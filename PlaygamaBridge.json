@@ -51,25 +51,18 @@
             "    isSdkReady: false",
             "}",
             "",
-            "console.log(\"Init\");",
-            "",
             "const options = {",
             "    platforms: {",
             "        \"y8\": {",
-            "            gameId2: runtimeScene.getVariablesForExtension(\"PlaygamaBridge\").get(\"Y8GameId\"),",
+            "            gameId: runtimeScene.getGame().getVariablesForExtension(\"PlaygamaBridge\").get(\"Y8GameId\"),",
             "        }",
             "    }",
             "};",
             "",
-            "console.log({ options });",
-            "",
             "bridge.initialize(options)",
             "    .then(() => {",
             "",
-            "        ",
             "        gdjs._playgamaBridgeExtension.isSdkReady = true;",
-            "",
-            "",
             "    });"
           ],
           "parameterObjects": "",
@@ -102,16 +95,18 @@
       "objectGroups": []
     },
     {
-      "description": "Get Catalog",
-      "fullName": "Get Catalog",
-      "functionType": "Action",
-      "name": "GetCatalog",
-      "sentence": "Get Catalog",
+      "description": "On Banner Loading",
+      "fullName": "On Banner Loading",
+      "functionType": "Condition",
+      "group": "Advertisement",
+      "name": "OnBannerLoading",
+      "sentence": "",
       "events": [
         {
           "type": "BuiltinCommonInstructions::JsCode",
           "inlineCode": [
-            "console.log(\"INITIALIZED HERE\");",
+            "eventsFunctionContext.returnValue = bridge.advertisement.bannerState === bridge.BANNER_STATE.LOADING ",
+            "    && runtimeScene.getOnceTriggers().triggerOnce(\"OnBannerLoading\")",
             ""
           ],
           "parameterObjects": "",
@@ -123,7 +118,100 @@
       "objectGroups": []
     },
     {
-      "description": "Show console",
+      "description": "On Banner Shown",
+      "fullName": "On Banner Shown",
+      "functionType": "Condition",
+      "group": "Advertisement",
+      "name": "OnBannerShown",
+      "sentence": "",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "eventsFunctionContext.returnValue = bridge.advertisement.bannerState === bridge.BANNER_STATE.SHOWN",
+            "    && runtimeScene.getOnceTriggers().triggerOnce(\"OnBannerShown\")"
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "parameters": [],
+      "objectGroups": []
+    },
+    {
+      "description": "On Banner Hidden",
+      "fullName": "On Banner Hidden",
+      "functionType": "Condition",
+      "group": "Advertisement",
+      "name": "OnBannerHidden",
+      "sentence": "",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "eventsFunctionContext.returnValue = bridge.advertisement.bannerState === bridge.BANNER_STATE.HIDDEN",
+            "    && runtimeScene.getOnceTriggers().triggerOnce(\"OnBannerHidden\")"
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "parameters": [],
+      "objectGroups": []
+    },
+    {
+      "description": "On Banner Failed",
+      "fullName": "On Banner Failed",
+      "functionType": "Condition",
+      "group": "Advertisement",
+      "name": "OnBannerFailed",
+      "sentence": "",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "eventsFunctionContext.returnValue = bridge.advertisement.bannerState === bridge.BANNER_STATE.HIDDEN",
+            "    && runtimeScene.getOnceTriggers().triggerOnce(\"OnBannerFailed\")"
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "parameters": [],
+      "objectGroups": []
+    },
+    {
+      "fullName": "",
+      "functionType": "Action",
+      "name": "___SetBannerState",
+      "sentence": "",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "bridge.advertisement._platformBridge._setBannerState(eventsFunctionContext.getArgument('BannerState'))",
+            ""
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "parameters": [
+        {
+          "description": "",
+          "name": "BannerState",
+          "supplementaryInformation": "[\"loading\",\"shown\",\"hidden\",\"failed\"]",
+          "type": "stringWithSelector"
+        }
+      ],
+      "objectGroups": []
+    },
+    {
+      "description": "Show console _PARAM1_",
       "fullName": "Show console",
       "functionType": "Action",
       "group": "Common",
