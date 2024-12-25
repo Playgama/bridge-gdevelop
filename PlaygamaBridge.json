@@ -100,7 +100,7 @@
       "functionType": "Condition",
       "group": "Advertisement",
       "name": "OnBannerLoading",
-      "sentence": "",
+      "sentence": "On Banner Loading",
       "events": [
         {
           "type": "BuiltinCommonInstructions::JsCode",
@@ -123,7 +123,7 @@
       "functionType": "Condition",
       "group": "Advertisement",
       "name": "OnBannerShown",
-      "sentence": "",
+      "sentence": "On Banner Shown",
       "events": [
         {
           "type": "BuiltinCommonInstructions::JsCode",
@@ -145,7 +145,7 @@
       "functionType": "Condition",
       "group": "Advertisement",
       "name": "OnBannerHidden",
-      "sentence": "",
+      "sentence": "On Banner Hidden",
       "events": [
         {
           "type": "BuiltinCommonInstructions::JsCode",
@@ -167,13 +167,211 @@
       "functionType": "Condition",
       "group": "Advertisement",
       "name": "OnBannerFailed",
-      "sentence": "",
+      "sentence": "On Banner Failed",
       "events": [
         {
           "type": "BuiltinCommonInstructions::JsCode",
           "inlineCode": [
-            "eventsFunctionContext.returnValue = bridge.advertisement.bannerState === bridge.BANNER_STATE.HIDDEN",
+            "eventsFunctionContext.returnValue = bridge.advertisement.bannerState === bridge.BANNER_STATE.FAILED",
             "    && runtimeScene.getOnceTriggers().triggerOnce(\"OnBannerFailed\")"
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "parameters": [],
+      "objectGroups": []
+    },
+    {
+      "description": "On Interstitial Loading",
+      "fullName": "On Interstitial Loading",
+      "functionType": "Condition",
+      "group": "Advertisement",
+      "name": "OnInterstitialLoading",
+      "sentence": "On Interstitial Loading",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "eventsFunctionContext.returnValue = bridge.advertisement.interstitialState === bridge.INTERSTITIAl_STATE.LOADING",
+            "    && runtimeScene.getOnceTriggers().triggerOnce(\"OnInterstitialLoading\")"
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "parameters": [],
+      "objectGroups": []
+    },
+    {
+      "description": "On Interstitial Shown",
+      "fullName": "On Interstitial Shown",
+      "functionType": "Condition",
+      "group": "Advertisement",
+      "name": "OnInterstitialShown",
+      "sentence": "On Interstitial Shown",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "eventsFunctionContext.returnValue = bridge.advertisement.interstitialState === bridge.INTERSTITIAl_STATE.SHOWN",
+            "    && runtimeScene.getOnceTriggers().triggerOnce(\"OnInterstitialShown\")"
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "parameters": [],
+      "objectGroups": []
+    },
+    {
+      "description": "On Interstitial Closed",
+      "fullName": "On Interstitial Closed",
+      "functionType": "Condition",
+      "group": "Advertisement",
+      "name": "OnInterstitialClosed",
+      "sentence": "On Interstitial Closed",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "eventsFunctionContext.returnValue = bridge.advertisement.interstitialState === bridge.INTERSTITIAl_STATE.CLOSED",
+            "    && runtimeScene.getOnceTriggers().triggerOnce(\"OnInterstitialClosed\")"
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "parameters": [],
+      "objectGroups": []
+    },
+    {
+      "description": "On Interstitial Failed",
+      "fullName": "On Interstitial Failed",
+      "functionType": "Condition",
+      "group": "Advertisement",
+      "name": "OnInterstitialFailed",
+      "sentence": "On Interstitial Failed",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "eventsFunctionContext.returnValue = bridge.advertisement.interstitialState === bridge.INTERSTITIAl_STATE.FAILED",
+            "    && runtimeScene.getOnceTriggers().triggerOnce(\"OnInterstitialFailed\")"
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "parameters": [],
+      "objectGroups": []
+    },
+    {
+      "description": "On Rewarded Loading",
+      "fullName": "On Rewarded Loading",
+      "functionType": "Condition",
+      "group": "Advertisement",
+      "name": "OnRewardedLoading",
+      "sentence": "On Rewarded Loading",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "eventsFunctionContext.returnValue = bridge.advertisement.rewardedState === bridge.REWARDED_STATE.LOADING",
+            "    && runtimeScene.getOnceTriggers().triggerOnce(\"OnRewardedLoading\")"
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "parameters": [],
+      "objectGroups": []
+    },
+    {
+      "description": "On Rewarded Shown",
+      "fullName": "On Rewarded Shown",
+      "functionType": "Condition",
+      "group": "Advertisement",
+      "name": "OnRewardedShown",
+      "sentence": "On Rewarded Shown",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "eventsFunctionContext.returnValue = bridge.advertisement.rewardedState === bridge.REWARDED_STATE.SHOWN",
+            "    && runtimeScene.getOnceTriggers().triggerOnce(\"OnRewardedShown\")"
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "parameters": [],
+      "objectGroups": []
+    },
+    {
+      "description": "On Rewarded Closed",
+      "fullName": "On Rewarded Closed",
+      "functionType": "Condition",
+      "group": "Advertisement",
+      "name": "OnRewardedClosed",
+      "sentence": "On Rewarded Closed",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "eventsFunctionContext.returnValue = bridge.advertisement.rewardedState === bridge.REWARDED_STATE.CLOSED",
+            "    && runtimeScene.getOnceTriggers().triggerOnce(\"OnRewardedClosed\")"
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "parameters": [],
+      "objectGroups": []
+    },
+    {
+      "description": "On Rewarded Rewarded",
+      "fullName": "On Rewarded Rewarded",
+      "functionType": "Condition",
+      "group": "Advertisement",
+      "name": "OnRewardedRewarded",
+      "sentence": "On Rewarded Rewarded",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "eventsFunctionContext.returnValue = bridge.advertisement.rewardedState === bridge.REWARDED_STATE.REWARDED",
+            "    && runtimeScene.getOnceTriggers().triggerOnce(\"OnRewardedRewarded\")"
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "parameters": [],
+      "objectGroups": []
+    },
+    {
+      "description": "On Rewarded Failed",
+      "fullName": "On Rewarded Failed",
+      "functionType": "Condition",
+      "group": "Advertisement",
+      "name": "OnRewardedFailed",
+      "sentence": "On Rewarded Failed",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "eventsFunctionContext.returnValue = bridge.advertisement.rewardedState === bridge.REWARDED_STATE.FAILED",
+            "    && runtimeScene.getOnceTriggers().triggerOnce(\"OnRewardedFailed\")"
           ],
           "parameterObjects": "",
           "useStrict": true,
