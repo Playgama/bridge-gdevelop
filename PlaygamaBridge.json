@@ -48,7 +48,10 @@
           "type": "BuiltinCommonInstructions::JsCode",
           "inlineCode": [
             "gdjs._playgamaBridgeExtension = {",
-            "    isSdkReady: false",
+            "    isSdkReady: false,",
+            "    bannerState: null,",
+            "    interstitialState: null,",
+            "    rewardedState: null,",
             "}",
             "",
             "const options = {",
@@ -61,6 +64,17 @@
             "",
             "bridge.initialize(options)",
             "    .then(() => {",
+            "         window.bridge.advertisement.on('banner_state_changed', state => {",
+            "             gdjs._playgamaBridgeExtension.bannerState = state;",
+            "         });",
+            "",
+            "         window.bridge.advertisement.on('interstitial_state_changed', state => {",
+            "             gdjs._playgamaBridgeExtension.interstitialState = state;",
+            "         });",
+            "",
+            "         window.bridge.advertisement.on('rewarded_state_changed', state => {",
+            "             gdjs._playgamaBridgeExtension.rewardedState = state;",
+            "         });",
             "",
             "        gdjs._playgamaBridgeExtension.isSdkReady = true;",
             "    });"
@@ -105,7 +119,7 @@
         {
           "type": "BuiltinCommonInstructions::JsCode",
           "inlineCode": [
-            "eventsFunctionContext.returnValue = bridge.advertisement.bannerState === bridge.BANNER_STATE.LOADING ",
+            "eventsFunctionContext.returnValue = gdjs._playgamaBridgeExtension.bannerState === bridge.BANNER_STATE.LOADING ",
             "    && runtimeScene.getOnceTriggers().triggerOnce(\"OnBannerLoading\")",
             ""
           ],
@@ -128,7 +142,7 @@
         {
           "type": "BuiltinCommonInstructions::JsCode",
           "inlineCode": [
-            "eventsFunctionContext.returnValue = bridge.advertisement.bannerState === bridge.BANNER_STATE.SHOWN",
+            "eventsFunctionContext.returnValue = gdjs._playgamaBridgeExtension.bannerState === bridge.BANNER_STATE.SHOWN",
             "    && runtimeScene.getOnceTriggers().triggerOnce(\"OnBannerShown\")"
           ],
           "parameterObjects": "",
@@ -150,7 +164,7 @@
         {
           "type": "BuiltinCommonInstructions::JsCode",
           "inlineCode": [
-            "eventsFunctionContext.returnValue = bridge.advertisement.bannerState === bridge.BANNER_STATE.HIDDEN",
+            "eventsFunctionContext.returnValue = gdjs._playgamaBridgeExtension.bannerState === bridge.BANNER_STATE.HIDDEN",
             "    && runtimeScene.getOnceTriggers().triggerOnce(\"OnBannerHidden\")"
           ],
           "parameterObjects": "",
@@ -172,7 +186,7 @@
         {
           "type": "BuiltinCommonInstructions::JsCode",
           "inlineCode": [
-            "eventsFunctionContext.returnValue = bridge.advertisement.bannerState === bridge.BANNER_STATE.FAILED",
+            "eventsFunctionContext.returnValue = gdjs._playgamaBridgeExtension.bannerState === bridge.BANNER_STATE.FAILED",
             "    && runtimeScene.getOnceTriggers().triggerOnce(\"OnBannerFailed\")"
           ],
           "parameterObjects": "",
@@ -194,7 +208,7 @@
         {
           "type": "BuiltinCommonInstructions::JsCode",
           "inlineCode": [
-            "eventsFunctionContext.returnValue = bridge.advertisement.interstitialState === bridge.INTERSTITIAl_STATE.LOADING",
+            "eventsFunctionContext.returnValue = gdjs._playgamaBridgeExtension.interstitialState === bridge.INTERSTITIAl_STATE.LOADING",
             "    && runtimeScene.getOnceTriggers().triggerOnce(\"OnInterstitialLoading\")"
           ],
           "parameterObjects": "",
@@ -216,7 +230,7 @@
         {
           "type": "BuiltinCommonInstructions::JsCode",
           "inlineCode": [
-            "eventsFunctionContext.returnValue = bridge.advertisement.interstitialState === bridge.INTERSTITIAl_STATE.SHOWN",
+            "eventsFunctionContext.returnValue = gdjs._playgamaBridgeExtension.interstitialState === bridge.INTERSTITIAl_STATE.SHOWN",
             "    && runtimeScene.getOnceTriggers().triggerOnce(\"OnInterstitialShown\")"
           ],
           "parameterObjects": "",
@@ -238,7 +252,7 @@
         {
           "type": "BuiltinCommonInstructions::JsCode",
           "inlineCode": [
-            "eventsFunctionContext.returnValue = bridge.advertisement.interstitialState === bridge.INTERSTITIAl_STATE.CLOSED",
+            "eventsFunctionContext.returnValue = gdjs._playgamaBridgeExtension.interstitialState === bridge.INTERSTITIAl_STATE.CLOSED",
             "    && runtimeScene.getOnceTriggers().triggerOnce(\"OnInterstitialClosed\")"
           ],
           "parameterObjects": "",
@@ -260,7 +274,7 @@
         {
           "type": "BuiltinCommonInstructions::JsCode",
           "inlineCode": [
-            "eventsFunctionContext.returnValue = bridge.advertisement.interstitialState === bridge.INTERSTITIAl_STATE.FAILED",
+            "eventsFunctionContext.returnValue = gdjs._playgamaBridgeExtension.interstitialState === bridge.INTERSTITIAl_STATE.FAILED",
             "    && runtimeScene.getOnceTriggers().triggerOnce(\"OnInterstitialFailed\")"
           ],
           "parameterObjects": "",
@@ -282,7 +296,7 @@
         {
           "type": "BuiltinCommonInstructions::JsCode",
           "inlineCode": [
-            "eventsFunctionContext.returnValue = bridge.advertisement.rewardedState === bridge.REWARDED_STATE.LOADING",
+            "eventsFunctionContext.returnValue = gdjs._playgamaBridgeExtension.rewardedState === bridge.REWARDED_STATE.LOADING",
             "    && runtimeScene.getOnceTriggers().triggerOnce(\"OnRewardedLoading\")"
           ],
           "parameterObjects": "",
@@ -304,7 +318,7 @@
         {
           "type": "BuiltinCommonInstructions::JsCode",
           "inlineCode": [
-            "eventsFunctionContext.returnValue = bridge.advertisement.rewardedState === bridge.REWARDED_STATE.SHOWN",
+            "eventsFunctionContext.returnValue = gdjs._playgamaBridgeExtension.rewardedState === bridge.REWARDED_STATE.SHOWN",
             "    && runtimeScene.getOnceTriggers().triggerOnce(\"OnRewardedShown\")"
           ],
           "parameterObjects": "",
@@ -326,7 +340,7 @@
         {
           "type": "BuiltinCommonInstructions::JsCode",
           "inlineCode": [
-            "eventsFunctionContext.returnValue = bridge.advertisement.rewardedState === bridge.REWARDED_STATE.CLOSED",
+            "eventsFunctionContext.returnValue = gdjs._playgamaBridgeExtension.rewardedState === bridge.REWARDED_STATE.CLOSED",
             "    && runtimeScene.getOnceTriggers().triggerOnce(\"OnRewardedClosed\")"
           ],
           "parameterObjects": "",
@@ -348,7 +362,7 @@
         {
           "type": "BuiltinCommonInstructions::JsCode",
           "inlineCode": [
-            "eventsFunctionContext.returnValue = bridge.advertisement.rewardedState === bridge.REWARDED_STATE.REWARDED",
+            "eventsFunctionContext.returnValue = gdjs._playgamaBridgeExtension.rewardedState === bridge.REWARDED_STATE.REWARDED",
             "    && runtimeScene.getOnceTriggers().triggerOnce(\"OnRewardedRewarded\")"
           ],
           "parameterObjects": "",
@@ -370,7 +384,7 @@
         {
           "type": "BuiltinCommonInstructions::JsCode",
           "inlineCode": [
-            "eventsFunctionContext.returnValue = bridge.advertisement.rewardedState === bridge.REWARDED_STATE.FAILED",
+            "eventsFunctionContext.returnValue = gdjs._playgamaBridgeExtension.rewardedState === bridge.REWARDED_STATE.FAILED",
             "    && runtimeScene.getOnceTriggers().triggerOnce(\"OnRewardedFailed\")"
           ],
           "parameterObjects": "",
