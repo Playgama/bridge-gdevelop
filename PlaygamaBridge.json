@@ -107,6 +107,7 @@
       "description": "Is SDK Ready",
       "fullName": "Is SDK Ready",
       "functionType": "Condition",
+      "group": "Platform",
       "name": "IsSDKReady",
       "sentence": "Is SDK Ready",
       "events": [
@@ -125,6 +126,489 @@
       "objectGroups": []
     },
     {
+      "description": "Platform Id",
+      "fullName": "Platform Id",
+      "functionType": "StringExpression",
+      "group": "Platform",
+      "name": "PlatformId",
+      "sentence": "",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "eventsFunctionContext.returnValue = bridge.platform.id",
+            ""
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "expressionType": {
+        "type": "string"
+      },
+      "parameters": [],
+      "objectGroups": []
+    },
+    {
+      "description": "Platform Language",
+      "fullName": "Platform Language",
+      "functionType": "StringExpression",
+      "group": "Platform",
+      "name": "PlatformLanguage",
+      "sentence": "",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "eventsFunctionContext.returnValue = bridge.platform.language",
+            ""
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "expressionType": {
+        "type": "string"
+      },
+      "parameters": [],
+      "objectGroups": []
+    },
+    {
+      "description": "Platform Payload",
+      "fullName": "Platform Payload",
+      "functionType": "StringExpression",
+      "group": "Platform",
+      "name": "PlatformPayload",
+      "sentence": "",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "eventsFunctionContext.returnValue = bridge.platform.payload",
+            ""
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "expressionType": {
+        "type": "string"
+      },
+      "parameters": [],
+      "objectGroups": []
+    },
+    {
+      "description": "Platform Tld",
+      "fullName": "Platform Tld",
+      "functionType": "StringExpression",
+      "group": "Platform",
+      "name": "PlatformTld",
+      "sentence": "",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "eventsFunctionContext.returnValue = bridge.platform.tld",
+            ""
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "expressionType": {
+        "type": "string"
+      },
+      "parameters": [],
+      "objectGroups": []
+    },
+    {
+      "description": "Device Type",
+      "fullName": "Device Type",
+      "functionType": "StringExpression",
+      "group": "Device",
+      "name": "DeviceType",
+      "sentence": "",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": "eventsFunctionContext.returnValue = bridge.device.type;",
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "expressionType": {
+        "type": "string"
+      },
+      "parameters": [],
+      "objectGroups": []
+    },
+    {
+      "description": "Player Id",
+      "fullName": "Player Id",
+      "functionType": "StringExpression",
+      "group": "Player",
+      "name": "PlayerId",
+      "sentence": "",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "eventsFunctionContext.returnValue = bridge.player.id;",
+            ""
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "expressionType": {
+        "type": "string"
+      },
+      "parameters": [],
+      "objectGroups": []
+    },
+    {
+      "description": "Player Name",
+      "fullName": "Player Name",
+      "functionType": "StringExpression",
+      "group": "Player",
+      "name": "PlayerName",
+      "sentence": "",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "eventsFunctionContext.returnValue = bridge.player.name;",
+            ""
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "expressionType": {
+        "type": "string"
+      },
+      "parameters": [],
+      "objectGroups": []
+    },
+    {
+      "description": "Player Photos Count",
+      "fullName": "Player Photos Count",
+      "functionType": "Expression",
+      "group": "Player",
+      "name": "PlayerPhotosCount",
+      "sentence": "",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "eventsFunctionContext.returnValue = bridge.player.photos.length;",
+            ""
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "expressionType": {
+        "type": "expression"
+      },
+      "parameters": [],
+      "objectGroups": []
+    },
+    {
+      "description": "Player Photo # _PARAM1_",
+      "fullName": "Player Photo",
+      "functionType": "Expression",
+      "group": "Player",
+      "name": "PlayerPhoto",
+      "sentence": "",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "eventsFunctionContext.returnValue = bridge.player.photos[",
+            "    eventsFunctionContext.getArgument(\"Index\")",
+            "];",
+            ""
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "expressionType": {
+        "type": "expression"
+      },
+      "parameters": [
+        {
+          "description": "Index",
+          "name": "Index",
+          "type": "expression"
+        }
+      ],
+      "objectGroups": []
+    },
+    {
+      "description": "Visibility State",
+      "fullName": "Visibility State",
+      "functionType": "StringExpression",
+      "group": "Game",
+      "name": "VisibilityState",
+      "sentence": "",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "eventsFunctionContext.returnValue = bridge.game.visibilityState",
+            ""
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "expressionType": {
+        "type": "string"
+      },
+      "parameters": [
+        {
+          "description": "Index",
+          "name": "Index",
+          "type": "expression"
+        }
+      ],
+      "objectGroups": []
+    },
+    {
+      "description": "On Visibility State Changed",
+      "fullName": "On Visibility State Changed",
+      "functionType": "Condition",
+      "group": "Game",
+      "name": "OnVisibilityStateChanged",
+      "sentence": "On Visibility State Changed",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "eventsFunctionContext.returnValue = gdjs._playgamaBridgeExtension.visibilityStateChanged",
+            "    && runtimeScene.getOnceTriggers().triggerOnce(\"OnVisibilityStateChanged\");",
+            "",
+            "gdjs._playgamaBridgeExtension.visibilityStateChanged = false;",
+            ""
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "parameters": [],
+      "objectGroups": []
+    },
+    {
+      "description": "Default Storage Type",
+      "fullName": "Default Storage Type",
+      "functionType": "StringExpression",
+      "group": "Storage",
+      "name": "DefaultStorageType",
+      "sentence": "",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "eventsFunctionContext.returnValue = bridge.storage.defaultType;",
+            ""
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "expressionType": {
+        "type": "string"
+      },
+      "parameters": [],
+      "objectGroups": []
+    },
+    {
+      "async": true,
+      "description": "Storage Data for _PARAM1_ from _PARAM2_",
+      "fullName": "Storage Data",
+      "functionType": "StringExpression",
+      "group": "Storage",
+      "name": "StorageData",
+      "sentence": "",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "eventsFunctionContext.returnValue = await bridge.storage.get(",
+            "    eventsFunctionContext.getArgument(\"Key\"),",
+            "    eventsFunctionContext.getArgument(\"StorageType\"),",
+            ");",
+            ""
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "expressionType": {
+        "type": "string"
+      },
+      "parameters": [
+        {
+          "description": "Key",
+          "name": "Key",
+          "type": "string"
+        },
+        {
+          "description": "StorageType",
+          "name": "StorageType",
+          "supplementaryInformation": "[\"local_storage\",\"platform_internal\",\"default\"]",
+          "type": "stringWithSelector"
+        }
+      ],
+      "objectGroups": []
+    },
+    {
+      "async": true,
+      "description": "Storage Data for _PARAM1_ from _PARAM2_",
+      "fullName": "Storage Data",
+      "functionType": "StringExpression",
+      "group": "Storage",
+      "name": "StorageDataAsJSON",
+      "sentence": "",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "eventsFunctionContext.returnValue = JSON.stringify(",
+            "    await bridge.storage.get(",
+            "        eventsFunctionContext.getArgument(\"Key\"),",
+            "        eventsFunctionContext.getArgument(\"StorageType\"),",
+            "    )",
+            ");",
+            ""
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "expressionType": {
+        "type": "string"
+      },
+      "parameters": [
+        {
+          "description": "Key",
+          "name": "Key",
+          "type": "string"
+        },
+        {
+          "description": "StorageType",
+          "name": "StorageType",
+          "supplementaryInformation": "[\"local_storage\",\"platform_internal\",\"default\"]",
+          "type": "stringWithSelector"
+        }
+      ],
+      "objectGroups": []
+    },
+    {
+      "description": "MinimumDelayBetweenInterstitial",
+      "fullName": "Minimum Delay Between Interstitial",
+      "functionType": "Expression",
+      "group": "Advertisement",
+      "name": "MinimumDelayBetweenInterstitial",
+      "sentence": "",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": "eventsFunctionContext.returnValue = bridge.advertisement.minimumDelayBetweenInterstitial;",
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "expressionType": {
+        "type": "expression"
+      },
+      "parameters": [],
+      "objectGroups": []
+    },
+    {
+      "description": "Banner State",
+      "fullName": "Banner State",
+      "functionType": "StringExpression",
+      "group": "Advertisement",
+      "name": "BannerState",
+      "sentence": "",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": "eventsFunctionContext.returnValue = bridge.advertisement.bannerState;",
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "expressionType": {
+        "type": "string"
+      },
+      "parameters": [],
+      "objectGroups": []
+    },
+    {
+      "description": "Interstitial State",
+      "fullName": "Interstitial State",
+      "functionType": "StringExpression",
+      "group": "Advertisement",
+      "name": "InterstitialState",
+      "sentence": "",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": "eventsFunctionContext.returnValue = bridge.advertisement.interstitialState;",
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "expressionType": {
+        "type": "string"
+      },
+      "parameters": [],
+      "objectGroups": []
+    },
+    {
+      "description": "Rewarded State",
+      "fullName": "Rewarded State",
+      "functionType": "StringExpression",
+      "group": "Advertisement",
+      "name": "RewardedState",
+      "sentence": "",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": "eventsFunctionContext.returnValue = bridge.advertisement.rewardedState;",
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "expressionType": {
+        "type": "string"
+      },
+      "parameters": [],
+      "objectGroups": []
+    },
+    {
       "description": "On Banner Loading",
       "fullName": "On Banner Loading",
       "functionType": "Condition",
@@ -137,31 +621,6 @@
           "inlineCode": [
             "eventsFunctionContext.returnValue = gdjs._playgamaBridgeExtension.bannerState === bridge.BANNER_STATE.LOADING ",
             "    && runtimeScene.getOnceTriggers().triggerOnce(\"OnBannerLoading\")",
-            ""
-          ],
-          "parameterObjects": "",
-          "useStrict": true,
-          "eventsSheetExpanded": false
-        }
-      ],
-      "parameters": [],
-      "objectGroups": []
-    },
-    {
-      "description": "On Visibility State Changed",
-      "fullName": "On Visibility State Changed",
-      "functionType": "Condition",
-      "group": "Advertisement",
-      "name": "OnVisibilityStateChanged",
-      "sentence": "On Visibility State Changed",
-      "events": [
-        {
-          "type": "BuiltinCommonInstructions::JsCode",
-          "inlineCode": [
-            "eventsFunctionContext.returnValue = gdjs._playgamaBridgeExtension.visibilityStateChanged",
-            "    && runtimeScene.getOnceTriggers().triggerOnce(\"OnVisibilityStateChanged\");",
-            "",
-            "gdjs._playgamaBridgeExtension.visibilityStateChanged = false;",
             ""
           ],
           "parameterObjects": "",
@@ -439,6 +898,7 @@
     {
       "fullName": "",
       "functionType": "Action",
+      "group": "Advertisement",
       "name": "___SetBannerState",
       "sentence": "",
       "events": [
@@ -464,17 +924,17 @@
       "objectGroups": []
     },
     {
-      "description": "Show console _PARAM1_",
+      "description": "Show console ",
       "fullName": "Show console",
       "functionType": "Action",
       "group": "Common",
       "name": "ShowConsole",
-      "sentence": "Show console",
+      "sentence": "Show console _PARAM1_",
       "events": [
         {
           "type": "BuiltinCommonInstructions::JsCode",
           "inlineCode": [
-            "console.log(\"Funct\");",
+            "console.log(eventsFunctionContext.getArgument(\"Text\"));",
             ""
           ],
           "parameterObjects": "",
@@ -482,7 +942,13 @@
           "eventsSheetExpanded": false
         }
       ],
-      "parameters": [],
+      "parameters": [
+        {
+          "description": "Text",
+          "name": "Text",
+          "type": "string"
+        }
+      ],
       "objectGroups": []
     }
   ],
