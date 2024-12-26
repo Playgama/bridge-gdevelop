@@ -77,7 +77,14 @@
             "    // player",
             "    isAuthorizePlayerCompleted: false,",
             "",
-            "    ",
+            "    // social",
+            "    isShareCompleted: false,",
+            "    isInviteFriendsCompleted: false,",
+            "    isJoinCommunityCompleted: false,",
+            "    isCreatePostCompleted: false,",
+            "    isAddToHomeScreenCompleted: false,",
+            "    isAddToFavoritesCompleted: false,",
+            "    isRateCompleted: false,",
             "}",
             "",
             "// utils",
@@ -2079,6 +2086,601 @@
           "type": "expression"
         }
       ],
+      "objectGroups": []
+    },
+    {
+      "description": "Share",
+      "fullName": "Share",
+      "functionType": "Action",
+      "group": "Social",
+      "name": "Share",
+      "sentence": "Share",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "gdjs._playgamaBridgeExtension.isLastActionCompletedSuccessfully = false;",
+            "",
+            "return new Promise(resolve => {",
+            "    bridge.social.share(gdjs._playgamaBridgeExtension.actionParametersContainer)",
+            "        .then(() => {",
+            "            gdjs._playgamaBridgeExtension.isLastActionCompletedSuccessfully = true;",
+            "        })",
+            "        .catch(error => console.log(error))",
+            "        .finally(() => {",
+            "            gdjs._playgamaBridgeExtension.actionParametersContainer = {};",
+            "            gdjs._playgamaBridgeExtension.isShareCompleted = true;",
+            "            resolve()",
+            "        })",
+            "})",
+            ""
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": true
+        }
+      ],
+      "parameters": [],
+      "objectGroups": []
+    },
+    {
+      "description": "Invite Friends",
+      "fullName": "Invite Friends",
+      "functionType": "Action",
+      "group": "Social",
+      "name": "InviteFriends",
+      "sentence": "Invite Friends",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "gdjs._playgamaBridgeExtension.isLastActionCompletedSuccessfully = false;",
+            "",
+            "return new Promise(resolve => {",
+            "    bridge.social.inviteFriends(gdjs._playgamaBridgeExtension.actionParametersContainer)",
+            "        .then(() => {",
+            "            tgdjs._playgamaBridgeExtensionhis.isLastActionCompletedSuccessfully = true;",
+            "        })",
+            "        .catch(error => console.log(error))",
+            "        .finally(() => {",
+            "            gdjs._playgamaBridgeExtension.actionParametersContainer = {};",
+            "            gdjs._playgamaBridgeExtension.isInviteFriendsCompleted = true;",
+            "            resolve();",
+            "        })",
+            "})",
+            ""
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": true
+        }
+      ],
+      "parameters": [],
+      "objectGroups": []
+    },
+    {
+      "description": "Join Community",
+      "fullName": "Join Community",
+      "functionType": "Action",
+      "group": "Social",
+      "name": "JoinCommunity",
+      "sentence": "Join Community",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "gdjs._playgamaBridgeExtension.isLastActionCompletedSuccessfully = false;",
+            "",
+            "return new Promise(resolve => {",
+            "    bridge.social.joinCommunity(gdjs._playgamaBridgeExtension.actionParametersContainer)",
+            "        .then(() => {",
+            "            gdjs._playgamaBridgeExtension.isLastActionCompletedSuccessfully = true;",
+            "        })",
+            "        .catch(error => console.log(error))",
+            "        .finally(() => {",
+            "            gdjs._playgamaBridgeExtension.actionParametersContainer = {};",
+            "            gdjs._playgamaBridgeExtension.idJoinCommunityCompleted = true;",
+            "            resolve();",
+            "        })",
+            "})"
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": true
+        }
+      ],
+      "parameters": [],
+      "objectGroups": []
+    },
+    {
+      "description": "Create Post",
+      "fullName": "Create Post",
+      "functionType": "Action",
+      "group": "Social",
+      "name": "CreatePost",
+      "sentence": "Create Post",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "gdjs._playgamaBridgeExtension.isLastActionCompletedSuccessfully = false;",
+            "",
+            "return new Promise(resolve => {",
+            "    bridge.social.createPost(gdjs._playgamaBridgeExtension.actionParametersContainer)",
+            "        .then(() => {",
+            "            gdjs._playgamaBridgeExtension.isLastActionCompletedSuccessfully = true;",
+            "        })",
+            "        .catch(error => console.log(error))",
+            "        .finally(() => {",
+            "            gdjs._playgamaBridgeExtension.actionParametersContainer = {};",
+            "            gdjs._playgamaBridgeExtension.isCreatePostCompleted = true;",
+            "            resolve();",
+            "        })",
+            "})"
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": true
+        }
+      ],
+      "parameters": [],
+      "objectGroups": []
+    },
+    {
+      "description": "Add To Home Screen",
+      "fullName": "Add To Home Screen",
+      "functionType": "Action",
+      "group": "Social",
+      "name": "AddToHomeScreen",
+      "sentence": "Add To Home Screen",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "gdjs._playgamaBridgeExtension.isLastActionCompletedSuccessfully = false;",
+            "",
+            "return new Promise(resolve => {",
+            "   bridge.social.addToHomeScreen()",
+            "        .then(() => {",
+            "            gdjs._playgamaBridgeExtension.isLastActionCompletedSuccessfully = true;",
+            "        })",
+            "        .catch(error => console.log(error))",
+            "        .finally(() => {",
+            "            gdjs._playgamaBridgeExtension.isAddToHomeScreenCompleted = true;",
+            "            resolve();",
+            "        })",
+            "});"
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": true
+        }
+      ],
+      "parameters": [],
+      "objectGroups": []
+    },
+    {
+      "description": "Add To Favorites",
+      "fullName": "Add To Favorites",
+      "functionType": "Action",
+      "group": "Social",
+      "name": "AddToFavorites",
+      "sentence": "Add To Favorites",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "gdjs._playgamaBridgeExtension.isLastActionCompletedSuccessfully = false;",
+            "",
+            "return new Promise(resolve => {",
+            "    bridge.social.addToFavorites()",
+            "        .then(() => {",
+            "            gdjs._playgamaBridgeExtension.isLastActionCompletedSuccessfully = true;",
+            "        })",
+            "        .catch(error => console.log(error))",
+            "        .finally(() => {",
+            "            gdjs._playgamaBridgeExtension.isAddToFavoritesCompleted = true;",
+            "            resolve();",
+            "        })",
+            "});"
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": true
+        }
+      ],
+      "parameters": [],
+      "objectGroups": []
+    },
+    {
+      "description": "Rate",
+      "fullName": "Rate",
+      "functionType": "Action",
+      "group": "Social",
+      "name": "Rate",
+      "sentence": "Rate",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "gdjs._playgamaBridgeExtension.isLastActionCompletedSuccessfully = false;",
+            "",
+            "return new Promise(resolve => {",
+            "    bridge.social.rate()",
+            "        .then(() => {",
+            "            gdjs._playgamaBridgeExtension.isLastActionCompletedSuccessfully = true;",
+            "        })",
+            "        .catch(error => console.log(error))",
+            "        .finally(() => {",
+            "            gdjs._playgamaBridgeExtension.isRateCompleted = true;",
+            "            resolve();",
+            "        });",
+            "});"
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": true
+        }
+      ],
+      "parameters": [],
+      "objectGroups": []
+    },
+    {
+      "description": "Is Share Supported",
+      "fullName": "Is Share Supported",
+      "functionType": "Condition",
+      "group": "Social",
+      "name": "IsShareSupported",
+      "sentence": "Is Share Supported",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "eventsFunctionContext.returnValue = bridge.social.isShareSupported;",
+            ""
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "parameters": [],
+      "objectGroups": []
+    },
+    {
+      "description": "On Share Completed",
+      "fullName": "On Share Completed",
+      "functionType": "Condition",
+      "group": "Social",
+      "name": "OnShareCompleted",
+      "sentence": "On Share Completed",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "eventsFunctionContext.returnValue = gdjs._playgamaBridgeExtension.isShareCompleted;",
+            "",
+            "if (gdjs._playgamaBridgeExtension.isShareCompleted) {",
+            "    gdjs._playgamaBridgeExtension.isShareCompleted = false;",
+            "}",
+            ""
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "parameters": [],
+      "objectGroups": []
+    },
+    {
+      "description": "Is Invite Friends Supported",
+      "fullName": "Is Invite Friends Supported",
+      "functionType": "Condition",
+      "group": "Social",
+      "name": "IsInviteFriendsSupported",
+      "sentence": "Is Invite Friends Supported",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "eventsFunctionContext.returnValue = bridge.social.isInviteFriendsSupported;",
+            ""
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "parameters": [],
+      "objectGroups": []
+    },
+    {
+      "description": "On Invite Friends Completed",
+      "fullName": "On Invite Friends Completed",
+      "functionType": "Condition",
+      "group": "Social",
+      "name": "OnInviteFriendsCompleted",
+      "sentence": "On Invite Friends Completed",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "eventsFunctionContext.returnValue = gdjs._playgamaBridgeExtension.isInviteFriendsCompleted;",
+            "",
+            "if (gdjs._playgamaBridgeExtension.isInviteFriendsCompleted) {",
+            "    gdjs._playgamaBridgeExtension.isInviteFriendsCompleted = false;",
+            "}",
+            ""
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "parameters": [],
+      "objectGroups": []
+    },
+    {
+      "description": "Is Join Community Supported",
+      "fullName": "Is Join Community Supported",
+      "functionType": "Condition",
+      "group": "Social",
+      "name": "IsJoinCommunitySupported",
+      "sentence": "Is Join Community Supported",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "eventsFunctionContext.returnValue = bridge.social.isJoinCommunitySupported;",
+            ""
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "parameters": [],
+      "objectGroups": []
+    },
+    {
+      "description": "On Join Community Completed",
+      "fullName": "On Join Community Completed",
+      "functionType": "Condition",
+      "group": "Social",
+      "name": "OnJoinCommunityCompleted",
+      "sentence": "On Join Community Completed",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "eventsFunctionContext.returnValue = gdjs._playgamaBridgeExtension.isJoinCommunityCompleted;",
+            "",
+            "if (gdjs._playgamaBridgeExtension.isJoinCommunityCompleted) {",
+            "    gdjs._playgamaBridgeExtension.isJoinCommunityCompleted = false;",
+            "}",
+            ""
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "parameters": [],
+      "objectGroups": []
+    },
+    {
+      "description": "Is Create Post Supported",
+      "fullName": "Is Create Post Supported",
+      "functionType": "Condition",
+      "group": "Social",
+      "name": "IsCreatePostSupported",
+      "sentence": "Is Create Post Supported",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "eventsFunctionContext.returnValue = bridge.social.isCreatePostSupported;",
+            ""
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "parameters": [],
+      "objectGroups": []
+    },
+    {
+      "description": "On Create Post Completed",
+      "fullName": "On Create Post Completed",
+      "functionType": "Condition",
+      "group": "Social",
+      "name": "OnCreatePostCompleted",
+      "sentence": "On Create Post Completed",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "eventsFunctionContext.returnValue = gdjs._playgamaBridgeExtension.isCreatePostCompleted;",
+            "",
+            "if (gdjs._playgamaBridgeExtension.isCreatePostCompleted) {",
+            "    gdjs._playgamaBridgeExtension.isCreatePostCompleted = false;",
+            "}",
+            ""
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "parameters": [],
+      "objectGroups": []
+    },
+    {
+      "description": "Is Add To Home Screen Supported",
+      "fullName": "Is Add To Home Screen Supported",
+      "functionType": "Condition",
+      "group": "Social",
+      "name": "IsAddToHomeScreenSupported",
+      "sentence": "Is Add To Home Screen Supported",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "eventsFunctionContext.returnValue = bridge.social.isAddToHomeScreenSupported;",
+            ""
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "parameters": [],
+      "objectGroups": []
+    },
+    {
+      "description": "On Add To Home Screen Completed",
+      "fullName": "On Add To Home Screen Completed",
+      "functionType": "Condition",
+      "group": "Social",
+      "name": "OnAddToHomeScreenCompleted",
+      "sentence": "On Add To Home Screen Completed",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "eventsFunctionContext.returnValue = gdjs._playgamaBridgeExtension.isAddToHomeScreenCompleted;",
+            "",
+            "if (gdjs._playgamaBridgeExtension.isAddToHomeScreenCompleted) {",
+            "    gdjs._playgamaBridgeExtension.isAddToHomeScreenCompleted = false;",
+            "}",
+            ""
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "parameters": [],
+      "objectGroups": []
+    },
+    {
+      "description": "Is Add To Favorites Supported",
+      "fullName": "Is Add To Favorites Supported",
+      "functionType": "Condition",
+      "group": "Social",
+      "name": "IsAddToFavoritesSupported",
+      "sentence": "Is Add To Favorites Supported",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "eventsFunctionContext.returnValue = bridge.social.isAddToFavoritesSupported;",
+            ""
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "parameters": [],
+      "objectGroups": []
+    },
+    {
+      "description": "On Add To Favorites Completed",
+      "fullName": "On Add To Favorites Completed",
+      "functionType": "Condition",
+      "group": "Social",
+      "name": "OnAddToFavoritesCompleted",
+      "sentence": "On Add To Favorites Completed",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "eventsFunctionContext.returnValue = gdjs._playgamaBridgeExtension.isAddToFavoritesCompleted;",
+            "",
+            "if (gdjs._playgamaBridgeExtension.isAddToFavoritesCompleted) {",
+            "    gdjs._playgamaBridgeExtension.isAddToFavoritesCompleted = false;",
+            "}",
+            ""
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "parameters": [],
+      "objectGroups": []
+    },
+    {
+      "description": "Is Rate Supported",
+      "fullName": "Is Rate Supported",
+      "functionType": "Condition",
+      "group": "Social",
+      "name": "IsRateSupported",
+      "sentence": "Is Rate Supported",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "eventsFunctionContext.returnValue = bridge.social.isRateSupported;",
+            ""
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "parameters": [],
+      "objectGroups": []
+    },
+    {
+      "description": "On Rate Completed",
+      "fullName": "On Rate Completed",
+      "functionType": "Condition",
+      "group": "Social",
+      "name": "OnRateCompleted",
+      "sentence": "On Rate Completed",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "eventsFunctionContext.returnValue = gdjs._playgamaBridgeExtension.isRateCompleted;",
+            "",
+            "if (gdjs._playgamaBridgeExtension.isRateCompleted) {",
+            "    gdjs._playgamaBridgeExtension.isRateCompleted = false;",
+            "}",
+            ""
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "parameters": [],
+      "objectGroups": []
+    },
+    {
+      "description": "Is External Links Allowed",
+      "fullName": "Is External Links Allowed",
+      "functionType": "Condition",
+      "group": "Social",
+      "name": "IsExternalLinksAllowed",
+      "sentence": "Is External Links Allowed",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "eventsFunctionContext.returnValue = bridge.social.isExternlLinksAllowed;",
+            ""
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "parameters": [],
       "objectGroups": []
     },
     {
