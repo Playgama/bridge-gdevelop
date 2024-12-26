@@ -48,6 +48,10 @@
             "    isLastActionCompletedSuccessfully: false,",
             "    isSdkReady: false,",
             "    visibilityStateChanged: false,",
+            "",
+            "    // platform",
+            "    serverTime: 0,",
+            "    isGetServerTimeCompleted: false,",
             "    ",
             "    // storage",
             "    storageData: {},",
@@ -226,7 +230,7 @@
         {
           "type": "BuiltinCommonInstructions::JsCode",
           "inlineCode": [
-            "eventsFunctionContext.returnValue = bridge.platform.tld;",
+            "eventsFunctionContext.returnValue = bridge.platform.tld || '';",
             ""
           ],
           "parameterObjects": "",
@@ -1579,6 +1583,144 @@
             "if (gdjs._playgamaBridge.isCheckAdBlockCompleted) {",
             "    gdjs._playgamaBridge.isCheckAdBlockCompleted = false;",
             "}",
+            ""
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "parameters": [],
+      "objectGroups": []
+    },
+    {
+      "description": "Send Message",
+      "fullName": "Send Message",
+      "functionType": "Action",
+      "group": "Platform",
+      "name": "SendMessage",
+      "sentence": "Send Message _PARAM1_",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "const message = eventsFunctionContext.getArgument(\"Message\")",
+            "",
+            "bridge.platform.sendMessage(bridge.PLATFORM_MESSAGE[message])",
+            ""
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "parameters": [
+        {
+          "description": "Message",
+          "name": "Message",
+          "supplementaryInformation": "[\"GAME_READY\",\"IN_GAME_LOADING_STARTED\",\"IN_GAME_LOADING_STOPPED\",\"GAMEPLAY_STARTED\",\"GAMEPLAY_STOPPED\",\"PLAYER_GOT_ACHIEVEMENT\"]",
+          "type": "stringWithSelector"
+        }
+      ],
+      "objectGroups": []
+    },
+    {
+      "description": "Get Server Time",
+      "fullName": "Get Server Time",
+      "functionType": "Action",
+      "group": "Platform",
+      "name": "GetServerTime",
+      "sentence": "Get Server Time",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "gdjs._playgamaBridgeExtension.isLastActionCompletedSuccessfully = false;",
+            "",
+            "return new Promise(resolve => {",
+            "    bridge.platform.getServerTime()",
+            "        .then(result => {",
+            "            gdjs._playgamaBridgeExtension.isLastActionCompletedSuccessfully = true;",
+            "            gdjs._playgamaBridgeExtension.serverTime = result;",
+            "        })",
+            "        .catch(error => console.log(error))",
+            "        .finally(() => {",
+            "            gdjs._playgamaBridgeExtension.isGetServerTimeCompleted = true;",
+            "            resolve();",
+            "        });",
+            "});",
+            ""
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "parameters": [],
+      "objectGroups": []
+    },
+    {
+      "description": "Server Time",
+      "fullName": "Server Time",
+      "functionType": "Expression",
+      "group": "Platform",
+      "name": "ServerTime",
+      "sentence": "",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "eventsFunctionContext.returnValue = gdjs._playgamaBridgeExtension.serverTime;",
+            ""
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "expressionType": {
+        "type": "expression"
+      },
+      "parameters": [],
+      "objectGroups": []
+    },
+    {
+      "description": "On Get Server Time Completed",
+      "fullName": "On Get Server Time Completed",
+      "functionType": "Condition",
+      "group": "Platform",
+      "name": "OnGetServerTimeCompleted",
+      "sentence": "On Get Server Time Completed",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "eventsFunctionContext.returnValue = gdjs._playgamaBridgeExtension.isGetServerTimeCompleted;",
+            "",
+            "if (gdjs._playgamaBridgeExtension.isGetServerTimeCompleted) {",
+            "    gdjs._playgamaBridgeExtension.isGetServerTimeCompleted = false;",
+            "}"
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "parameters": [],
+      "objectGroups": []
+    },
+    {
+      "description": "Has Server Time",
+      "fullName": "Has Server Time",
+      "functionType": "Condition",
+      "group": "Platform",
+      "name": "HasServerTime",
+      "sentence": "Has Server Time",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "eventsFunctionContext.returnValue = gdjs._playgamaBridgeExtenstion.serverTime > 0;",
             ""
           ],
           "parameterObjects": "",
