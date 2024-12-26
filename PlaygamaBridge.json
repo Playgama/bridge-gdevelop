@@ -2672,7 +2672,7 @@
         {
           "type": "BuiltinCommonInstructions::JsCode",
           "inlineCode": [
-            "eventsFunctionContext.returnValue = bridge.social.isExternlLinksAllowed;",
+            "eventsFunctionContext.returnValue = bridge.social.isExternalLinksAllowed;",
             ""
           ],
           "parameterObjects": "",
