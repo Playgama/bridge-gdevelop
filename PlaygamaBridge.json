@@ -48,6 +48,7 @@
             "    isLastActionCompletedSuccessfully: false,",
             "    isSdkReady: false,",
             "    visibilityStateChanged: false,",
+            "    actionParametersContainer: {},",
             "",
             "    // platform",
             "    serverTime: 0,",
@@ -72,6 +73,39 @@
             "    isBannerStateChanged: false,",
             "    isInterstitialStateChanged: false,",
             "    isRewardedStateChanged: false,",
+            "",
+            "    // player",
+            "    isAuthorizePlayerCompleted: false,",
+            "",
+            "    ",
+            "}",
+            "",
+            "// utils",
+            "gdjs._playgamaBridgeExtension.addActionParameter = function (path, value) {",
+            "    const keys = path.replace(/\\[/g, sep).replace(/]/g, '').split(sep).map(item => isNaN(+item) ? item : +item);",
+            "",
+            "    let current = gdjs._playgamaBridgeExtension.actionParametersContainer;",
+            "",
+            "    for (let i = 0; i < keys.length; i++) {",
+            "        const key = keys[i];",
+            "        if (['__proto__', 'prototype', 'constructor'].includes(key)) {",
+            "            break;",
+            "        }",
+            "",
+            "        if (i < keys.length - 1) {",
+            "            if ((Array.isArray(current[key]) && typeof keys[i + 1] !== 'number') || (!Array.isArray(current[key]) && typeof keys[i + 1] === 'number') || typeof current[key] !== 'object') {",
+            "                break;",
+            "            }",
+            "            current = current[key];",
+            "        } else if (Array.isArray(current[key]) && Array.isArray(value)) {",
+            "            current[key] = [ ...current[key], ...value ];",
+            "        } else if (",
+            "            typeof value === 'object' && typeof current[key] === 'object' && !Array.isArray(current[key]) && !Array.isArray(value)) {",
+            "            current[key] = { ...current[key], ...value };",
+            "        } else {",
+            "            current[key] = value;",
+            "        }",
+            "    }",
             "}",
             "",
             "const variables = runtimeScene.getGame().getVariablesForExtension(\"PlaygamaBridge\");",
@@ -120,6 +154,78 @@
         }
       ],
       "parameters": [],
+      "objectGroups": []
+    },
+    {
+      "description": "Add Action Parameter",
+      "fullName": "Add Action Parameter",
+      "functionType": "Action",
+      "group": "Common",
+      "name": "AddActionParameter",
+      "sentence": "Add Action Parameter _PARAM1_ : _PARAM2_",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "const path = eventsFunctionContext.getArgument(\"Path\");",
+            "const value = eventsFunctionContext.getArgument(\"Value\");",
+            "      ",
+            "gdjs._playgamaBridgeExtension.addActionParameter(path, value);",
+            ""
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": true
+        }
+      ],
+      "parameters": [
+        {
+          "description": "Path",
+          "name": "Path",
+          "type": "string"
+        },
+        {
+          "description": "Value",
+          "name": "Value",
+          "type": "string"
+        }
+      ],
+      "objectGroups": []
+    },
+    {
+      "description": "Add Bool Action Parameter",
+      "fullName": "Add Bool Action Parameter",
+      "functionType": "Action",
+      "group": "Common",
+      "name": "AddBoolActionParameter",
+      "sentence": "Add Action Parameter _PARAM1_ : _PARAM2_",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "const path = eventsFunctionContext.getArgument(\"Path\");",
+            "const value = eventsFunctionContext.getArgument(\"Value\");",
+            "      ",
+            "gdjs._playgamaBridgeExtension.addActionParameter(path, value);",
+            ""
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": true
+        }
+      ],
+      "parameters": [
+        {
+          "description": "Path",
+          "name": "Path",
+          "type": "string"
+        },
+        {
+          "description": "Value",
+          "name": "Value",
+          "type": "trueorfalse"
+        }
+      ],
       "objectGroups": []
     },
     {
@@ -267,6 +373,94 @@
       "objectGroups": []
     },
     {
+      "description": "Is Mobile",
+      "fullName": "Is Mobile",
+      "functionType": "Condition",
+      "group": "Device",
+      "name": "IsMobile",
+      "sentence": "Is Mobile",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "eventsFunctionContext.returnValue = bridge.device.type === 'mobile';",
+            ""
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "parameters": [],
+      "objectGroups": []
+    },
+    {
+      "description": "Is Tablet",
+      "fullName": "Is Tablet",
+      "functionType": "Condition",
+      "group": "Device",
+      "name": "IsTablet",
+      "sentence": "Is Tablet",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "eventsFunctionContext.returnValue = bridge.device.type === 'tablet';",
+            ""
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "parameters": [],
+      "objectGroups": []
+    },
+    {
+      "description": "Is Desktop",
+      "fullName": "Is Desktop",
+      "functionType": "Condition",
+      "group": "Device",
+      "name": "IsDesktop",
+      "sentence": "Is Desktop",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "eventsFunctionContext.returnValue = bridge.device.type === 'desktop';",
+            ""
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "parameters": [],
+      "objectGroups": []
+    },
+    {
+      "description": "Is Tv",
+      "fullName": "Is Tv",
+      "functionType": "Condition",
+      "group": "Device",
+      "name": "IsTv",
+      "sentence": "Is Tv",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "eventsFunctionContext.returnValue = bridge.device.type === 'tv';",
+            ""
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "parameters": [],
+      "objectGroups": []
+    },
+    {
       "description": "Player Id",
       "fullName": "Player Id",
       "functionType": "StringExpression",
@@ -352,9 +546,9 @@
         {
           "type": "BuiltinCommonInstructions::JsCode",
           "inlineCode": [
-            "eventsFunctionContext.returnValue = bridge.player.photos[",
-            "    eventsFunctionContext.getArgument(\"Index\")",
-            "];",
+            "const index = eventsFunctionContext.getArgument(\"Index\")",
+            "",
+            "eventsFunctionContext.returnValue = bridge.player.photos[index];",
             ""
           ],
           "parameterObjects": "",
@@ -1729,6 +1923,162 @@
         }
       ],
       "parameters": [],
+      "objectGroups": []
+    },
+    {
+      "description": "Authorize Player",
+      "fullName": "Authorize Player",
+      "functionType": "Action",
+      "group": "Player",
+      "name": "AuthorizePlayer",
+      "sentence": "Authorize Player",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "gdjs._playgamaBridgeExtension.isLastActionCompletedSuccessfully = false;",
+            "",
+            "return new Promise(resolve => {",
+            "    bridge.player.authorize(gdjs._playgamaBridgeExtension.actionParametersContainer)",
+            "        .then(() => {",
+            "            gdjs._playgamaBridgeExtension.isLastActionCompletedSuccessfully = true;",
+            "        })",
+            "        .catch(error => console.log(error))",
+            "        .finally(() => {",
+            "            gdjs._playgamaBridgeExtension.actionParametersContainer = {};",
+            "            gdjs._playgamaBridgeExtension.isAuthorizePlayerCompleted = true;",
+            "            resolve()",
+            "        })",
+            "})",
+            ""
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": true
+        }
+      ],
+      "parameters": [],
+      "objectGroups": []
+    },
+    {
+      "description": "Is Player Authorization Supported",
+      "fullName": "Is Player Authorization Supported",
+      "functionType": "Condition",
+      "group": "Player",
+      "name": "IsPlayerAuthorizationSupported",
+      "sentence": "Is Player Authorization Supported",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "eventsFunctionContext.returnValue = bridge.player.isAuthorizationSupported;",
+            ""
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "parameters": [],
+      "objectGroups": []
+    },
+    {
+      "description": "Is Player Authorized",
+      "fullName": "Is Player Authorized",
+      "functionType": "Condition",
+      "group": "Player",
+      "name": "IsPlayerAuthorized",
+      "sentence": "Is Player Authorized",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "eventsFunctionContext.returnValue = bridge.player.isAuthorized;",
+            ""
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "parameters": [],
+      "objectGroups": []
+    },
+    {
+      "description": "On Authorize Player Completed",
+      "fullName": "On Authorize Player Completed",
+      "functionType": "Condition",
+      "group": "Player",
+      "name": "OnAuthorizePlayerCompleted",
+      "sentence": "On Authorize Player Completed",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "eventsFunctionContext.returnValue = gdjs._playgamaBridgeExtension.isAuthorizePlayerCompleted;",
+            "",
+            "if (gdjs._playgamaBridgeExtension.isAuthorizePlayerCompleted) {",
+            "    gdjs._playgamaBridgeExtension.isAuthorizePlayerCompleted = false;",
+            "}"
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "parameters": [],
+      "objectGroups": []
+    },
+    {
+      "description": "Does Player Have Name",
+      "fullName": "Does Player Have Name",
+      "functionType": "Condition",
+      "group": "Player",
+      "name": "DoesPlayerHaveName",
+      "sentence": "Does Player Have Name",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "eventsFunctionContext.returnValue = bridge.player.name === 'string';",
+            ""
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "parameters": [],
+      "objectGroups": []
+    },
+    {
+      "description": "Does Player Have Photo",
+      "fullName": "Does Player Have Photo",
+      "functionType": "Condition",
+      "group": "Player",
+      "name": "DoesPlayerHavePhoto",
+      "sentence": "Does Player Have Photo # _PARAM1_",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "const index = eventsFunctionContext.getArgument(\"Index\");",
+            "",
+            "eventsFunctionContext.returnValue = bridge.player.photos.length > index;",
+            ""
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "parameters": [
+        {
+          "description": "Index",
+          "name": "Index",
+          "type": "expression"
+        }
+      ],
       "objectGroups": []
     },
     {
