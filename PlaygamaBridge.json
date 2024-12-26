@@ -48,9 +48,6 @@
             "    isLastActionCompletedSuccessfully: false,",
             "    isSdkReady: false,",
             "    visibilityStateChanged: false,",
-            "    bannerState: null,",
-            "    interstitialState: null,",
-            "    rewardedState: null,",
             "    ",
             "    // storage",
             "    storageData: {},",
@@ -61,6 +58,16 @@
             "    isStorageDataGetRequestCompleted: false,",
             "    isStorageDataSetRequestCompleted: false,",
             "    isStorageDataDeleteRequestCompleted: false,",
+            "",
+            "    // advertisement",
+            "    bannerState: null,",
+            "    interstitialState: null,",
+            "    rewardedState: null,",
+            "    isAdBlockDetected: false,",
+            "    isCheckAdBlockCompleted: false,",
+            "    isBannerStateChanged: false,",
+            "    isInterstitialStateChanged: false,",
+            "    isRewardedStateChanged: false,",
             "}",
             "",
             "const variables = runtimeScene.getGame().getVariablesForExtension(\"PlaygamaBridge\");",
@@ -867,6 +874,7 @@
       "description": "Is Storage Supported",
       "fullName": "Is Storage Supported",
       "functionType": "Condition",
+      "group": "Storage",
       "name": "IsStorageSupported",
       "sentence": "Is Storage Supported _PARAM1_",
       "events": [
@@ -896,6 +904,7 @@
       "description": "Is Storage Available",
       "fullName": "Is Storage Available",
       "functionType": "Condition",
+      "group": "Storage",
       "name": "IsStorageAvailable",
       "sentence": "Is Storage Available _PARAM1_",
       "events": [
@@ -919,6 +928,164 @@
           "type": "stringWithSelector"
         }
       ],
+      "objectGroups": []
+    },
+    {
+      "description": "Set Minimum Delay Between Interstitial",
+      "fullName": "Set Minimum Delay Between Interstitial",
+      "functionType": "Action",
+      "group": "Advertisement",
+      "name": "SetMinimumDelayBetweenInterstitial",
+      "sentence": "Set Minimum Delay Between Interstitial _PARAM1_",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "const seconds = eventsFunctionContext.getArgument(\"Seconds\");",
+            "",
+            "bridge.advertisement.setMinimumDelayBetweenInterstitial(seconds);",
+            ""
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "parameters": [
+        {
+          "description": "Seconds",
+          "name": "Seconds",
+          "type": "expression"
+        }
+      ],
+      "objectGroups": []
+    },
+    {
+      "description": "Show Banner",
+      "fullName": "Show Banner",
+      "functionType": "Action",
+      "group": "Advertisement",
+      "name": "ShowBanner",
+      "sentence": "Show Banner",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "bridge.advertisement.showBanner(gdjs._playgamaBridgeExtension.actionParametersContainer);",
+            "",
+            "gdjs._playgamaBridgeExtension.actionParametersContainer = {};"
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "parameters": [],
+      "objectGroups": []
+    },
+    {
+      "description": "Hide Banner",
+      "fullName": "Hide Banner",
+      "functionType": "Action",
+      "group": "Advertisement",
+      "name": "HideBanner",
+      "sentence": "Hide Banner",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "bridge.advertisement.hideBanner(gdjs._playgamaBridgeExtension.actionParametersContainer);",
+            "",
+            "gdjs._playgamaBridgeExtension.actionParametersContainer = {};"
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "parameters": [],
+      "objectGroups": []
+    },
+    {
+      "description": "Show Interstitial",
+      "fullName": "Show Interstitial",
+      "functionType": "Action",
+      "group": "Advertisement",
+      "name": "ShowInterstitial",
+      "sentence": "Show Interstitial",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "const ignoreDelay = eventsFunctionContext.getArgument(\"IgnoreDelay\");",
+            "",
+            "bridge.advertisement.showInterstitial(ignoreDelay);"
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "parameters": [
+        {
+          "description": "Ignore Delay",
+          "name": "IgnoreDelay",
+          "type": "yesorno"
+        }
+      ],
+      "objectGroups": []
+    },
+    {
+      "description": "Show Rewarded",
+      "fullName": "Show Rewarded",
+      "functionType": "Action",
+      "group": "Advertisement",
+      "name": "ShowRewarded",
+      "sentence": "Show Rewarded",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": "bridge.advertisement.showRewarded();",
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "parameters": [],
+      "objectGroups": []
+    },
+    {
+      "description": "Check AdBlock",
+      "fullName": "Check AdBlock",
+      "functionType": "Action",
+      "group": "Advertisement",
+      "name": "CheckAdBlock",
+      "sentence": "Check AdBlock",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "gdjs._playgamaBridgeExtension.isLastActionCompletedSuccessfully = false;",
+            "",
+            "return new Promise(resolve => {",
+            "    bridge.advertisement.checkAdBlock()",
+            "        .then(result => {",
+            "            gdjs._playgamaBridgeExtension.isLastActionCompletedSuccessfully = true;",
+            "            gdjs._playgamaBridgeExtension.isAdBlockDetected = result;",
+            "        })",
+            "        .catch(error => console.log(error))",
+            "        .finally(() => {",
+            "            gdjs._playgamaBridgeExtension.isCheckAdBlockCompleted = true;",
+            "            resolve();",
+            "        })",
+            "})"
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "parameters": [],
       "objectGroups": []
     },
     {
@@ -1006,6 +1173,54 @@
       "expressionType": {
         "type": "string"
       },
+      "parameters": [],
+      "objectGroups": []
+    },
+    {
+      "description": "Is BannerS upported",
+      "fullName": "Is Banner Supported",
+      "functionType": "Condition",
+      "group": "Advertisement",
+      "name": "IsBannerSupported",
+      "sentence": "Is Banner Supported",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "eventsFunctionContext.returnValue = bridge.advertisement.isBannerSupported;",
+            ""
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "parameters": [],
+      "objectGroups": []
+    },
+    {
+      "description": "On Banner State Changed",
+      "fullName": "On Banner State Changed",
+      "functionType": "Condition",
+      "group": "Advertisement",
+      "name": "OnBannerStateChanged",
+      "sentence": "On Banner State Changed",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "eventsFunctionContext.returnValue = gdjs._playgamaBridge.isBannerStateChanged;",
+            "",
+            "if (gdjs._playgamaBridge.isBannerStateChanged) {",
+            "    gdjs._playgamaBridge.isBannerStateChanged = false;",
+            "}",
+            ""
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
       "parameters": [],
       "objectGroups": []
     },
@@ -1099,6 +1314,32 @@
       "objectGroups": []
     },
     {
+      "description": "On Interstitial State Change",
+      "fullName": "On Interstitial State Change",
+      "functionType": "Condition",
+      "group": "Advertisement",
+      "name": "OnInterstitialStateChanged",
+      "sentence": "On Interstitial State Change",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "eventsFunctionContext.returnValue = gdjs._playgamaBridge.isInterstitialStateChanged;",
+            "",
+            "if (gdjs._playgamaBridge.isInterstitialStateChanged) {",
+            "    gdjs._playgamaBridge.isInterstitialStateChanged = false;",
+            "}",
+            ""
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "parameters": [],
+      "objectGroups": []
+    },
+    {
       "description": "On Interstitial Loading",
       "fullName": "On Interstitial Loading",
       "functionType": "Condition",
@@ -1177,6 +1418,32 @@
           "inlineCode": [
             "eventsFunctionContext.returnValue = gdjs._playgamaBridgeExtension.interstitialState === bridge.INTERSTITIAl_STATE.FAILED",
             "    && runtimeScene.getOnceTriggers().triggerOnce(\"OnInterstitialFailed\")"
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "parameters": [],
+      "objectGroups": []
+    },
+    {
+      "description": "On Rewarded State Change",
+      "fullName": "On Rewarded State Change",
+      "functionType": "Condition",
+      "group": "Advertisement",
+      "name": "OnRewardedStateChanged",
+      "sentence": "On Rewarded State Change",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "eventsFunctionContext.returnValue = gdjs._playgamaBridge.isRewardedStateChanged;",
+            "",
+            "if (gdjs._playgamaBridge.isRewardedStateChanged) {",
+            "    gdjs._playgamaBridge.isRewardedStateChanged = false;",
+            "}",
+            ""
           ],
           "parameterObjects": "",
           "useStrict": true,
@@ -1287,6 +1554,32 @@
           "inlineCode": [
             "eventsFunctionContext.returnValue = gdjs._playgamaBridgeExtension.rewardedState === bridge.REWARDED_STATE.FAILED",
             "    && runtimeScene.getOnceTriggers().triggerOnce(\"OnRewardedFailed\")"
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "parameters": [],
+      "objectGroups": []
+    },
+    {
+      "description": "On Check AdBlock Completed",
+      "fullName": "On Check AdBlock Completed",
+      "functionType": "Condition",
+      "group": "Advertisement",
+      "name": "OnCheckAdBlockCompleted",
+      "sentence": "On Check AdBlock Completed",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "eventsFunctionContext.returnValue = gdjs._playgamaBridge.isCheckAdBlockCompleted;",
+            "",
+            "if (gdjs._playgamaBridge.isCheckAdBlockCompleted) {",
+            "    gdjs._playgamaBridge.isCheckAdBlockCompleted = false;",
+            "}",
+            ""
           ],
           "parameterObjects": "",
           "useStrict": true,
