@@ -85,6 +85,15 @@
             "    isAddToHomeScreenCompleted: false,",
             "    isAddToFavoritesCompleted: false,",
             "    isRateCompleted: false,",
+            "",
+            "    // leaderboard",
+            "    isLeaderboardSetScoreCompleted: false,",
+            "    isLeaderboardGetScoreCompleted: false,",
+            "    isLeaderboardGetEntriesCompleted: false,",
+            "    isLeaderboardShowNativePopupCompleted: false,",
+            "    leaderboardPlayerScore: 0,",
+            "    leaderboardEntries: [],",
+            "    ",
             "}",
             "",
             "// utils",
@@ -2681,6 +2690,543 @@
         }
       ],
       "parameters": [],
+      "objectGroups": []
+    },
+    {
+      "description": "Leaderboard Set Score",
+      "fullName": "Leaderboard Set Score",
+      "functionType": "Action",
+      "group": "Leaderboard",
+      "name": "LeaderboardSetScore",
+      "sentence": "Leaderboard Set Score",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "gdjs._playgamaBridgeExtension.isLastActionCompletedSuccessfully = false;",
+            "",
+            "return new Promise(resolve => {",
+            "    bridge.leaderboard.setScore(gdjs._playgamaBridgeExtension.actionParametersContainer)",
+            "        .then(() => {",
+            "            gdjs._playgamaBridgeExtension.isLastActionCompletedSuccessfully = true;",
+            "        })",
+            "        .catch(error => console.log(error))",
+            "        .finally(() => {",
+            "            gdjs._playgamaBridgeExtension.actionParametersContainer = {};",
+            "            gdjs._playgamaBridgeExtension.isLeaderboardSetScoreCompleted = true;",
+            "            resolve();",
+            "        });",
+            "});",
+            ""
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "parameters": [],
+      "objectGroups": []
+    },
+    {
+      "description": "Leaderboard Get Score",
+      "fullName": "Leaderboard Get Score",
+      "functionType": "Action",
+      "group": "Leaderboard",
+      "name": "LeaderboardGetScore",
+      "sentence": "Leaderboard Get Score",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "gdjs._playgamaBridgeExtension.isLastActionCompletedSuccessfully = false;",
+            "gdjs._playgamaBridgeExtension.leaderboardPlayerScore = 0;",
+            "",
+            "return new Promise(resolve => {",
+            "    bridge.leaderboard.getScore(gdjs._playgamaBridgeExtension.actionParametersContainer)",
+            "        .then(score => {",
+            "            gdjs._playgamaBridgeExtension.leaderboardPlayerScore = score;",
+            "            gdjs._playgamaBridgeExtension.isLastActionCompletedSuccessfully = true;",
+            "        })",
+            "        .catch(error => console.log(error))",
+            "        .finally(() => {",
+            "            gdjs._playgamaBridgeExtension.actionParametersContainer = {};",
+            "            gdjs._playgamaBridgeExtension.isLeaderboardGetScoreCompleted = true;",
+            "            resolve();",
+            "        });",
+            "});",
+            ""
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "parameters": [],
+      "objectGroups": []
+    },
+    {
+      "description": "Leaderboard Get Entries",
+      "fullName": "Leaderboard Get Entries",
+      "functionType": "Action",
+      "group": "Leaderboard",
+      "name": "LeaderboardGetEntries",
+      "sentence": "Leaderboard Get Entries",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "gdjs._playgamaBridgeExtension.isLastActionCompletedSuccessfully = false;",
+            "gdjs._playgamaBridgeExtension.leaderboardEntries = [];",
+            "",
+            "return new Promise(resolve => {",
+            "    bridge.leaderboard.getEntries(gdjs._playgamaBridgeExtension.actionParametersContainer)",
+            "        .then(entries => {",
+            "            gdjs._playgamaBridgeExtension.leaderboardEntries = entries;",
+            "            gdjs._playgamaBridgeExtension.isLastActionCompletedSuccessfully = true;",
+            "        })",
+            "        .catch(error => console.log(error))",
+            "        .finally(() => {",
+            "            gdjs._playgamaBridgeExtension.actionParametersContainer = {};",
+            "            gdjs._playgamaBridgeExtension.isLeaderboardGetEntriesCompleted = true;",
+            "            resolve();",
+            "        });",
+            "});"
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "parameters": [],
+      "objectGroups": []
+    },
+    {
+      "description": "Leaderboard Show Native Popup",
+      "fullName": "Leaderboard Show Native Popup",
+      "functionType": "Action",
+      "group": "Leaderboard",
+      "name": "LeaderboardShowNativePopup",
+      "sentence": "Leaderboard Show Native Popup",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "gdjs._playgamaBridgeExtension.isLastActionCompletedSuccessfully = false;",
+            "",
+            "return new Promise(resolve => {",
+            "    bridge.leaderboard.showNativePopup(gdjs._playgamaBridgeExtension.actionParametersContainer)",
+            "        .then(() => {",
+            "            gdjs._playgamaBridgeExtension.isLastActionCompletedSuccessfully = true;",
+            "        })",
+            "        .catch(error => console.log(error))",
+            "        .finally(() => {",
+            "            gdjs._playgamaBridgeExtension.actionParametersContainer = {};",
+            "            gdjs._playgamaBridgeExtension.isLeaderboardShowNativePopupCompleted = true;",
+            "            resolve();",
+            "        });",
+            "});"
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": true
+        }
+      ],
+      "parameters": [],
+      "objectGroups": []
+    },
+    {
+      "description": "Is Leaderboard Supported",
+      "fullName": "Is Leaderboard Supported",
+      "functionType": "Condition",
+      "group": "Leaderboard",
+      "name": "IsLeaderboardSupported",
+      "sentence": "Is Leaderboard Supported",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "eventsFunctionContext.returnValue = bridge.leaderboard.isSupported;",
+            ""
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "parameters": [],
+      "objectGroups": []
+    },
+    {
+      "description": "Is Leaderboard Native Popup Supported",
+      "fullName": "Is Leaderboard Native Popup Supported",
+      "functionType": "Condition",
+      "group": "Leaderboard",
+      "name": "IsLeaderboardNativePopupSupported",
+      "sentence": "Is Leaderboard Native Popup Supported",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "eventsFunctionContext.returnValue = bridge.leaderboard.isNativePopupSupported;",
+            ""
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "parameters": [],
+      "objectGroups": []
+    },
+    {
+      "description": "Is Leaderboard Multiple Boards Supported",
+      "fullName": "Is Leaderboard Multiple Boards Supported",
+      "functionType": "Condition",
+      "group": "Leaderboard",
+      "name": "IsLeaderboardMultipleBoardsSupported",
+      "sentence": "Is Leaderboard Multiple Boards Supported",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "eventsFunctionContext.returnValue = bridge.leaderboard.isMultipleBoardsSupported;",
+            ""
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "parameters": [],
+      "objectGroups": []
+    },
+    {
+      "description": "Is Leaderboard Set Score Supported",
+      "fullName": "Is Leaderboard Set Score Supported",
+      "functionType": "Condition",
+      "group": "Leaderboard",
+      "name": "IsLeaderboardSetScoreSupported",
+      "sentence": "Is Leaderboard Set Score Supported",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "eventsFunctionContext.returnValue = bridge.leaderboard.isSetScoreSupported;",
+            ""
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "parameters": [],
+      "objectGroups": []
+    },
+    {
+      "description": "Is Leaderboard Get Score Supported",
+      "fullName": "Is Leaderboard Get Score Supported",
+      "functionType": "Condition",
+      "group": "Leaderboard",
+      "name": "IsLeaderboardGetScoreSupported",
+      "sentence": "Is Leaderboard Get Score Supported",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "eventsFunctionContext.returnValue = bridge.leaderboard.isGetScoreSupported;",
+            ""
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "parameters": [],
+      "objectGroups": []
+    },
+    {
+      "description": "Is Leaderboard Get Entries Supported",
+      "fullName": "Is Leaderboard Get Entries Supported",
+      "functionType": "Condition",
+      "group": "Leaderboard",
+      "name": "IsLeaderboardGetEntriesSupported",
+      "sentence": "Is Leaderboard Get Entries Supported",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "eventsFunctionContext.returnValue = bridge.leaderboard.isGetEntriesSupported;",
+            ""
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "parameters": [],
+      "objectGroups": []
+    },
+    {
+      "description": "On Leaderboard Set Score Completed",
+      "fullName": "On Leaderboard Set Score Completed",
+      "functionType": "Condition",
+      "group": "Leaderboard",
+      "name": "OnLeaderboardSetScoreCompleted",
+      "sentence": "On Leaderboard Set Score Completed",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "eventsFunctionContext.returnValue = gdjs._playgamaBridgeExtension.isLeaderboardSetScoreCompleted;",
+            "",
+            "if (gdjs._playgamaBridgeExtension.isLeaderboardSetScoreCompleted) {",
+            "    gdjs._playgamaBridgeExtension.isLeaderboardSetScoreCompleted = false;",
+            "}",
+            ""
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "parameters": [],
+      "objectGroups": []
+    },
+    {
+      "description": "On Leaderboard Get Score Completed",
+      "fullName": "On Leaderboard Get Score Completed",
+      "functionType": "Condition",
+      "group": "Leaderboard",
+      "name": "OnLeaderboardGetScoreCompleted",
+      "sentence": "On Leaderboard Get Score Completed",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "eventsFunctionContext.returnValue = gdjs._playgamaBridgeExtension.isLeaderboardGetScoreCompleted;",
+            "",
+            "if (gdjs._playgamaBridgeExtension.isLeaderboardGetScoreCompleted) {",
+            "    gdjs._playgamaBridgeExtension.isLeaderboardGetScoreCompleted = false;",
+            "}",
+            ""
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "parameters": [],
+      "objectGroups": []
+    },
+    {
+      "description": "On Leaderboard Get Entries Completed",
+      "fullName": "On Leaderboard Get Entries Completed",
+      "functionType": "Condition",
+      "group": "Leaderboard",
+      "name": "OnLeaderboardGetEntriesCompleted",
+      "sentence": "On Leaderboard Get Entries Completed",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "eventsFunctionContext.returnValue = gdjs._playgamaBridgeExtension.isLeaderboardGetEntriesCompleted;",
+            "",
+            "if (gdjs._playgamaBridgeExtension.isLeaderboardGetEntriesCompleted) {",
+            "    gdjs._playgamaBridgeExtension.isLeaderboardGetEntriesCompleted = false;",
+            "}",
+            ""
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "parameters": [],
+      "objectGroups": []
+    },
+    {
+      "description": "On Leaderboard Show Native Popup Completed",
+      "fullName": "On Leaderboard Show Native Popup Completed",
+      "functionType": "Condition",
+      "group": "Leaderboard",
+      "name": "OnLeaderboardShowNativePopupCompleted",
+      "sentence": "On Leaderboard Show Native Popup Completed",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "eventsFunctionContext.returnValue = gdjs._playgamaBridgeExtension.isLeaderboardShowNativePopupCompleted;",
+            "",
+            "if (gdjs._playgamaBridgeExtension.isLeaderboardShowNativePopupCompleted) {",
+            "    gdjs._playgamaBridgeExtension.isLeaderboardShowNativePopupCompleted = false;",
+            "}",
+            ""
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "parameters": [],
+      "objectGroups": []
+    },
+    {
+      "description": "Leaderboard Player Score",
+      "fullName": "Leaderboard Player Score",
+      "functionType": "Expression",
+      "group": "Leaderboard",
+      "name": "LeaderboardPlayerScore",
+      "sentence": "",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "eventsFunctionContext.returnValue = gdjs._playgamaBridgeExtension.leaderboardPlayerScore;",
+            ""
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "expressionType": {
+        "type": "expression"
+      },
+      "parameters": [],
+      "objectGroups": []
+    },
+    {
+      "description": "Leaderboard Entries Count",
+      "fullName": "Leaderboard Entries Count",
+      "functionType": "Expression",
+      "group": "Leaderboard",
+      "name": "LeaderboardEntriesCount",
+      "sentence": "",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "eventsFunctionContext.returnValue = gdjs._playgamaBridgeExtension.leaderboardEntries.length;",
+            ""
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "expressionType": {
+        "type": "expression"
+      },
+      "parameters": [],
+      "objectGroups": []
+    },
+    {
+      "description": "Leaderboard Entry Properties Count",
+      "fullName": "Leaderboard Entry Properties Count",
+      "functionType": "Expression",
+      "group": "Leaderboard",
+      "name": "LeaderboardEntryPropertiesCount",
+      "sentence": "",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "eventsFunctionContext.returnValue = gdjs._playgamaBridgeExtension.leaderboardEntries.length > 0 ",
+            "    ? Object.keys(gdjs._playgamaBridgeExtension.leaderboardEntries[0] || {}).length",
+            "    : 0",
+            ""
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "expressionType": {
+        "type": "expression"
+      },
+      "parameters": [],
+      "objectGroups": []
+    },
+    {
+      "description": "Leaderboard Entry Property Name",
+      "fullName": "Leaderboard Entry Property Name",
+      "functionType": "StringExpression",
+      "group": "Leaderboard",
+      "name": "LeaderboardEntryPropertyName",
+      "sentence": "",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "const propertyIndex = eventsFunctionContext.getArgument(\"PropertyIndex\");",
+            "",
+            "eventsFunctionContext.returnValue = gdjs._playgamaBridgeExtension.leaderboardEntries.length > 0 ",
+            "    ? Object.keys(gdjs._playgamaBridgeExtension.leaderboardEntries[0] || {})[propertyIndex]",
+            "    : ''",
+            ""
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "expressionType": {
+        "type": "string"
+      },
+      "parameters": [
+        {
+          "description": "Property Index",
+          "name": "PropertyIndex",
+          "type": "expression"
+        }
+      ],
+      "objectGroups": []
+    },
+    {
+      "description": "Leaderboard Entry Property Value",
+      "fullName": "Leaderboard Entry Property Value",
+      "functionType": "StringExpression",
+      "group": "Leaderboard",
+      "name": "LeaderboardEntryPropertyValue",
+      "sentence": "",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "const entryIndex = eventsFunctionContext.getArgument(\"EntryIndex\");",
+            "const property = eventsFunctionContext.getArgument(\"Property\");",
+            "",
+            "if (gdjs._playgamaBridgeExtension.leaderboardEntries.length > 0) {",
+            "    const entry = this.leaderboardEntries[entryIndex];",
+            "",
+            "    eventsFunctionContext.returnValue = isNaN(+property) ",
+            "        ? entry[property]",
+            "        : entry[Object.keys(entry || {})[+property]]",
+            "} else {",
+            "    eventsFunctionContext.returnValue = '';",
+            "}",
+            ""
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "expressionType": {
+        "type": "string"
+      },
+      "parameters": [
+        {
+          "description": "Entry Index",
+          "name": "EntryIndex",
+          "type": "expression"
+        },
+        {
+          "description": "Property",
+          "name": "Property",
+          "type": "string"
+        }
+      ],
       "objectGroups": []
     },
     {
