@@ -102,6 +102,12 @@
             "    paymentsPurchase: null,",
             "    paymentsPurchases: [],",
             "    paymentsCatalog: [],",
+            "",
+            "    // achievements",
+            "    isAchievementsUnlockCompleted: false,",
+            "    isAchievementsGetListCompleted: false,",
+            "    isAchievementsShowNativePopupCompleted: false,",
+            "    achievementsList: [],",
             "}",
             "",
             "// utils",
@@ -3949,6 +3955,393 @@
           "type": "string"
         }
       ],
+      "objectGroups": []
+    },
+    {
+      "description": "Is Achievements Supported",
+      "fullName": "Is Achievements Supported",
+      "functionType": "Condition",
+      "group": "Achievements",
+      "name": "IsAchievementsSupported",
+      "sentence": "Is Achievements Supported",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "eventsFunctionContext.returnValue = bridge.achievements.isSupported;",
+            ""
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "parameters": [],
+      "objectGroups": []
+    },
+    {
+      "description": "Is Achievements Get List Supported",
+      "fullName": "Is Achievements Get List Supported",
+      "functionType": "Condition",
+      "group": "Achievements",
+      "name": "IsAchievementsGetListSupported",
+      "sentence": "Is Achievements Get List Supported",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "eventsFunctionContext.returnValue = bridge.achievements.isGetListSupported;",
+            ""
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "parameters": [],
+      "objectGroups": []
+    },
+    {
+      "description": "Is Achievements Native Popup Supported",
+      "fullName": "Is Achievements Native Popup Supported",
+      "functionType": "Condition",
+      "group": "Achievements",
+      "name": "IsAchievementsNativePopupSupported",
+      "sentence": "Is Achievements Native Popup Supported",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "eventsFunctionContext.returnValue = bridge.achievements.isNativePopupSupported;",
+            ""
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "parameters": [],
+      "objectGroups": []
+    },
+    {
+      "description": "On Achievements Unlock Completed",
+      "fullName": "On Achievements Unlock Completed",
+      "functionType": "Condition",
+      "group": "Achievements",
+      "name": "OnAchievementsUnlockCompleted",
+      "sentence": "On Achievements Unlock Completed",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "eventsFunctionContext.returnValue = gdjs._playgamaBridgeExtension.isAchievementsUnlockCompleted;",
+            "",
+            "if (gdjs._playgamaBridgeExtension.isAchievementsUnlockCompleted) {",
+            "    gdjs._playgamaBridgeExtension.isAchievementsUnlockCompleted = false;",
+            "}",
+            ""
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "parameters": [],
+      "objectGroups": []
+    },
+    {
+      "description": "On Achievements Get List Completed",
+      "fullName": "On Achievements Get List Completed",
+      "functionType": "Condition",
+      "group": "Achievements",
+      "name": "OnAchievementsGetListCompleted",
+      "sentence": "On Achievements Get List Completed",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "eventsFunctionContext.returnValue = gdjs._playgamaBridgeExtension.isAchievementsGetListCompleted;",
+            "",
+            "if (gdjs._playgamaBridgeExtension.isAchievementsGetListCompleted) {",
+            "    gdjs._playgamaBridgeExtension.isAchievementsGetListCompleted = false;",
+            "}",
+            ""
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "parameters": [],
+      "objectGroups": []
+    },
+    {
+      "description": "On Achievements Show Native Popup Completed",
+      "fullName": "On Achievements Show Native Popup Completed",
+      "functionType": "Condition",
+      "group": "Achievements",
+      "name": "OnAchievementsShowNativePopupCompleted",
+      "sentence": "On Achievements Show Native Popup Completed",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "eventsFunctionContext.returnValue = gdjs._playgamaBridgeExtension.isAchievementsShowNativePopupCompleted;",
+            "",
+            "if (gdjs._playgamaBridgeExtension.isAchievementsShowNativePopupCompleted) {",
+            "    gdjs._playgamaBridgeExtension.isAchievementsShowNativePopupCompleted = false;",
+            "}",
+            ""
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "parameters": [],
+      "objectGroups": []
+    },
+    {
+      "description": "Achievements Count",
+      "fullName": "Achievements Count",
+      "functionType": "Expression",
+      "group": "Achievements",
+      "name": "AchievementsCount",
+      "sentence": "",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "eventsFunctionContext.returnValue = gdjs._playgamaBridgeExtension.achievementsList.length;",
+            ""
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "expressionType": {
+        "type": "expression"
+      },
+      "parameters": [],
+      "objectGroups": []
+    },
+    {
+      "description": "Achievement Properties Count",
+      "fullName": "Achievement Properties Count",
+      "functionType": "Expression",
+      "group": "Achievements",
+      "name": "AchievementPropertiesCount",
+      "sentence": "",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "eventsFunctionContext.returnValue = gdjs._playgamaBridgeExtension.achievementsList.length > 0",
+            "    ? Object.keys(gdjs._playgamaBridgeExtension.achievementsList[0] || {}).length",
+            "    : 0;",
+            ""
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "expressionType": {
+        "type": "expression"
+      },
+      "parameters": [],
+      "objectGroups": []
+    },
+    {
+      "description": "Achievement Property Name",
+      "fullName": "Achievement Property Name",
+      "functionType": "StringExpression",
+      "group": "Achievements",
+      "name": "AchievementPropertyName",
+      "sentence": "",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "const propertyIndex = eventsFunctionContext.getArgument(\"PropertyIndex\");",
+            "",
+            "eventsFunctionContext.returnValue = gdjs._playgamaBridgeExtension.achievementsList",
+            "    ? Object.keys(gdjs._playgamaBridgeExtension.achievementsList[0] || {})[propertyIndex]",
+            "    : '';",
+            "",
+            ""
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "expressionType": {
+        "type": "string"
+      },
+      "parameters": [
+        {
+          "description": "Property Index",
+          "name": "PropertyIndex",
+          "type": "expression"
+        }
+      ],
+      "objectGroups": []
+    },
+    {
+      "description": "Achievement Property Value",
+      "fullName": "Achievement Property Value",
+      "functionType": "StringExpression",
+      "group": "Achievements",
+      "name": "AchievementPropertyValue",
+      "sentence": "",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "const achievementIndex = eventsFunctionContext.getArgument(\"AchievementIndex\");",
+            "const property = eventsFunctionContext.getArgument(\"Property\");",
+            "",
+            "const { achievementsList } = gdjs._playgamaBridgeExtension;",
+            "",
+            "if (achievementsList.length > 0) {",
+            "    const achievement = achievementsList[achievementIndex] || {};",
+            "    ",
+            "    eventsFunctionContext.returnValue = isNaN(+property)",
+            "        ? achievement[property]",
+            "        : achievement[Object.keys(achievement)[property]];",
+            "} else {",
+            "    eventsFunctionContext.returnValue = \"\";",
+            "}",
+            "",
+            ""
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "expressionType": {
+        "type": "string"
+      },
+      "parameters": [
+        {
+          "description": "Achievement Index",
+          "name": "AchievementIndex",
+          "type": "expression"
+        },
+        {
+          "description": "Property",
+          "name": "Property",
+          "type": "string"
+        }
+      ],
+      "objectGroups": []
+    },
+    {
+      "description": "Achievements Unlock",
+      "fullName": "Achievements Unlock",
+      "functionType": "Action",
+      "group": "Achievements",
+      "name": "AchievementsUnlock",
+      "sentence": "Achievements Unlock",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "gdjs._playgamaBridgeExtension.isLastActionCompletedSuccessfully = false;",
+            "",
+            "return new Promise(resolve => {",
+            "    bridge.achievements.unlock(gdjs._playgamaBridgeExtension.actionParametersContainer)",
+            "        .then(() => {",
+            "            gdjs._playgamaBridgeExtension.isLastActionCompletedSuccessfully = true;",
+            "        })",
+            "        .catch(error => console.log(error))",
+            "        .finally(() => {",
+            "            gdjs._playgamaBridgeExtension.actionParametersContainer = {};",
+            "            gdjs._playgamaBridgeExtension.isAchievementsUnlockCompleted = true;",
+            "            resolve();",
+            "        });",
+            "});",
+            ""
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": true
+        }
+      ],
+      "parameters": [],
+      "objectGroups": []
+    },
+    {
+      "description": "Achievements Get List",
+      "fullName": "Achievements Get List",
+      "functionType": "Action",
+      "group": "Achievements",
+      "name": "AchievementsGetList",
+      "sentence": "Achievements Get List",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "gdjs._playgamaBridgeExtension.isLastActionCompletedSuccessfully = false;",
+            "",
+            "return new Promise(resolve => {",
+            "    bridge.achievements.getList(gdjs._playgamaBridgeExtension.actionParametersContainer)",
+            "        .then(data => {",
+            "            gdjs._playgamaBridgeExtension.isLastActionCompletedSuccessfully = true;",
+            "            gdjs._playgamaBridgeExtension.achievementsList = data;",
+            "        })",
+            "        .catch(error => console.log(error))",
+            "        .finally(() => {",
+            "            gdjs._playgamaBridgeExtension.actionParametersContainer = {};",
+            "            gdjs._playgamaBridgeExtension.isAchievementsGetListCompleted = true;",
+            "            resolve();",
+            "        });",
+            "});"
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": true
+        }
+      ],
+      "parameters": [],
+      "objectGroups": []
+    },
+    {
+      "description": "Achievements Show Native Popup",
+      "fullName": "Achievements Show Native Popup",
+      "functionType": "Action",
+      "group": "Achievements",
+      "name": "AchievementsShowNativePopup",
+      "sentence": "Achievements Show Native Popup",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "gdjs._playgamaBridgeExtension.isLastActionCompletedSuccessfully = false;",
+            "",
+            "return new Promise(resolve => {",
+            "    bridge.achievements.showNativePopup(gdjs._playgamaBridgeExtension.actionParametersContainer)",
+            "        .then(() => {",
+            "            gdjs._playgamaBridgeExtension.isLastActionCompletedSuccessfully = true;",
+            "        })",
+            "        .catch(error => console.log(error))",
+            "        .finally(() => {",
+            "            gdjs._playgamaBridgeExtension.actionParametersContainer = {};",
+            "            gdjs._playgamaBridgeExtension.isAchievementsShowNativePopupCompleted = true;",
+            "            resolve();",
+            "        });",
+            "});",
+            ""
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": true
+        }
+      ],
+      "parameters": [],
       "objectGroups": []
     },
     {
