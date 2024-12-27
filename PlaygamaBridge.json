@@ -12,12 +12,59 @@
   "description": "",
   "tags": [],
   "authorIds": [],
-  "dependencies": [],
+  "dependencies": [
+    {
+      "exportName": "my-dependency",
+      "name": "New Dependency",
+      "type": "cordova",
+      "version": "1.0.0"
+    }
+  ],
   "globalVariables": [
+    {
+      "name": "GameDistributionGameId",
+      "type": "string",
+      "value": ""
+    },
     {
       "name": "Y8GameId",
       "type": "string",
-      "value": "1234ddd"
+      "value": ""
+    },
+    {
+      "name": "y8ChannelId",
+      "type": "string",
+      "value": ""
+    },
+    {
+      "name": "Y8AdsenseId",
+      "type": "string",
+      "value": ""
+    },
+    {
+      "name": "LaggedDevId",
+      "type": "string",
+      "value": ""
+    },
+    {
+      "name": "LaggedPublisherId",
+      "type": "string",
+      "value": ""
+    },
+    {
+      "name": "FacebookPlacementId",
+      "type": "string",
+      "value": ""
+    },
+    {
+      "name": "AdsgramBlockId",
+      "type": "string",
+      "value": ""
+    },
+    {
+      "name": "ShowInterstitialOnInit",
+      "type": "boolean",
+      "value": false
     }
   ],
   "sceneVariables": [
@@ -144,16 +191,38 @@
             "",
             "const variables = runtimeScene.getGame().getVariablesForExtension(\"PlaygamaBridge\");",
             "",
+            "const gameDistributionGameId = variables.get(\"GameDistributionGameId\").getAsString();",
             "const y8GameId = variables.get(\"Y8GameId\").getAsString();",
+            "const y8ChannelId = variables.get(\"Y8ChannelId\").getAsString();",
+            "const y8AdsenseId = variables.get(\"Y8AdsenseId\").getAsString();",
+            "const laggedDevId = variables.get(\"LaggedDevId\").getAsString();",
+            "const laggedPublisherId = variables.get(\"LaggedPublisherId\").getAsString();",
+            "const facebookPlacementId = variables.get(\"FacebookPlacementId\").getAsString();",
+            "const adsgramBlockId = variables.get(\"AdsgramBlockId\").getAsString();",
             "const showInterstitialOnInit = variables.get(\"ShowInterstitialOnInit\").getAsBoolean();",
             "",
             "const options = {",
-            "    platforms: {",
-            "        \"y8\": {",
+            "    'platforms': {",
+            "        'game_distribution': {",
+            "            gameId: gameDistributionGameId",
+            "        },",
+            "        'telegram': {",
+            "            adsgramBlockId,",
+            "        },",
+            "        'y8': {",
             "            gameId: y8GameId,",
+            "            adsenseId: y8AdsenseId,",
+            "            channelId: y8ChannelId,",
+            "        },",
+            "        'lagged': {",
+            "            devId: laggedDevId,",
+            "            publisherId: laggedPublisherId",
+            "        },",
+            "        'facebook': {",
+            "            placementId: facebookPlacementId",
             "        }",
             "    }",
-            "};",
+            "}",
             "",
             "bridge.initialize(options)",
             "    .then(() => {",
