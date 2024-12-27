@@ -108,6 +108,10 @@
             "    isAchievementsGetListCompleted: false,",
             "    isAchievementsShowNativePopupCompleted: false,",
             "    achievementsList: [],",
+            "",
+            "    // remote",
+            "    remoteConfig: {},",
+            "    isRemoteConfigGotCompleted: false,",
             "}",
             "",
             "// utils",
@@ -4335,6 +4339,156 @@
             "        });",
             "});",
             ""
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": true
+        }
+      ],
+      "parameters": [],
+      "objectGroups": []
+    },
+    {
+      "description": "Is Remote Config Supported",
+      "fullName": "Is Remote Config Supported",
+      "functionType": "Condition",
+      "group": "Remote",
+      "name": "IsRemoteConfigSupported",
+      "sentence": "Is Remote Config Supported",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "eventsFunctionContext.returnValue = bridge.remoteConfig.isSupported;",
+            ""
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "parameters": [],
+      "objectGroups": []
+    },
+    {
+      "description": "On Remote Config Got Completed",
+      "fullName": "On Remote Config Got Completed",
+      "functionType": "Condition",
+      "group": "Remote",
+      "name": "OnRemoteConfigGotCompleted",
+      "sentence": "On Remote Config Got Completed",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "eventsFunctionContext.returnValue = gdjs._playgamaBridgeExtension.isRemoteConfigGotCompleted;",
+            "",
+            "if (gdjs._playgamaBridgeExtension.isRemoteConfigGotCompleted) {",
+            "    gdjs._playgamaBridgeExtension.isRemoteConfigGotCompleted = false;",
+            "}",
+            ""
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "parameters": [],
+      "objectGroups": []
+    },
+    {
+      "description": "Has Remote Config Value",
+      "fullName": "Has Remote Config Value",
+      "functionType": "Condition",
+      "group": "Remote",
+      "name": "HasRemoteConfigValue",
+      "sentence": "Has _PARAM1_ in Remote Config",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "const key = eventsFunctionContext.getArgument(\"Key\");",
+            "const { remoteConfig } = gdjs._playgamaBridgeExtension;",
+            "",
+            "const value = remoteConfig[key];",
+            "",
+            "eventsFunctionContext.returnValue = value !== null && typeof value !== 'undefined';",
+            ""
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "parameters": [
+        {
+          "description": "Key",
+          "name": "Key",
+          "type": "string"
+        }
+      ],
+      "objectGroups": []
+    },
+    {
+      "description": "Remote Config Value",
+      "fullName": "Remote Config Value",
+      "functionType": "StringExpression",
+      "group": "Remote",
+      "name": "RemoteConfigValue",
+      "sentence": "Has _PARAM1_ in Remote Config",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "const key = eventsFunctionContext.getArgument(\"Key\");",
+            "const { remoteConfig } = gdjs._playgamaBridgeExtension;",
+            "",
+            "eventsFunctionContext.returnValue = remoteConfig[key];",
+            ""
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "expressionType": {
+        "type": "string"
+      },
+      "parameters": [
+        {
+          "description": "Key",
+          "name": "Key",
+          "type": "string"
+        }
+      ],
+      "objectGroups": []
+    },
+    {
+      "description": "Send Remote Config Get Request",
+      "fullName": "Send Remote Config Get Request",
+      "functionType": "Action",
+      "group": "Remote",
+      "name": "SendRemoteConfigGetRequest",
+      "sentence": "Send Remote Config Get Request",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "gdjs._playgamaBridgeExtension.isLastActionCompletedSuccessfully = false;",
+            "",
+            "return new Promise(resolve => {",
+            "    window.bridge.remoteConfig.get(gdjs._playgamaBridgeExtension.actionParametersContainer)",
+            "        .then(data => {",
+            "            gdjs._playgamaBridgeExtension.isLastActionCompletedSuccessfully = true;",
+            "            gdjs._playgamaBridgeExtension.remoteConfig = data;",
+            "        })",
+            "        .catch(error => console.log(error))",
+            "        .finally(() => {",
+            "            gdjs._playgamaBridgeExtension.actionParametersContainer = {};",
+            "            gdjs._playgamaBridgeExtension.isRemoteConfigGotCompleted = true;",
+            "            resolve();",
+            "        });",
+            "});"
           ],
           "parameterObjects": "",
           "useStrict": true,
