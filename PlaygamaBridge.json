@@ -94,6 +94,14 @@
             "    leaderboardPlayerScore: 0,",
             "    leaderboardEntries: [],",
             "    ",
+            "    // payments",
+            "    isPaymentsPurchaseCompleted: false,",
+            "    isPaymentsGetPurchasesCompleted: false,",
+            "    isPaymentsGetCatalogCompleted: false,",
+            "    isPaymentsConsumePurchaseCompleted: false,",
+            "    paymentsPurchase: null,",
+            "    paymentsPurchases: [],",
+            "    paymentsCatalog: [],",
             "}",
             "",
             "// utils",
@@ -3219,6 +3227,720 @@
         {
           "description": "Entry Index",
           "name": "EntryIndex",
+          "type": "expression"
+        },
+        {
+          "description": "Property",
+          "name": "Property",
+          "type": "string"
+        }
+      ],
+      "objectGroups": []
+    },
+    {
+      "description": "Payments Purchase",
+      "fullName": "Payments Purchase",
+      "functionType": "Action",
+      "group": "Payments",
+      "name": "PaymentsPurchase",
+      "sentence": "Payments Purchase",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "gdjs._playgamaBridgeExtension.isLastActionCompletedSuccessfully = false;",
+            "",
+            "return new Promise(resolve => {",
+            "    bridge.payments.purchase(gdjs._playgamaBridgeExtension.actionParametersContainer)",
+            "        .then(data => {",
+            "            gdjs._playgamaBridgeExtension.isLastActionCompletedSuccessfully = true;",
+            "            gdjs._playgamaBridgeExtension.paymentsPurchase = data;",
+            "        })",
+            "        .catch(error => console.log(error))",
+            "        .finally(() => {",
+            "            gdjs._playgamaBridgeExtension.actionParametersContainer = {};",
+            "            gdjs._playgamaBridgeExtension.isPaymentsPurchaseCompleted = true;",
+            "            resolve();",
+            "        });",
+            "});",
+            ""
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": true
+        }
+      ],
+      "parameters": [],
+      "objectGroups": []
+    },
+    {
+      "description": "Payments Get Purchases",
+      "fullName": "Payments Get Purchases",
+      "functionType": "Action",
+      "group": "Payments",
+      "name": "PaymentsGetPurchases",
+      "sentence": "Payments Get Purchases",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "gdjs._playgamaBridgeExtension.isLastActionCompletedSuccessfully = false;",
+            "",
+            "return new Promise(resolve => {",
+            "    bridge.payments.getPurchases()",
+            "        .then(data => {",
+            "            gdjs._playgamaBridgeExtension.isLastActionCompletedSuccessfully = true;",
+            "            gdjs._playgamaBridgeExtension.paymentsPurchases = data;",
+            "        })",
+            "        .catch(error => console.log(error))",
+            "        .finally(() => {",
+            "            gdjs._playgamaBridgeExtension.isPaymentsGetPurchasesCompleted = true;",
+            "            resolve();",
+            "        });",
+            "});",
+            ""
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": true
+        }
+      ],
+      "parameters": [],
+      "objectGroups": []
+    },
+    {
+      "description": "Payments Get Catalog",
+      "fullName": "Payments Get Catalog",
+      "functionType": "Action",
+      "group": "Payments",
+      "name": "PaymentsGetCatalog",
+      "sentence": "Payments Get Catalog",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "gdjs._playgamaBridgeExtension.isLastActionCompletedSuccessfully = false;",
+            "",
+            "return new Promise(resolve => {",
+            "    bridge.payments.getCatalog()",
+            "        .then(data => {",
+            "            gdjs._playgamaBridgeExtension.isLastActionCompletedSuccessfully = true;",
+            "            gdjs._playgamaBridgeExtension.paymentsCatalog = data;",
+            "        })",
+            "        .catch(error => console.log(error))",
+            "        .finally(() => {",
+            "            gdjs._playgamaBridgeExtension.isPaymentsGetCatalogCompleted = true;",
+            "            resolve();",
+            "        });",
+            "});",
+            ""
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": true
+        }
+      ],
+      "parameters": [],
+      "objectGroups": []
+    },
+    {
+      "description": "Payments Consume Purchase",
+      "fullName": "Payments Consume Purchase",
+      "functionType": "Action",
+      "group": "Payments",
+      "name": "PaymentsConsumePurchase",
+      "sentence": "Payments Consume Purchase",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "gdjs._playgamaBridgeExtension.isLastActionCompletedSuccessfully = false;",
+            "",
+            "return new Promise(resolve => {",
+            "    bridge.payments.consumePurchase(gdjs._playgamaBridgeExtension.actionParametersContainer)",
+            "        .then(() => {",
+            "            gdjs._playgamaBridgeExtension.isLastActionCompletedSuccessfully = true;",
+            "        })",
+            "        .catch(error => console.log(error))",
+            "        .finally(() => {",
+            "            gdjs._playgamaBridgeExtension.actionParametersContainer = {};",
+            "            gdjs._playgamaBridgeExtension.isPaymentsConsumePurchaseCompleted = true;",
+            "            resolve();",
+            "        });",
+            "});",
+            ""
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": true
+        }
+      ],
+      "parameters": [],
+      "objectGroups": []
+    },
+    {
+      "description": "Is Payments Supported",
+      "fullName": "Is Payments Supported",
+      "functionType": "Condition",
+      "group": "Payments",
+      "name": "IsPaymentsSupported",
+      "sentence": "Is Payments Supported",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "eventsFunctionContext.returnValue = bridge.payments.isSupported;",
+            ""
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "parameters": [],
+      "objectGroups": []
+    },
+    {
+      "description": "Is Payments Get Catalog Supported",
+      "fullName": "Is Payments Get Catalog Supported",
+      "functionType": "Condition",
+      "group": "Payments",
+      "name": "IsPaymentsGetCatalogSupported",
+      "sentence": "Is Payments Get Catalog Supported",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "eventsFunctionContext.returnValue = bridge.payments.isGetCatalogSupported;",
+            ""
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "parameters": [],
+      "objectGroups": []
+    },
+    {
+      "description": "Is Payments Get Purchases Supported",
+      "fullName": "Is Payments Get Purchases Supported",
+      "functionType": "Condition",
+      "group": "Payments",
+      "name": "IsPaymentsGetPurchasesSupported",
+      "sentence": "Is Payments Get Purchases Supported",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "eventsFunctionContext.returnValue = bridge.payments.isGetPurchasesSupported;",
+            ""
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "parameters": [],
+      "objectGroups": []
+    },
+    {
+      "description": "Is Payments Consume Purchase Supported",
+      "fullName": "Is Payments Consume Purchase Supported",
+      "functionType": "Condition",
+      "group": "Payments",
+      "name": "IsPaymentsConsumePurchaseSupported",
+      "sentence": "Is Payments Consume Purchase Supported",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "eventsFunctionContext.returnValue = bridge.payments.isConsumePurchaseSupported;",
+            ""
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "parameters": [],
+      "objectGroups": []
+    },
+    {
+      "description": "On Payments Purchase Completed",
+      "fullName": "On Payments Purchase Completed",
+      "functionType": "Condition",
+      "group": "Payments",
+      "name": "OnPaymentsPurchaseCompleted",
+      "sentence": "On Payments Purchase Completed",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "eventsFunctionContext.returnValue = gdjs._playgamaBridgeExtension.isPaymentsPurchaseCompleted;",
+            "",
+            "if (gdjs._playgamaBridgeExtension.isPaymentsPurchaseCompleted) {",
+            "    gdjs._playgamaBridgeExtension.isPaymentsPurchaseCompleted = false;",
+            "}",
+            ""
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "parameters": [],
+      "objectGroups": []
+    },
+    {
+      "description": "On Payments Get Purchases Completed",
+      "fullName": "On Payments Get Purchases Completed",
+      "functionType": "Condition",
+      "group": "Payments",
+      "name": "OnPaymentsGetPurchasesCompleted",
+      "sentence": "On Payments Get Purchases Completed",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "eventsFunctionContext.returnValue = gdjs._playgamaBridgeExtension.isPaymentsGetPurchasesCompleted;",
+            "",
+            "if (gdjs._playgamaBridgeExtension.isPaymentsGetPurchasesCompleted) {",
+            "    gdjs._playgamaBridgeExtension.isPaymentsGetPurchasesCompleted = false;",
+            "}",
+            ""
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "parameters": [],
+      "objectGroups": []
+    },
+    {
+      "description": "On Payments Get Catalog Completed",
+      "fullName": "On Payments Get Catalog Completed",
+      "functionType": "Condition",
+      "group": "Payments",
+      "name": "OnPaymentsGetCatalogCompleted",
+      "sentence": "On Payments Get Catalog Completed",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "eventsFunctionContext.returnValue = gdjs._playgamaBridgeExtension.isPaymentsGetCatalogCompleted;",
+            "",
+            "if (gdjs._playgamaBridgeExtension.isPaymentsGetCatalogCompleted) {",
+            "    gdjs._playgamaBridgeExtension.isPaymentsGetCatalogCompleted = false;",
+            "}",
+            ""
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "parameters": [],
+      "objectGroups": []
+    },
+    {
+      "description": "On Payments Consume Purchase Completed",
+      "fullName": "On Payments Consume Purchase Completed",
+      "functionType": "Condition",
+      "group": "Payments",
+      "name": "OnPaymentsConsumePurchaseCompleted",
+      "sentence": "On Payments Consume Purchase Completed",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "eventsFunctionContext.returnValue = gdjs._playgamaBridgeExtension.isPaymentsConsumePurchaseCompleted;",
+            "",
+            "if (gdjs._playgamaBridgeExtension.isPaymentsConsumePurchaseCompleted) {",
+            "    gdjs._playgamaBridgeExtension.isPaymentsConsumePurchaseCompleted = false;",
+            "}",
+            ""
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "parameters": [],
+      "objectGroups": []
+    },
+    {
+      "description": "Payments Last Purchase Properties Count",
+      "fullName": "Payments Last Purchase Properties Count",
+      "functionType": "Expression",
+      "group": "Payments",
+      "name": "PaymentsLastPurchasePropertiesCount",
+      "sentence": "",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "eventsFunctionContext.returnValue = gdjs._playgamaBridgeExtension.paymentsPurchase",
+            "    ? Object.keys(gdjs._playgamaBridgeExtension.paymentsPurchase).length",
+            "    : 0;",
+            "",
+            ""
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "expressionType": {
+        "type": "expression"
+      },
+      "parameters": [],
+      "objectGroups": []
+    },
+    {
+      "description": "Payments Last Purchase Property Name",
+      "fullName": "Payments Last Purchase Property Name",
+      "functionType": "StringExpression",
+      "group": "Payments",
+      "name": "PaymentsLastPurchasePropertyName",
+      "sentence": "",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "const propertyIndex = eventsFunctionContext.getArgument(\"PropertyIndex\");",
+            "",
+            "eventsFunctionContext.returnValue = gdjs._playgamaBridgeExtension.paymentsPurchase",
+            "    ? Object.keys(gdjs._playgamaBridgeExtension.paymentsPurchase)[propertyIndex]",
+            "    : '';",
+            "",
+            ""
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "expressionType": {
+        "type": "string"
+      },
+      "parameters": [
+        {
+          "description": "Property Index",
+          "name": "PropertyIndex",
+          "type": "expression"
+        }
+      ],
+      "objectGroups": []
+    },
+    {
+      "description": "Payments Last Purchase Property Value",
+      "fullName": "Payments Last Purchase Property Value",
+      "functionType": "StringExpression",
+      "group": "Payments",
+      "name": "PaymentsLastPurchasePropertyValue",
+      "sentence": "",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "const property = eventsFunctionContext.getArgument(\"Property\");",
+            "const { paymentsPurchase } = gdjs._playgamaBridgeExtension;",
+            "",
+            "if (!paymentsPurchase) {",
+            "    eventsFunctionContext.returnValue = \"\";",
+            "} else {",
+            "    eventsFunctionContext.returnValue = isNaN(+property)",
+            "        ? paymentsPurchase[property]",
+            "        : paymentsPurchase[Object.keys(paymentsPurchase)[property]];",
+            "}",
+            "",
+            ""
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "expressionType": {
+        "type": "string"
+      },
+      "parameters": [
+        {
+          "description": "Property",
+          "name": "Property",
+          "type": "string"
+        }
+      ],
+      "objectGroups": []
+    },
+    {
+      "description": "Payments Purchases Count",
+      "fullName": "Payments Purchases Count",
+      "functionType": "Expression",
+      "group": "Payments",
+      "name": "PaymentsPurchasesCount",
+      "sentence": "",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "eventsFunctionContext.returnValue = gdjs._playgamaBridgeExtension.paymentsPurchases.length;",
+            ""
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "expressionType": {
+        "type": "expression"
+      },
+      "parameters": [],
+      "objectGroups": []
+    },
+    {
+      "description": "Payments Purchase Properties Count",
+      "fullName": "Payments Purchase Properties Count",
+      "functionType": "Expression",
+      "group": "Payments",
+      "name": "PaymentsPurchasePropertiesCount",
+      "sentence": "",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "eventsFunctionContext.returnValue = gdjs._playgamaBridgeExtension.paymentsPurchases.length > 0",
+            "    ? Object.keys(gdjs._playgamaBridgeExtension.paymentsPurchases[0] || {}).length",
+            "    : 0;",
+            ""
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "expressionType": {
+        "type": "expression"
+      },
+      "parameters": [],
+      "objectGroups": []
+    },
+    {
+      "description": "Payments Purchase Property Name",
+      "fullName": "Payments Purchase Property Name",
+      "functionType": "StringExpression",
+      "group": "Payments",
+      "name": "PaymentsPurchasePropertyName",
+      "sentence": "",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "const propertyIndex = eventsFunctionContext.getArgument(\"PropertyIndex\");",
+            "",
+            "eventsFunctionContext.returnValue = gdjs._playgamaBridgeExtension.paymentsPurchases",
+            "    ? Object.keys(gdjs._playgamaBridgeExtension.paymentsPurchases[0])[propertyIndex]",
+            "    : '';",
+            "",
+            ""
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "expressionType": {
+        "type": "string"
+      },
+      "parameters": [
+        {
+          "description": "Property Index",
+          "name": "PropertyIndex",
+          "type": "expression"
+        }
+      ],
+      "objectGroups": []
+    },
+    {
+      "description": "Payments Last Purchase Property Value",
+      "fullName": "Payments Last Purchase Property Value",
+      "functionType": "StringExpression",
+      "group": "Payments",
+      "name": "PaymentsPurchasePropertyValue",
+      "sentence": "",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "const purchaseIndex = eventsFunctionContext.getArgument(\"PurchaseIndex\");",
+            "const property = eventsFunctionContext.getArgument(\"Property\");",
+            "",
+            "const { paymentsPurchases } = gdjs._playgamaBridgeExtension;",
+            "",
+            "if (paymentsPurchases.length > 0) {",
+            "    const purchase = paymentsPurchases[purchaseIndex] || {};",
+            "    ",
+            "    eventsFunctionContext.returnValue = isNaN(+property)",
+            "        ? purchase[property]",
+            "        : purchase[Object.keys(purchase)[property]];",
+            "} else {",
+            "    eventsFunctionContext.returnValue = \"\";",
+            "}",
+            "",
+            ""
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "expressionType": {
+        "type": "string"
+      },
+      "parameters": [
+        {
+          "description": "Purchase Index",
+          "name": "PurchaseIndex",
+          "type": "expression"
+        },
+        {
+          "description": "Property",
+          "name": "Property",
+          "type": "string"
+        }
+      ],
+      "objectGroups": []
+    },
+    {
+      "description": "Payments Catalog Items Count",
+      "fullName": "Payments Catalog Items Count",
+      "functionType": "Expression",
+      "group": "Payments",
+      "name": "PaymentsCatalogItemsCount",
+      "sentence": "",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "eventsFunctionContext.returnValue = gdjs._playgamaBridgeExtension.paymentsCatalog.length;",
+            ""
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "expressionType": {
+        "type": "expression"
+      },
+      "parameters": [],
+      "objectGroups": []
+    },
+    {
+      "description": "Payments Catalog Item Properties Count",
+      "fullName": "Payments Catalog Item Properties Count",
+      "functionType": "Expression",
+      "group": "Payments",
+      "name": "PaymentsCatalogItemPropertiesCount",
+      "sentence": "",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "eventsFunctionContext.returnValue = gdjs._playgamaBridgeExtension.paymentsCatalog.length > 0",
+            "    ? Object.keys(gdjs._playgamaBridgeExtension.paymentsCatalog[0] || {}).length",
+            "    : 0;",
+            ""
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "expressionType": {
+        "type": "expression"
+      },
+      "parameters": [],
+      "objectGroups": []
+    },
+    {
+      "description": "Payments Catalog Item Property Name",
+      "fullName": "Payments Catalog Item Property Name",
+      "functionType": "StringExpression",
+      "group": "Payments",
+      "name": "PaymentsCatalogItemPropertyName",
+      "sentence": "",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "const propertyIndex = eventsFunctionContext.getArgument(\"PropertyIndex\");",
+            "",
+            "eventsFunctionContext.returnValue = gdjs._playgamaBridgeExtension.paymentsCatalog",
+            "    ? Object.keys(gdjs._playgamaBridgeExtension.paymentsCatalog[0])[propertyIndex]",
+            "    : '';",
+            "",
+            ""
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "expressionType": {
+        "type": "string"
+      },
+      "parameters": [
+        {
+          "description": "Property Index",
+          "name": "PropertyIndex",
+          "type": "expression"
+        }
+      ],
+      "objectGroups": []
+    },
+    {
+      "description": "Payments Last Purchase Property Value",
+      "fullName": "Payments Last Purchase Property Value",
+      "functionType": "StringExpression",
+      "group": "Payments",
+      "name": "PaymentsCatalogItemPropertyValue",
+      "sentence": "",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "const productIndex = eventsFunctionContext.getArgument(\"ProductIndex\");",
+            "const property = eventsFunctionContext.getArgument(\"Property\");",
+            "",
+            "const { paymentsCatalog } = gdjs._playgamaBridgeExtension;",
+            "",
+            "if (paymentsCatalog.length > 0) {",
+            "    const product = paymentsCatalog[productIndex] || {};",
+            "    ",
+            "    eventsFunctionContext.returnValue = isNaN(+property)",
+            "        ? product[property]",
+            "        : product[Object.keys(product)[property]];",
+            "} else {",
+            "    eventsFunctionContext.returnValue = \"\";",
+            "}",
+            "",
+            ""
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "expressionType": {
+        "type": "string"
+      },
+      "parameters": [
+        {
+          "description": "Product Index",
+          "name": "ProductIndex",
           "type": "expression"
         },
         {
