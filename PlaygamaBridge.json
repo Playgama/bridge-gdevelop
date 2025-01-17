@@ -1508,10 +1508,10 @@
         {
           "type": "BuiltinCommonInstructions::JsCode",
           "inlineCode": [
-            "eventsFunctionContext.returnValue = gdjs._playgamaBridgeExtension.isBannerStateChanged;",
+            "eventsFunctionContext.returnValue = gdjs._playgamaBridge.isBannerStateChanged;",
             "",
-            "if (gdjs._playgamaBridgeExtension.isBannerStateChanged) {",
-            "    gdjs._playgamaBridgeExtension.isBannerStateChanged = false;",
+            "if (gdjs._playgamaBridge.isBannerStateChanged) {",
+            "    gdjs._playgamaBridge.isBannerStateChanged = false;",
             "}",
             ""
           ],
@@ -1532,15 +1532,35 @@
       "sentence": "On Banner Loading",
       "events": [
         {
-          "type": "BuiltinCommonInstructions::JsCode",
-          "inlineCode": [
-            "eventsFunctionContext.returnValue = gdjs._playgamaBridgeExtension.bannerState === bridge.BANNER_STATE.LOADING ",
-            "    && runtimeScene.getOnceTriggers().triggerOnce(\"OnBannerLoading\")",
-            ""
+          "type": "BuiltinCommonInstructions::Standard",
+          "conditions": [
+            {
+              "type": {
+                "value": "BuiltinCommonInstructions::CompareStrings"
+              },
+              "parameters": [
+                "PlaygamaBridge::BannerState()",
+                "=",
+                "\"loading\""
+              ]
+            },
+            {
+              "type": {
+                "value": "BuiltinCommonInstructions::Once"
+              },
+              "parameters": []
+            }
           ],
-          "parameterObjects": "",
-          "useStrict": true,
-          "eventsSheetExpanded": false
+          "actions": [
+            {
+              "type": {
+                "value": "SetReturnBoolean"
+              },
+              "parameters": [
+                "True"
+              ]
+            }
+          ]
         }
       ],
       "parameters": [],
@@ -1555,14 +1575,35 @@
       "sentence": "On Banner Shown",
       "events": [
         {
-          "type": "BuiltinCommonInstructions::JsCode",
-          "inlineCode": [
-            "eventsFunctionContext.returnValue = gdjs._playgamaBridgeExtension.bannerState === bridge.BANNER_STATE.SHOWN",
-            "    && runtimeScene.getOnceTriggers().triggerOnce(\"OnBannerShown\")"
+          "type": "BuiltinCommonInstructions::Standard",
+          "conditions": [
+            {
+              "type": {
+                "value": "BuiltinCommonInstructions::CompareStrings"
+              },
+              "parameters": [
+                "PlaygamaBridge::BannerState()",
+                "=",
+                "\"shown\""
+              ]
+            },
+            {
+              "type": {
+                "value": "BuiltinCommonInstructions::Once"
+              },
+              "parameters": []
+            }
           ],
-          "parameterObjects": "",
-          "useStrict": true,
-          "eventsSheetExpanded": false
+          "actions": [
+            {
+              "type": {
+                "value": "SetReturnBoolean"
+              },
+              "parameters": [
+                "True"
+              ]
+            }
+          ]
         }
       ],
       "parameters": [],
@@ -1577,14 +1618,35 @@
       "sentence": "On Banner Hidden",
       "events": [
         {
-          "type": "BuiltinCommonInstructions::JsCode",
-          "inlineCode": [
-            "eventsFunctionContext.returnValue = gdjs._playgamaBridgeExtension.bannerState === bridge.BANNER_STATE.HIDDEN",
-            "    && runtimeScene.getOnceTriggers().triggerOnce(\"OnBannerHidden\")"
+          "type": "BuiltinCommonInstructions::Standard",
+          "conditions": [
+            {
+              "type": {
+                "value": "BuiltinCommonInstructions::CompareStrings"
+              },
+              "parameters": [
+                "PlaygamaBridge::BannerState()",
+                "=",
+                "\"hidden\""
+              ]
+            },
+            {
+              "type": {
+                "value": "BuiltinCommonInstructions::Once"
+              },
+              "parameters": []
+            }
           ],
-          "parameterObjects": "",
-          "useStrict": true,
-          "eventsSheetExpanded": false
+          "actions": [
+            {
+              "type": {
+                "value": "SetReturnBoolean"
+              },
+              "parameters": [
+                "True"
+              ]
+            }
+          ]
         }
       ],
       "parameters": [],
@@ -1599,26 +1661,47 @@
       "sentence": "On Banner Failed",
       "events": [
         {
-          "type": "BuiltinCommonInstructions::JsCode",
-          "inlineCode": [
-            "eventsFunctionContext.returnValue = gdjs._playgamaBridgeExtension.bannerState === bridge.BANNER_STATE.FAILED",
-            "    && runtimeScene.getOnceTriggers().triggerOnce(\"OnBannerFailed\")"
+          "type": "BuiltinCommonInstructions::Standard",
+          "conditions": [
+            {
+              "type": {
+                "value": "BuiltinCommonInstructions::CompareStrings"
+              },
+              "parameters": [
+                "PlaygamaBridge::BannerState()",
+                "=",
+                "\"failed\""
+              ]
+            },
+            {
+              "type": {
+                "value": "BuiltinCommonInstructions::Once"
+              },
+              "parameters": []
+            }
           ],
-          "parameterObjects": "",
-          "useStrict": true,
-          "eventsSheetExpanded": false
+          "actions": [
+            {
+              "type": {
+                "value": "SetReturnBoolean"
+              },
+              "parameters": [
+                "True"
+              ]
+            }
+          ]
         }
       ],
       "parameters": [],
       "objectGroups": []
     },
     {
-      "description": "On Interstitial State Change",
-      "fullName": "On Interstitial State Change",
+      "description": "On Interstitial State Changed",
+      "fullName": "On Interstitial State Changed",
       "functionType": "Condition",
       "group": "Advertisement",
       "name": "OnInterstitialStateChanged",
-      "sentence": "On Interstitial State Change",
+      "sentence": "On Interstitial State Changed",
       "events": [
         {
           "type": "BuiltinCommonInstructions::JsCode",
@@ -1647,14 +1730,35 @@
       "sentence": "On Interstitial Loading",
       "events": [
         {
-          "type": "BuiltinCommonInstructions::JsCode",
-          "inlineCode": [
-            "eventsFunctionContext.returnValue = gdjs._playgamaBridgeExtension.interstitialState === bridge.INTERSTITIAL_STATE.LOADING",
-            "    && runtimeScene.getOnceTriggers().triggerOnce(\"OnInterstitialLoading\")"
+          "type": "BuiltinCommonInstructions::Standard",
+          "conditions": [
+            {
+              "type": {
+                "value": "BuiltinCommonInstructions::CompareStrings"
+              },
+              "parameters": [
+                "PlaygamaBridge::InterstitialState()",
+                "=",
+                "\"loading\""
+              ]
+            },
+            {
+              "type": {
+                "value": "BuiltinCommonInstructions::Once"
+              },
+              "parameters": []
+            }
           ],
-          "parameterObjects": "",
-          "useStrict": true,
-          "eventsSheetExpanded": false
+          "actions": [
+            {
+              "type": {
+                "value": "SetReturnBoolean"
+              },
+              "parameters": [
+                "True"
+              ]
+            }
+          ]
         }
       ],
       "parameters": [],
@@ -1669,14 +1773,35 @@
       "sentence": "On Interstitial Shown",
       "events": [
         {
-          "type": "BuiltinCommonInstructions::JsCode",
-          "inlineCode": [
-            "eventsFunctionContext.returnValue = gdjs._playgamaBridgeExtension.interstitialState === bridge.INTERSTITIAL_STATE.SHOWN",
-            "    && runtimeScene.getOnceTriggers().triggerOnce(\"OnInterstitialShown\")"
+          "type": "BuiltinCommonInstructions::Standard",
+          "conditions": [
+            {
+              "type": {
+                "value": "BuiltinCommonInstructions::CompareStrings"
+              },
+              "parameters": [
+                "PlaygamaBridge::InterstitialState()",
+                "=",
+                "\"shown\""
+              ]
+            },
+            {
+              "type": {
+                "value": "BuiltinCommonInstructions::Once"
+              },
+              "parameters": []
+            }
           ],
-          "parameterObjects": "",
-          "useStrict": true,
-          "eventsSheetExpanded": false
+          "actions": [
+            {
+              "type": {
+                "value": "SetReturnBoolean"
+              },
+              "parameters": [
+                "True"
+              ]
+            }
+          ]
         }
       ],
       "parameters": [],
@@ -1691,14 +1816,35 @@
       "sentence": "On Interstitial Closed",
       "events": [
         {
-          "type": "BuiltinCommonInstructions::JsCode",
-          "inlineCode": [
-            "eventsFunctionContext.returnValue = gdjs._playgamaBridgeExtension.interstitialState === bridge.INTERSTITIAL_STATE.CLOSED",
-            "    && runtimeScene.getOnceTriggers().triggerOnce(\"OnInterstitialClosed\")"
+          "type": "BuiltinCommonInstructions::Standard",
+          "conditions": [
+            {
+              "type": {
+                "value": "BuiltinCommonInstructions::CompareStrings"
+              },
+              "parameters": [
+                "PlaygamaBridge::InterstitialState()",
+                "=",
+                "\"closed\""
+              ]
+            },
+            {
+              "type": {
+                "value": "BuiltinCommonInstructions::Once"
+              },
+              "parameters": []
+            }
           ],
-          "parameterObjects": "",
-          "useStrict": true,
-          "eventsSheetExpanded": false
+          "actions": [
+            {
+              "type": {
+                "value": "SetReturnBoolean"
+              },
+              "parameters": [
+                "True"
+              ]
+            }
+          ]
         }
       ],
       "parameters": [],
@@ -1713,14 +1859,35 @@
       "sentence": "On Interstitial Failed",
       "events": [
         {
-          "type": "BuiltinCommonInstructions::JsCode",
-          "inlineCode": [
-            "eventsFunctionContext.returnValue = gdjs._playgamaBridgeExtension.interstitialState === bridge.INTERSTITIAL_STATE.FAILED;",
-            ""
+          "type": "BuiltinCommonInstructions::Standard",
+          "conditions": [
+            {
+              "type": {
+                "value": "BuiltinCommonInstructions::CompareStrings"
+              },
+              "parameters": [
+                "PlaygamaBridge::InterstitialState()",
+                "=",
+                "\"failed\""
+              ]
+            },
+            {
+              "type": {
+                "value": "BuiltinCommonInstructions::Once"
+              },
+              "parameters": []
+            }
           ],
-          "parameterObjects": "",
-          "useStrict": true,
-          "eventsSheetExpanded": false
+          "actions": [
+            {
+              "type": {
+                "value": "SetReturnBoolean"
+              },
+              "parameters": [
+                "True"
+              ]
+            }
+          ]
         }
       ],
       "parameters": [],
@@ -1761,14 +1928,35 @@
       "sentence": "On Rewarded Loading",
       "events": [
         {
-          "type": "BuiltinCommonInstructions::JsCode",
-          "inlineCode": [
-            "eventsFunctionContext.returnValue = gdjs._playgamaBridgeExtension.rewardedState === bridge.REWARDED_STATE.LOADING",
-            "    && runtimeScene.getOnceTriggers().triggerOnce(\"OnRewardedLoading\")"
+          "type": "BuiltinCommonInstructions::Standard",
+          "conditions": [
+            {
+              "type": {
+                "value": "BuiltinCommonInstructions::CompareStrings"
+              },
+              "parameters": [
+                "PlaygamaBridge::RewardedState()",
+                "=",
+                "\"loading\""
+              ]
+            },
+            {
+              "type": {
+                "value": "BuiltinCommonInstructions::Once"
+              },
+              "parameters": []
+            }
           ],
-          "parameterObjects": "",
-          "useStrict": true,
-          "eventsSheetExpanded": false
+          "actions": [
+            {
+              "type": {
+                "value": "SetReturnBoolean"
+              },
+              "parameters": [
+                "True"
+              ]
+            }
+          ]
         }
       ],
       "parameters": [],
@@ -1783,14 +1971,35 @@
       "sentence": "On Rewarded Shown",
       "events": [
         {
-          "type": "BuiltinCommonInstructions::JsCode",
-          "inlineCode": [
-            "eventsFunctionContext.returnValue = gdjs._playgamaBridgeExtension.rewardedState === bridge.REWARDED_STATE.SHOWN",
-            "    && runtimeScene.getOnceTriggers().triggerOnce(\"OnRewardedShown\")"
+          "type": "BuiltinCommonInstructions::Standard",
+          "conditions": [
+            {
+              "type": {
+                "value": "BuiltinCommonInstructions::CompareStrings"
+              },
+              "parameters": [
+                "PlaygamaBridge::RewardedState()",
+                "=",
+                "\"shown\""
+              ]
+            },
+            {
+              "type": {
+                "value": "BuiltinCommonInstructions::Once"
+              },
+              "parameters": []
+            }
           ],
-          "parameterObjects": "",
-          "useStrict": true,
-          "eventsSheetExpanded": false
+          "actions": [
+            {
+              "type": {
+                "value": "SetReturnBoolean"
+              },
+              "parameters": [
+                "True"
+              ]
+            }
+          ]
         }
       ],
       "parameters": [],
@@ -1805,14 +2014,35 @@
       "sentence": "On Rewarded Closed",
       "events": [
         {
-          "type": "BuiltinCommonInstructions::JsCode",
-          "inlineCode": [
-            "eventsFunctionContext.returnValue = gdjs._playgamaBridgeExtension.rewardedState === bridge.REWARDED_STATE.CLOSED",
-            "    && runtimeScene.getOnceTriggers().triggerOnce(\"OnRewardedClosed\")"
+          "type": "BuiltinCommonInstructions::Standard",
+          "conditions": [
+            {
+              "type": {
+                "value": "BuiltinCommonInstructions::CompareStrings"
+              },
+              "parameters": [
+                "PlaygamaBridge::RewardedState()",
+                "=",
+                "\"closed\""
+              ]
+            },
+            {
+              "type": {
+                "value": "BuiltinCommonInstructions::Once"
+              },
+              "parameters": []
+            }
           ],
-          "parameterObjects": "",
-          "useStrict": true,
-          "eventsSheetExpanded": false
+          "actions": [
+            {
+              "type": {
+                "value": "SetReturnBoolean"
+              },
+              "parameters": [
+                "True"
+              ]
+            }
+          ]
         }
       ],
       "parameters": [],
@@ -1827,14 +2057,35 @@
       "sentence": "On Rewarded Rewarded",
       "events": [
         {
-          "type": "BuiltinCommonInstructions::JsCode",
-          "inlineCode": [
-            "eventsFunctionContext.returnValue = gdjs._playgamaBridgeExtension.rewardedState === bridge.REWARDED_STATE.REWARDED",
-            "    && runtimeScene.getOnceTriggers().triggerOnce(\"OnRewardedRewarded\")"
+          "type": "BuiltinCommonInstructions::Standard",
+          "conditions": [
+            {
+              "type": {
+                "value": "BuiltinCommonInstructions::CompareStrings"
+              },
+              "parameters": [
+                "PlaygamaBridge::RewardedState()",
+                "=",
+                "\"rewarded\""
+              ]
+            },
+            {
+              "type": {
+                "value": "BuiltinCommonInstructions::Once"
+              },
+              "parameters": []
+            }
           ],
-          "parameterObjects": "",
-          "useStrict": true,
-          "eventsSheetExpanded": false
+          "actions": [
+            {
+              "type": {
+                "value": "SetReturnBoolean"
+              },
+              "parameters": [
+                "True"
+              ]
+            }
+          ]
         }
       ],
       "parameters": [],
@@ -1849,14 +2100,35 @@
       "sentence": "On Rewarded Failed",
       "events": [
         {
-          "type": "BuiltinCommonInstructions::JsCode",
-          "inlineCode": [
-            "eventsFunctionContext.returnValue = gdjs._playgamaBridgeExtension.rewardedState === bridge.REWARDED_STATE.FAILED",
-            "    && runtimeScene.getOnceTriggers().triggerOnce(\"OnRewardedFailed\")"
+          "type": "BuiltinCommonInstructions::Standard",
+          "conditions": [
+            {
+              "type": {
+                "value": "BuiltinCommonInstructions::CompareStrings"
+              },
+              "parameters": [
+                "PlaygamaBridge::RewardedState()",
+                "=",
+                "\"failed\""
+              ]
+            },
+            {
+              "type": {
+                "value": "BuiltinCommonInstructions::Once"
+              },
+              "parameters": []
+            }
           ],
-          "parameterObjects": "",
-          "useStrict": true,
-          "eventsSheetExpanded": false
+          "actions": [
+            {
+              "type": {
+                "value": "SetReturnBoolean"
+              },
+              "parameters": [
+                "True"
+              ]
+            }
+          ]
         }
       ],
       "parameters": [],
@@ -1873,10 +2145,10 @@
         {
           "type": "BuiltinCommonInstructions::JsCode",
           "inlineCode": [
-            "eventsFunctionContext.returnValue = gdjs._playgamaBridgeExtension.isCheckAdBlockCompleted;",
+            "eventsFunctionContext.returnValue = gdjs._playgamaBridge.isCheckAdBlockCompleted;",
             "",
-            "if (gdjs._playgamaBridgeExtension.isCheckAdBlockCompleted) {",
-            "    gdjs._playgamaBridgeExtension.isCheckAdBlockCompleted = false;",
+            "if (gdjs._playgamaBridge.isCheckAdBlockCompleted) {",
+            "    gdjs._playgamaBridge.isCheckAdBlockCompleted = false;",
             "}",
             ""
           ],
