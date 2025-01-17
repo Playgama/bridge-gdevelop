@@ -1508,10 +1508,10 @@
         {
           "type": "BuiltinCommonInstructions::JsCode",
           "inlineCode": [
-            "eventsFunctionContext.returnValue = gdjs._playgamaBridge.isBannerStateChanged;",
+            "eventsFunctionContext.returnValue = gdjs._playgamaBridgeExtension.isBannerStateChanged;",
             "",
-            "if (gdjs._playgamaBridge.isBannerStateChanged) {",
-            "    gdjs._playgamaBridge.isBannerStateChanged = false;",
+            "if (gdjs._playgamaBridgeExtension.isBannerStateChanged) {",
+            "    gdjs._playgamaBridgeExtension.isBannerStateChanged = false;",
             "}",
             ""
           ],
@@ -1737,10 +1737,10 @@
         {
           "type": "BuiltinCommonInstructions::JsCode",
           "inlineCode": [
-            "eventsFunctionContext.returnValue = gdjs._playgamaBridge.isRewardedStateChanged;",
+            "eventsFunctionContext.returnValue = gdjs._playgamaBridgeExtension.isRewardedStateChanged;",
             "",
-            "if (gdjs._playgamaBridge.isRewardedStateChanged) {",
-            "    gdjs._playgamaBridge.isRewardedStateChanged = false;",
+            "if (gdjs._playgamaBridgeExtension.isRewardedStateChanged) {",
+            "    gdjs._playgamaBridgeExtension.isRewardedStateChanged = false;",
             "}",
             ""
           ],
@@ -1873,10 +1873,10 @@
         {
           "type": "BuiltinCommonInstructions::JsCode",
           "inlineCode": [
-            "eventsFunctionContext.returnValue = gdjs._playgamaBridge.isCheckAdBlockCompleted;",
+            "eventsFunctionContext.returnValue = gdjs._playgamaBridgeExtension.isCheckAdBlockCompleted;",
             "",
-            "if (gdjs._playgamaBridge.isCheckAdBlockCompleted) {",
-            "    gdjs._playgamaBridge.isCheckAdBlockCompleted = false;",
+            "if (gdjs._playgamaBridgeExtension.isCheckAdBlockCompleted) {",
+            "    gdjs._playgamaBridgeExtension.isCheckAdBlockCompleted = false;",
             "}",
             ""
           ],
