@@ -1,25 +1,26 @@
 {
-  "author": "",
-  "category": "",
+  "author": "Playgama",
+  "category": "General",
   "extensionNamespace": "",
-  "fullName": "",
-  "helpPath": "",
-  "iconUrl": "",
+  "fullName": "Playgama Bridge",
+  "helpPath": "https://wiki.playgama.com/playgama",
+  "iconUrl": "data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz48IURPQ1RZUEUgc3ZnIFBVQkxJQyAiLS8vVzNDLy9EVEQgU1ZHIDEuMS8vRU4iICJodHRwOi8vd3d3LnczLm9yZy9HcmFwaGljcy9TVkcvMS4xL0RURC9zdmcxMS5kdGQiPjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgdmVyc2lvbj0iMS4xIiBpZD0ibWRpLWxhbmd1YWdlLWh0bWw1IiB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHBhdGggZD0iTTEyLDE3LjU2TDE2LjA3LDE2LjQzTDE2LjYyLDEwLjMzSDkuMzhMOS4yLDguM0gxNi44TDE3LDYuMzFIN0w3LjU2LDEyLjMySDE0LjQ1TDE0LjIyLDE0LjlMMTIsMTUuNUw5Ljc4LDE0LjlMOS42NCwxMy4yNEg3LjY0TDcuOTMsMTYuNDNMMTIsMTcuNTZNNC4wNywzSDE5LjkzTDE4LjUsMTkuMkwxMiwyMUw1LjUsMTkuMkw0LjA3LDNaIiAvPjwvc3ZnPg==",
   "name": "PlaygamaBridge",
-  "previewIconUrl": "",
-  "shortDescription": "",
-  "version": "",
-  "description": "",
-  "tags": [],
-  "authorIds": [],
-  "dependencies": [
-    {
-      "exportName": "my-dependency",
-      "name": "New Dependency",
-      "type": "cordova",
-      "version": "1.0.0"
-    }
+  "previewIconUrl": "https://asset-resources.gdevelop.io/public-resources/Icons/c028a9349a295d115a72310d4ace0e8ab27dc259602629b4ea11bf43a0e3fdf9_language-html5.svg",
+  "shortDescription": "One SDK for cross-platform publishing HTML5 games",
+  "version": "1.19.0",
+  "description": "One SDK for cross-platform publishing HTML5 games",
+  "tags": [
+    "playgama",
+    "bridge",
+    "html5",
+    "sdk",
+    "platform"
   ],
+  "authorIds": [
+    "1yQBMQcznXUlTLB6RAwfQ9jTGAk1"
+  ],
+  "dependencies": [],
   "globalVariables": [
     {
       "name": "GameDistributionGameId",
@@ -4565,59 +4566,6 @@
         }
       ],
       "parameters": [],
-      "objectGroups": []
-    },
-    {
-      "fullName": "",
-      "functionType": "Action",
-      "group": "Advertisement",
-      "name": "___SetBannerState",
-      "sentence": "",
-      "events": [
-        {
-          "type": "BuiltinCommonInstructions::JsCode",
-          "inlineCode": [
-            "bridge.advertisement._platformBridge._setBannerState(eventsFunctionContext.getArgument('BannerState'))",
-            ""
-          ],
-          "parameterObjects": "",
-          "useStrict": true,
-          "eventsSheetExpanded": false
-        }
-      ],
-      "parameters": [
-        {
-          "description": "",
-          "name": "BannerState",
-          "supplementaryInformation": "[\"loading\",\"shown\",\"hidden\",\"failed\"]",
-          "type": "stringWithSelector"
-        }
-      ],
-      "objectGroups": []
-    },
-    {
-      "description": "Show console ",
-      "fullName": "Show console",
-      "functionType": "Action",
-      "group": "Common",
-      "name": "ShowConsole",
-      "sentence": "Show console _PARAM1_",
-      "events": [
-        {
-          "type": "BuiltinCommonInstructions::JsCode",
-          "inlineCode": "console.log(eventsFunctionContext.getArgument(\"Text\"));",
-          "parameterObjects": "",
-          "useStrict": true,
-          "eventsSheetExpanded": false
-        }
-      ],
-      "parameters": [
-        {
-          "description": "Text",
-          "name": "Text",
-          "type": "string"
-        }
-      ],
       "objectGroups": []
     }
   ],
