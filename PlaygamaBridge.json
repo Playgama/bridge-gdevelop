@@ -33,7 +33,7 @@
       "value": ""
     },
     {
-      "name": "y8ChannelId",
+      "name": "Y8ChannelId",
       "type": "string",
       "value": ""
     },
@@ -68,13 +68,7 @@
       "value": false
     }
   ],
-  "sceneVariables": [
-    {
-      "name": "Y8GameId",
-      "type": "string",
-      "value": "111fsdfs"
-    }
-  ],
+  "sceneVariables": [],
   "eventsFunctions": [
     {
       "fullName": "",
