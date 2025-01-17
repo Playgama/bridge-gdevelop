@@ -157,7 +157,7 @@
             "}",
             "",
             "// utils",
-            "gdjs._playgamaBridgeExtension.addActionParameter = function (path, value) {",
+            "gdjs._playgamaBridgeExtension.addActionParameter = function (path, value, sep = '.') {",
             "    const keys = path.replace(/\\[/g, sep).replace(/]/g, '').split(sep).map(item => isNaN(+item) ? item : +item);",
             "",
             "    let current = gdjs._playgamaBridgeExtension.actionParametersContainer;",
@@ -223,14 +223,17 @@
             "    .then(() => {",
             "        bridge.advertisement.on('banner_state_changed', state => {",
             "            gdjs._playgamaBridgeExtension.bannerState = state;",
+            "            gdjs._playgamaBridgeExtension.isBannerStateChanged = true;",
             "        });",
             "",
             "        bridge.advertisement.on('interstitial_state_changed', state => {",
             "            gdjs._playgamaBridgeExtension.interstitialState = state;",
+            "            gdjs._playgamaBridgeExtension.isInterstitialStateChanged = true;",
             "        });",
             "",
             "        bridge.advertisement.on('rewarded_state_changed', state => {",
             "            gdjs._playgamaBridgeExtension.rewardedState = state;",
+            "            gdjs._playgamaBridgeExtension.isRewardedStateChanged = true;",
             "        });",
             "",
             "        bridge.game.on('visibility_state_changed', state => {",
@@ -987,8 +990,8 @@
             "        })",
             "        .catch(error => console.log(error))",
             "        .finally(() => {",
-            "            storageDataSetRequestKeys = []",
-            "            storageDataSetRequestValues = []",
+            "            gdjs._playgamaBridgeExtension.storageDataSetRequestKeys = []",
+            "            gdjs._playgamaBridgeExtension.storageDataSetRequestValues = []",
             "",
             "            gdjs._playgamaBridgeExtension.isStorageDataSetRequestCompleted = true;",
             "            resolve()",
@@ -1620,10 +1623,10 @@
         {
           "type": "BuiltinCommonInstructions::JsCode",
           "inlineCode": [
-            "eventsFunctionContext.returnValue = gdjs._playgamaBridge.isInterstitialStateChanged;",
+            "eventsFunctionContext.returnValue = gdjs._playgamaBridgeExtension.isInterstitialStateChanged;",
             "",
-            "if (gdjs._playgamaBridge.isInterstitialStateChanged) {",
-            "    gdjs._playgamaBridge.isInterstitialStateChanged = false;",
+            "if (gdjs._playgamaBridgeExtension.isInterstitialStateChanged) {",
+            "    gdjs._playgamaBridgeExtension.isInterstitialStateChanged = false;",
             "}",
             ""
           ],
@@ -1646,7 +1649,7 @@
         {
           "type": "BuiltinCommonInstructions::JsCode",
           "inlineCode": [
-            "eventsFunctionContext.returnValue = gdjs._playgamaBridgeExtension.interstitialState === bridge.INTERSTITIAl_STATE.LOADING",
+            "eventsFunctionContext.returnValue = gdjs._playgamaBridgeExtension.interstitialState === bridge.INTERSTITIAL_STATE.LOADING",
             "    && runtimeScene.getOnceTriggers().triggerOnce(\"OnInterstitialLoading\")"
           ],
           "parameterObjects": "",
@@ -1668,7 +1671,7 @@
         {
           "type": "BuiltinCommonInstructions::JsCode",
           "inlineCode": [
-            "eventsFunctionContext.returnValue = gdjs._playgamaBridgeExtension.interstitialState === bridge.INTERSTITIAl_STATE.SHOWN",
+            "eventsFunctionContext.returnValue = gdjs._playgamaBridgeExtension.interstitialState === bridge.INTERSTITIAL_STATE.SHOWN",
             "    && runtimeScene.getOnceTriggers().triggerOnce(\"OnInterstitialShown\")"
           ],
           "parameterObjects": "",
@@ -1690,7 +1693,7 @@
         {
           "type": "BuiltinCommonInstructions::JsCode",
           "inlineCode": [
-            "eventsFunctionContext.returnValue = gdjs._playgamaBridgeExtension.interstitialState === bridge.INTERSTITIAl_STATE.CLOSED",
+            "eventsFunctionContext.returnValue = gdjs._playgamaBridgeExtension.interstitialState === bridge.INTERSTITIAL_STATE.CLOSED",
             "    && runtimeScene.getOnceTriggers().triggerOnce(\"OnInterstitialClosed\")"
           ],
           "parameterObjects": "",
@@ -1712,8 +1715,8 @@
         {
           "type": "BuiltinCommonInstructions::JsCode",
           "inlineCode": [
-            "eventsFunctionContext.returnValue = gdjs._playgamaBridgeExtension.interstitialState === bridge.INTERSTITIAl_STATE.FAILED",
-            "    && runtimeScene.getOnceTriggers().triggerOnce(\"OnInterstitialFailed\")"
+            "eventsFunctionContext.returnValue = gdjs._playgamaBridgeExtension.interstitialState === bridge.INTERSTITIAL_STATE.FAILED;",
+            ""
           ],
           "parameterObjects": "",
           "useStrict": true,
