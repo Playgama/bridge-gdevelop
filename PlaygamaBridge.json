@@ -705,15 +705,21 @@
         {
           "type": "BuiltinCommonInstructions::JsCode",
           "inlineCode": [
-            "eventsFunctionContext.returnValue = gdjs._playgamaBridgeExtension.visibilityStateChanged",
-            "    && runtimeScene.getOnceTriggers().triggerOnce(\"OnVisibilityStateChanged\");",
+            "eventsFunctionContext.returnValue = gdjs._playgamaBridgeExtension.visibilityStateChanged;",
             "",
-            "gdjs._playgamaBridgeExtension.visibilityStateChanged = false;",
+            "if (gdjs._playgamaBridgeExtension.visibilityStateChanged) {",
+            "    gdjs._playgamaBridgeExtension.visibilityStateChanged = false;",
+            "}",
             ""
           ],
           "parameterObjects": "",
           "useStrict": true,
           "eventsSheetExpanded": false
+        },
+        {
+          "type": "BuiltinCommonInstructions::Standard",
+          "conditions": [],
+          "actions": []
         }
       ],
       "parameters": [],
@@ -1008,12 +1014,12 @@
       "objectGroups": []
     },
     {
-      "description": "Send Storage Data Get Request",
-      "fullName": "Send Storage Data Get Request",
+      "description": "Send Storage Data Delete Request",
+      "fullName": "Send Storage Data Delete Request",
       "functionType": "Action",
       "group": "Storage",
       "name": "SendStorageDataDeleteRequest",
-      "sentence": "Send Storage Data Get Request _PARAM1_",
+      "sentence": "Send Storage Data Delete Request _PARAM1_",
       "events": [
         {
           "type": "BuiltinCommonInstructions::JsCode",
@@ -1069,10 +1075,11 @@
         {
           "type": "BuiltinCommonInstructions::JsCode",
           "inlineCode": [
-            "eventsFunctionContext.returnValue = gdjs._playgamaBridgeExtension.isStorageDataGetRequestCompleted &&",
-            "    runtimeScene.getOnceTriggers().triggerOnce(\"OnStorageDataGetRequestCompleted\");",
+            "eventsFunctionContext.returnValue = gdjs._playgamaBridgeExtension.isStorageDataGetRequestCompleted;",
             "",
-            "gdjs._playgamaBridgeExtension.isStorageDataGetRequestCompleted = false;"
+            "if (gdjs._playgamaBridgeExtension.isStorageDataGetRequestCompleted) {",
+            "    gdjs._playgamaBridgeExtension.isStorageDataGetRequestCompleted = false;",
+            "}"
           ],
           "parameterObjects": "",
           "useStrict": true,
@@ -1093,10 +1100,11 @@
         {
           "type": "BuiltinCommonInstructions::JsCode",
           "inlineCode": [
-            "eventsFunctionContext.returnValue = gdjs._playgamaBridgeExtension.isStorageDataSetRequestCompleted &&",
-            "    runtimeScene.getOnceTriggers().triggerOnce(\"OnStorageDataSetRequestCompleted\");",
+            "eventsFunctionContext.returnValue = gdjs._playgamaBridgeExtension.isStorageDataSetRequestCompleted;",
             "",
-            "gdjs._playgamaBridgeExtension.isStorageDataSetRequestCompleted = false;"
+            "if (gdjs._playgamaBridgeExtension.isStorageDataSetRequestCompleted) {",
+            "    gdjs._playgamaBridgeExtension.isStorageDataSetRequestCompleted = false;",
+            "}"
           ],
           "parameterObjects": "",
           "useStrict": true,
@@ -1117,10 +1125,11 @@
         {
           "type": "BuiltinCommonInstructions::JsCode",
           "inlineCode": [
-            "eventsFunctionContext.returnValue = gdjs._playgamaBridgeExtension.isStorageDataDeleteRequestCompleted &&",
-            "    runtimeScene.getOnceTriggers().triggerOnce(\"OnStorageDataDeleteRequestCompleted\");",
+            "eventsFunctionContext.returnValue = gdjs._playgamaBridgeExtension.isStorageDataDeleteRequestCompleted;",
             "",
-            "gdjs._playgamaBridgeExtension.isStorageDataDeleteRequestCompleted = false;"
+            "if (gdjs._playgamaBridgeExtension.isStorageDataDeleteRequestCompleted) {",
+            "    gdjs._playgamaBridgeExtension.isStorageDataDeleteRequestCompleted = false;",
+            "}"
           ],
           "parameterObjects": "",
           "useStrict": true,
