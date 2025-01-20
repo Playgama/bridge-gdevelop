@@ -88,7 +88,6 @@
           "inlineCode": [
             "gdjs._playgamaBridgeExtension = {",
             "    isLastActionCompletedSuccessfully: false,",
-            "    isInitialized: false,",
             "    visibilityStateChanged: false,",
             "    actionParametersContainer: {},",
             "",
@@ -222,17 +221,14 @@
             "bridge.initialize(options)",
             "    .then(() => {",
             "        bridge.advertisement.on('banner_state_changed', state => {",
-            "            gdjs._playgamaBridgeExtension.bannerState = state;",
             "            gdjs._playgamaBridgeExtension.isBannerStateChanged = true;",
             "        });",
             "",
             "        bridge.advertisement.on('interstitial_state_changed', state => {",
-            "            gdjs._playgamaBridgeExtension.interstitialState = state;",
             "            gdjs._playgamaBridgeExtension.isInterstitialStateChanged = true;",
             "        });",
             "",
             "        bridge.advertisement.on('rewarded_state_changed', state => {",
-            "            gdjs._playgamaBridgeExtension.rewardedState = state;",
             "            gdjs._playgamaBridgeExtension.isRewardedStateChanged = true;",
             "        });",
             "",
@@ -245,8 +241,6 @@
             "                bridge.advertisement.showInterstitial()",
             "            }",
             "        }",
-            "",
-            "        gdjs._playgamaBridgeExtension.isInitialized = true;",
             "    });"
           ],
           "parameterObjects": "",
@@ -339,10 +333,7 @@
       "events": [
         {
           "type": "BuiltinCommonInstructions::JsCode",
-          "inlineCode": [
-            "eventsFunctionContext.returnValue = gdjs._playgamaBridgeExtension.isInitialized;",
-            ""
-          ],
+          "inlineCode": "eventsFunctionContext.returnValue = window.bridge && window.bridge.isInitialized;",
           "parameterObjects": "",
           "useStrict": true,
           "eventsSheetExpanded": false
