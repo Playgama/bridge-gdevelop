@@ -691,13 +691,7 @@
       "expressionType": {
         "type": "string"
       },
-      "parameters": [
-        {
-          "description": "Index",
-          "name": "Index",
-          "type": "expression"
-        }
-      ],
+      "parameters": [],
       "objectGroups": []
     },
     {
