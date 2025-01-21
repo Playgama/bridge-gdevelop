@@ -958,6 +958,25 @@
       "objectGroups": []
     },
     {
+      "description": "Is Last Action Completed Successfully",
+      "fullName": "Is Last Action Completed Successfully",
+      "functionType": "Condition",
+      "group": "Common",
+      "name": "IsLastActionCompletedSuccessfully",
+      "sentence": "Is Last Action Completed Successfully",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": "eventsFunctionContext.returnValue = gdjs.__playgamaBridgeExtension.isLastActionCompletedSuccessfully;",
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "parameters": [],
+      "objectGroups": []
+    },
+    {
       "description": "Send Storage Data Set Request",
       "fullName": "Send Storage Data Set Request",
       "functionType": "Action",
