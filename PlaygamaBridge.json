@@ -1782,12 +1782,12 @@
       "objectGroups": []
     },
     {
-      "description": "On Interstitial Shown",
-      "fullName": "On Interstitial Shown",
+      "description": "On Interstitial Opened",
+      "fullName": "On Interstitial Opened",
       "functionType": "Condition",
       "group": "Advertisement",
-      "name": "OnInterstitialShown",
-      "sentence": "On Interstitial Shown",
+      "name": "OnInterstitialOpened",
+      "sentence": "On Interstitial Opened",
       "events": [
         {
           "type": "BuiltinCommonInstructions::Standard",
@@ -1799,7 +1799,7 @@
               "parameters": [
                 "PlaygamaBridge::InterstitialState()",
                 "=",
-                "\"shown\""
+                "\"opened\""
               ]
             },
             {
@@ -1980,12 +1980,12 @@
       "objectGroups": []
     },
     {
-      "description": "On Rewarded Shown",
-      "fullName": "On Rewarded Shown",
+      "description": "On Rewarded Opened",
+      "fullName": "On Rewarded Opened",
       "functionType": "Condition",
       "group": "Advertisement",
-      "name": "OnRewardedShown",
-      "sentence": "On Rewarded Shown",
+      "name": "OnRewardedOpened",
+      "sentence": "On Rewarded Opened",
       "events": [
         {
           "type": "BuiltinCommonInstructions::Standard",
@@ -1997,7 +1997,7 @@
               "parameters": [
                 "PlaygamaBridge::RewardedState()",
                 "=",
-                "\"shown\""
+                "\"opened\""
               ]
             },
             {
