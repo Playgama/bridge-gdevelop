@@ -4853,6 +4853,24 @@
       ],
       "parameters": [],
       "objectGroups": []
+    },
+    {
+      "description": "Is Ad Block Detected",
+      "fullName": "Is Ad Block Detected",
+      "functionType": "Condition",
+      "name": "IsAdBlockDetected",
+      "sentence": "Is Ad Block Detected",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": "eventsFunctionContext.returnValue = gdjs.__playgamaBridgeExtension.isAdBlockDetected;",
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "parameters": [],
+      "objectGroups": []
     }
   ],
   "eventsBasedBehaviors": [],
