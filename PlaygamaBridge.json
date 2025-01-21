@@ -4,9 +4,9 @@
   "extensionNamespace": "",
   "fullName": "Playgama Bridge",
   "helpPath": "https://wiki.playgama.com/playgama/sdk/engines/gdevelop",
-  "iconUrl": "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNTEyIiBoZWlnaHQ9IjUxMiIgdmlld0JveD0iMCAwIDUxMiA1MTIiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxnIGNsaXAtcGF0aD0idXJsKCNjbGlwMF84NTNfMTIwNzcpIj4KPHBhdGggZmlsbC1ydWxlPSJldmVub2RkIiBjbGlwLXJ1bGU9ImV2ZW5vZGQiIGQ9Ik01MTIgMEgwVjUxMkg1MTJWMFpNMzk1IDk2VjE1NC4zNjJIMzUzLjU2VjM1OS4yNTRIMzk1VjQxNkgyODguODcxVjk2SDM5NVpNMTE3IDk2LjAwMDFWMTU0LjM2MkgxNTguNDRWMzU5LjI1NEgxMTdWNDE2SDIyMy4xMjlWOTYuMDAwMUgxMTdaIiBmaWxsPSIjMDA3NzhFIi8+CjwvZz4KPGRlZnM+CjxjbGlwUGF0aCBpZD0iY2xpcDBfODUzXzEyMDc3Ij4KPHJlY3Qgd2lkdGg9IjUxMiIgaGVpZ2h0PSI1MTIiIGZpbGw9IndoaXRlIi8+CjwvY2xpcFBhdGg+CjwvZGVmcz4KPC9zdmc+Cg==",
+  "iconUrl": "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNTEyIiBoZWlnaHQ9IjUxMiIgdmlld0JveD0iMCAwIDUxMiA1MTIiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSI1MTIiIGhlaWdodD0iNTEyIiBmaWxsPSIjOTc0N0ZGIi8+CjxwYXRoIGQ9Ik0xMTcgMTU0LjM2MlY5Ni4wMDAxSDIyMy4xMjlWNDE2SDExN1YzNTkuMjU0SDE1OC40NFYxNTQuMzYySDExN1oiIGZpbGw9IndoaXRlIi8+CjxwYXRoIGQ9Ik0zOTUgMTU0LjM2MlY5NkgyODguODcxVjQxNkgzOTVWMzU5LjI1NEgzNTMuNTZWMTU0LjM2MkgzOTVaIiBmaWxsPSJ3aGl0ZSIvPgo8L3N2Zz4K",
   "name": "PlaygamaBridge",
-  "previewIconUrl": "https://asset-resources.gdevelop.io/public-resources/Icons/c028a9349a295d115a72310d4ace0e8ab27dc259602629b4ea11bf43a0e3fdf9_language-html5.svg",
+  "previewIconUrl": "",
   "shortDescription": "One SDK for cross-platform publishing HTML5 games",
   "version": "1.19.0",
   "description": [
