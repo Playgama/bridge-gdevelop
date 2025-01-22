@@ -269,7 +269,7 @@
             "const path = eventsFunctionContext.getArgument(\"Path\");",
             "const value = eventsFunctionContext.getArgument(\"Value\");",
             "      ",
-            "gdjs._playgamaBridgeExtension.addActionParameter(path, value);",
+            "gdjs._playgamaBridgeExtension.addActionParameter(path, isNaN(+value) ? value : +value);",
             ""
           ],
           "parameterObjects": "",
