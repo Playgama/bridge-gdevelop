@@ -7,7 +7,7 @@
   "iconUrl": "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNTEyIiBoZWlnaHQ9IjUxMiIgdmlld0JveD0iMCAwIDUxMiA1MTIiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSI1MTIiIGhlaWdodD0iNTEyIiBmaWxsPSIjOTc0N0ZGIi8+CjxwYXRoIGQ9Ik0xMTcgMTU0LjM2MlY5Ni4wMDAxSDIyMy4xMjlWNDE2SDExN1YzNTkuMjU0SDE1OC40NFYxNTQuMzYySDExN1oiIGZpbGw9IndoaXRlIi8+CjxwYXRoIGQ9Ik0zOTUgMTU0LjM2MlY5NkgyODguODcxVjQxNkgzOTVWMzU5LjI1NEgzNTMuNTZWMTU0LjM2MkgzOTVaIiBmaWxsPSJ3aGl0ZSIvPgo8L3N2Zz4K",
   "name": "PlaygamaBridge",
   "previewIconUrl": "",
-  "shortDescription": "One SDK for cross-platform publishing HTML5 games",
+  "shortDescription": "One SDK for cross-platform publishing HTML5 games.",
   "version": "1.19.0",
   "description": [
     "One SDK for cross-platform publishing HTML5 games. ",
@@ -256,7 +256,7 @@
       "objectGroups": []
     },
     {
-      "description": "Add Action Parameter",
+      "description": "Add Action Parameter.",
       "fullName": "Add Action Parameter",
       "functionType": "Action",
       "group": "Common",
@@ -279,12 +279,12 @@
       ],
       "parameters": [
         {
-          "description": "Path",
+          "description": "Path.",
           "name": "Path",
           "type": "string"
         },
         {
-          "description": "Value",
+          "description": "Value.",
           "name": "Value",
           "type": "string"
         }
@@ -292,7 +292,7 @@
       "objectGroups": []
     },
     {
-      "description": "Add Bool Action Parameter",
+      "description": "Add Bool Action Parameter.",
       "fullName": "Add Bool Action Parameter",
       "functionType": "Action",
       "group": "Common",
@@ -328,7 +328,7 @@
       "objectGroups": []
     },
     {
-      "description": "Is Initialized",
+      "description": "Is Initialized.",
       "fullName": "Is Initialized",
       "functionType": "Condition",
       "group": "Platform",
@@ -347,7 +347,7 @@
       "objectGroups": []
     },
     {
-      "description": "Platform Id",
+      "description": "Platform Id.",
       "fullName": "Platform Id",
       "functionType": "StringExpression",
       "group": "Platform",
@@ -372,7 +372,7 @@
       "objectGroups": []
     },
     {
-      "description": "Platform Language",
+      "description": "Platform Language.",
       "fullName": "Platform Language",
       "functionType": "StringExpression",
       "group": "Platform",
@@ -397,7 +397,7 @@
       "objectGroups": []
     },
     {
-      "description": "Platform Payload",
+      "description": "Platform Payload.",
       "fullName": "Platform Payload",
       "functionType": "StringExpression",
       "group": "Platform",
@@ -422,7 +422,7 @@
       "objectGroups": []
     },
     {
-      "description": "Platform Tld",
+      "description": "Platform Tld.",
       "fullName": "Platform Tld",
       "functionType": "StringExpression",
       "group": "Platform",
@@ -447,7 +447,7 @@
       "objectGroups": []
     },
     {
-      "description": "Device Type",
+      "description": "Device Type.",
       "fullName": "Device Type",
       "functionType": "StringExpression",
       "group": "Device",
@@ -469,7 +469,7 @@
       "objectGroups": []
     },
     {
-      "description": "Is Mobile",
+      "description": "Is Mobile.",
       "fullName": "Is Mobile",
       "functionType": "Condition",
       "group": "Device",
@@ -491,7 +491,7 @@
       "objectGroups": []
     },
     {
-      "description": "Is Tablet",
+      "description": "Is Tablet.",
       "fullName": "Is Tablet",
       "functionType": "Condition",
       "group": "Device",
@@ -513,7 +513,7 @@
       "objectGroups": []
     },
     {
-      "description": "Is Desktop",
+      "description": "Is Desktop.",
       "fullName": "Is Desktop",
       "functionType": "Condition",
       "group": "Device",
@@ -535,7 +535,7 @@
       "objectGroups": []
     },
     {
-      "description": "Is Tv",
+      "description": "Is Tv.",
       "fullName": "Is Tv",
       "functionType": "Condition",
       "group": "Device",
@@ -557,7 +557,7 @@
       "objectGroups": []
     },
     {
-      "description": "Player Id",
+      "description": "Player Id.",
       "fullName": "Player Id",
       "functionType": "StringExpression",
       "group": "Player",
@@ -582,7 +582,7 @@
       "objectGroups": []
     },
     {
-      "description": "Player Name",
+      "description": "Player Name.",
       "fullName": "Player Name",
       "functionType": "StringExpression",
       "group": "Player",
@@ -607,7 +607,7 @@
       "objectGroups": []
     },
     {
-      "description": "Player Photos Count",
+      "description": "Player Photos Count.",
       "fullName": "Player Photos Count",
       "functionType": "Expression",
       "group": "Player",
@@ -632,7 +632,7 @@
       "objectGroups": []
     },
     {
-      "description": "Player Photo # _PARAM1_",
+      "description": "Player Photo # _PARAM1_.",
       "fullName": "Player Photo",
       "functionType": "Expression",
       "group": "Player",
@@ -665,7 +665,7 @@
       "objectGroups": []
     },
     {
-      "description": "Visibility State",
+      "description": "Visibility State.",
       "fullName": "Visibility State",
       "functionType": "StringExpression",
       "group": "Game",
@@ -690,7 +690,7 @@
       "objectGroups": []
     },
     {
-      "description": "On Visibility State Changed",
+      "description": "On Visibility State Changed.",
       "fullName": "On Visibility State Changed",
       "functionType": "Condition",
       "group": "Game",
@@ -721,7 +721,7 @@
       "objectGroups": []
     },
     {
-      "description": "Default Storage Type",
+      "description": "Default Storage Type.",
       "fullName": "Default Storage Type",
       "functionType": "StringExpression",
       "group": "Storage",
@@ -746,7 +746,7 @@
       "objectGroups": []
     },
     {
-      "description": "Storage Data Key",
+      "description": "Storage Data Key.",
       "fullName": "Storage Data Key",
       "functionType": "StringExpression",
       "group": "Storage",
@@ -778,7 +778,7 @@
       "objectGroups": []
     },
     {
-      "description": "Storage Data Key As JSON",
+      "description": "Storage Data Key As JSON.",
       "fullName": "Storage Data Key As JSON",
       "functionType": "StringExpression",
       "group": "Storage",
@@ -815,7 +815,7 @@
       "objectGroups": []
     },
     {
-      "description": "Append Parameter to Storage Data Get Request",
+      "description": "Append Parameter to Storage Data Get Request.",
       "fullName": "Append Parameter to Storage Data Get Request",
       "functionType": "Action",
       "group": "Storage",
@@ -843,7 +843,7 @@
       "objectGroups": []
     },
     {
-      "description": "Append Parameter to Storage Data Set Request",
+      "description": "Append Parameter to Storage Data Set Request.",
       "fullName": "Append Parameter to Storage Data Set Request",
       "functionType": "Action",
       "group": "Storage",
@@ -879,7 +879,7 @@
       "objectGroups": []
     },
     {
-      "description": "Append Parameter to Storage Data Delete Request",
+      "description": "Append Parameter to Storage Data Delete Request.",
       "fullName": "Append Parameter to Storage Data Delete Request",
       "functionType": "Action",
       "group": "Storage",
@@ -907,7 +907,7 @@
       "objectGroups": []
     },
     {
-      "description": "Send Storage Data Get Request",
+      "description": "Send Storage Data Get Request.",
       "fullName": "Send Storage Data Get Request",
       "functionType": "Action",
       "group": "Storage",
@@ -958,7 +958,7 @@
       "objectGroups": []
     },
     {
-      "description": "Is Last Action Completed Successfully",
+      "description": "Is Last Action Completed Successfully.",
       "fullName": "Is Last Action Completed Successfully",
       "functionType": "Condition",
       "group": "Common",
@@ -977,7 +977,7 @@
       "objectGroups": []
     },
     {
-      "description": "Send Storage Data Set Request",
+      "description": "Send Storage Data Set Request.",
       "fullName": "Send Storage Data Set Request",
       "functionType": "Action",
       "group": "Storage",
@@ -1028,7 +1028,7 @@
       "objectGroups": []
     },
     {
-      "description": "Send Storage Data Delete Request",
+      "description": "Send Storage Data Delete Request.",
       "fullName": "Send Storage Data Delete Request",
       "functionType": "Action",
       "group": "Storage",
@@ -1079,7 +1079,7 @@
       "objectGroups": []
     },
     {
-      "description": "On Storage Data Get Request Completed",
+      "description": "On Storage Data Get Request Completed.",
       "fullName": "On Storage Data Get Request Completed",
       "functionType": "Condition",
       "group": "Storage",
@@ -1104,7 +1104,7 @@
       "objectGroups": []
     },
     {
-      "description": "On Storage Data Set Request Completed",
+      "description": "On Storage Data Set Request Completed.",
       "fullName": "On Storage Data Set Request Completed",
       "functionType": "Condition",
       "group": "Storage",
@@ -1129,7 +1129,7 @@
       "objectGroups": []
     },
     {
-      "description": "On Storage Data Delete Request Completed",
+      "description": "On Storage Data Delete Request Completed.",
       "fullName": "On Storage Data Delete Request Completed",
       "functionType": "Condition",
       "group": "Storage",
@@ -1154,7 +1154,7 @@
       "objectGroups": []
     },
     {
-      "description": "Has Storage Data",
+      "description": "Has Storage Data.",
       "fullName": "Has Storage Data",
       "functionType": "Condition",
       "group": "Storage",
@@ -1187,7 +1187,7 @@
       "objectGroups": []
     },
     {
-      "description": "Is Storage Supported",
+      "description": "Is Storage Supported.",
       "fullName": "Is Storage Supported",
       "functionType": "Condition",
       "group": "Storage",
@@ -1208,7 +1208,7 @@
       ],
       "parameters": [
         {
-          "description": "",
+          "description": "Storage Type",
           "name": "StorageType",
           "supplementaryInformation": "[\"platform_internal\",\"local_storage\"]",
           "type": "stringWithSelector"
@@ -1217,7 +1217,7 @@
       "objectGroups": []
     },
     {
-      "description": "Is Storage Available",
+      "description": "Is Storage Available.",
       "fullName": "Is Storage Available",
       "functionType": "Condition",
       "group": "Storage",
@@ -1238,7 +1238,7 @@
       ],
       "parameters": [
         {
-          "description": "",
+          "description": "Storage Type",
           "name": "StorageType",
           "supplementaryInformation": "[\"platform_internal\",\"local_storage\"]",
           "type": "stringWithSelector"
@@ -1247,7 +1247,7 @@
       "objectGroups": []
     },
     {
-      "description": "Set Minimum Delay Between Interstitial",
+      "description": "Set Minimum Delay Between Interstitial.",
       "fullName": "Set Minimum Delay Between Interstitial",
       "functionType": "Action",
       "group": "Advertisement",
@@ -1277,7 +1277,7 @@
       "objectGroups": []
     },
     {
-      "description": "Show Banner",
+      "description": "Show Banner.",
       "fullName": "Show Banner",
       "functionType": "Action",
       "group": "Advertisement",
@@ -1300,7 +1300,7 @@
       "objectGroups": []
     },
     {
-      "description": "Hide Banner",
+      "description": "Hide Banner.",
       "fullName": "Hide Banner",
       "functionType": "Action",
       "group": "Advertisement",
@@ -1323,7 +1323,7 @@
       "objectGroups": []
     },
     {
-      "description": "Show Interstitial",
+      "description": "Show Interstitial.",
       "fullName": "Show Interstitial",
       "functionType": "Action",
       "group": "Advertisement",
@@ -1352,7 +1352,7 @@
       "objectGroups": []
     },
     {
-      "description": "Show Rewarded",
+      "description": "Show Rewarded.",
       "fullName": "Show Rewarded",
       "functionType": "Action",
       "group": "Advertisement",
@@ -1371,7 +1371,7 @@
       "objectGroups": []
     },
     {
-      "description": "Check AdBlock",
+      "description": "Check AdBlock.",
       "fullName": "Check AdBlock",
       "functionType": "Action",
       "group": "Advertisement",
@@ -1405,7 +1405,7 @@
       "objectGroups": []
     },
     {
-      "description": "MinimumDelayBetweenInterstitial",
+      "description": "Minimum Delay Between Interstitial.",
       "fullName": "Minimum Delay Between Interstitial",
       "functionType": "Expression",
       "group": "Advertisement",
@@ -1427,7 +1427,7 @@
       "objectGroups": []
     },
     {
-      "description": "Banner State",
+      "description": "Banner State.",
       "fullName": "Banner State",
       "functionType": "StringExpression",
       "group": "Advertisement",
@@ -1449,7 +1449,7 @@
       "objectGroups": []
     },
     {
-      "description": "Interstitial State",
+      "description": "Interstitial State.",
       "fullName": "Interstitial State",
       "functionType": "StringExpression",
       "group": "Advertisement",
@@ -1471,7 +1471,7 @@
       "objectGroups": []
     },
     {
-      "description": "Rewarded State",
+      "description": "Rewarded State.",
       "fullName": "Rewarded State",
       "functionType": "StringExpression",
       "group": "Advertisement",
@@ -1493,7 +1493,7 @@
       "objectGroups": []
     },
     {
-      "description": "Is BannerS upported",
+      "description": "Is Banner Supported.",
       "fullName": "Is Banner Supported",
       "functionType": "Condition",
       "group": "Advertisement",
@@ -1515,7 +1515,7 @@
       "objectGroups": []
     },
     {
-      "description": "On Banner State Changed",
+      "description": "On Banner State Changed.",
       "fullName": "On Banner State Changed",
       "functionType": "Condition",
       "group": "Advertisement",
@@ -1541,7 +1541,7 @@
       "objectGroups": []
     },
     {
-      "description": "On Banner Loading",
+      "description": "On Banner Loading.",
       "fullName": "On Banner Loading",
       "functionType": "Condition",
       "group": "Advertisement",
@@ -1587,7 +1587,7 @@
       "objectGroups": []
     },
     {
-      "description": "On Banner Shown",
+      "description": "On Banner Shown.",
       "fullName": "On Banner Shown",
       "functionType": "Condition",
       "group": "Advertisement",
@@ -1633,7 +1633,7 @@
       "objectGroups": []
     },
     {
-      "description": "On Banner Hidden",
+      "description": "On Banner Hidden.",
       "fullName": "On Banner Hidden",
       "functionType": "Condition",
       "group": "Advertisement",
@@ -1679,7 +1679,7 @@
       "objectGroups": []
     },
     {
-      "description": "On Banner Failed",
+      "description": "On Banner Failed.",
       "fullName": "On Banner Failed",
       "functionType": "Condition",
       "group": "Advertisement",
@@ -1725,7 +1725,7 @@
       "objectGroups": []
     },
     {
-      "description": "On Interstitial State Changed",
+      "description": "On Interstitial State Changed.",
       "fullName": "On Interstitial State Changed",
       "functionType": "Condition",
       "group": "Advertisement",
@@ -1751,7 +1751,7 @@
       "objectGroups": []
     },
     {
-      "description": "On Interstitial Loading",
+      "description": "On Interstitial Loading.",
       "fullName": "On Interstitial Loading",
       "functionType": "Condition",
       "group": "Advertisement",
@@ -1797,7 +1797,7 @@
       "objectGroups": []
     },
     {
-      "description": "On Interstitial Opened",
+      "description": "On Interstitial Opened.",
       "fullName": "On Interstitial Opened",
       "functionType": "Condition",
       "group": "Advertisement",
@@ -1843,7 +1843,7 @@
       "objectGroups": []
     },
     {
-      "description": "On Interstitial Closed",
+      "description": "On Interstitial Closed.",
       "fullName": "On Interstitial Closed",
       "functionType": "Condition",
       "group": "Advertisement",
@@ -1889,7 +1889,7 @@
       "objectGroups": []
     },
     {
-      "description": "On Interstitial Failed",
+      "description": "On Interstitial Failed.",
       "fullName": "On Interstitial Failed",
       "functionType": "Condition",
       "group": "Advertisement",
@@ -1935,7 +1935,7 @@
       "objectGroups": []
     },
     {
-      "description": "On Rewarded State Changed",
+      "description": "On Rewarded State Changed.",
       "fullName": "On Rewarded State Changed",
       "functionType": "Condition",
       "group": "Advertisement",
@@ -1961,7 +1961,7 @@
       "objectGroups": []
     },
     {
-      "description": "On Rewarded Loading",
+      "description": "On Rewarded Loading.",
       "fullName": "On Rewarded Loading",
       "functionType": "Condition",
       "group": "Advertisement",
@@ -2007,7 +2007,7 @@
       "objectGroups": []
     },
     {
-      "description": "On Rewarded Opened",
+      "description": "On Rewarded Opened.",
       "fullName": "On Rewarded Opened",
       "functionType": "Condition",
       "group": "Advertisement",
@@ -2053,7 +2053,7 @@
       "objectGroups": []
     },
     {
-      "description": "On Rewarded Closed",
+      "description": "On Rewarded Closed.",
       "fullName": "On Rewarded Closed",
       "functionType": "Condition",
       "group": "Advertisement",
@@ -2099,7 +2099,7 @@
       "objectGroups": []
     },
     {
-      "description": "On Rewarded Rewarded",
+      "description": "On Rewarded Rewarded.",
       "fullName": "On Rewarded Rewarded",
       "functionType": "Condition",
       "group": "Advertisement",
@@ -2145,7 +2145,7 @@
       "objectGroups": []
     },
     {
-      "description": "On Rewarded Failed",
+      "description": "On Rewarded Failed.",
       "fullName": "On Rewarded Failed",
       "functionType": "Condition",
       "group": "Advertisement",
@@ -2191,7 +2191,7 @@
       "objectGroups": []
     },
     {
-      "description": "On Check AdBlock Completed",
+      "description": "On Check AdBlock Completed.",
       "fullName": "On Check AdBlock Completed",
       "functionType": "Condition",
       "group": "Advertisement",
@@ -2217,7 +2217,7 @@
       "objectGroups": []
     },
     {
-      "description": "Send Message",
+      "description": "Send Message.",
       "fullName": "Send Message",
       "functionType": "Action",
       "group": "Platform",
@@ -2248,7 +2248,7 @@
       "objectGroups": []
     },
     {
-      "description": "Get Server Time",
+      "description": "Get Server Time.",
       "fullName": "Get Server Time",
       "functionType": "Action",
       "group": "Platform",
@@ -2283,7 +2283,7 @@
       "objectGroups": []
     },
     {
-      "description": "Server Time",
+      "description": "Server Time.",
       "fullName": "Server Time",
       "functionType": "Expression",
       "group": "Platform",
@@ -2308,7 +2308,7 @@
       "objectGroups": []
     },
     {
-      "description": "On Get Server Time Completed",
+      "description": "On Get Server Time Completed.",
       "fullName": "On Get Server Time Completed",
       "functionType": "Condition",
       "group": "Platform",
@@ -2333,7 +2333,7 @@
       "objectGroups": []
     },
     {
-      "description": "Has Server Time",
+      "description": "Has Server Time.",
       "fullName": "Has Server Time",
       "functionType": "Condition",
       "group": "Platform",
@@ -2355,7 +2355,7 @@
       "objectGroups": []
     },
     {
-      "description": "Authorize Player",
+      "description": "Authorize Player.",
       "fullName": "Authorize Player",
       "functionType": "Action",
       "group": "Player",
@@ -2390,7 +2390,7 @@
       "objectGroups": []
     },
     {
-      "description": "Is Player Authorization Supported",
+      "description": "Is Player Authorization Supported.",
       "fullName": "Is Player Authorization Supported",
       "functionType": "Condition",
       "group": "Player",
@@ -2412,7 +2412,7 @@
       "objectGroups": []
     },
     {
-      "description": "Is Player Authorized",
+      "description": "Is Player Authorized.",
       "fullName": "Is Player Authorized",
       "functionType": "Condition",
       "group": "Player",
@@ -2434,7 +2434,7 @@
       "objectGroups": []
     },
     {
-      "description": "On Authorize Player Completed",
+      "description": "On Authorize Player Completed.",
       "fullName": "On Authorize Player Completed",
       "functionType": "Condition",
       "group": "Player",
@@ -2459,7 +2459,7 @@
       "objectGroups": []
     },
     {
-      "description": "Does Player Have Name",
+      "description": "Does Player Have Name.",
       "fullName": "Does Player Have Name",
       "functionType": "Condition",
       "group": "Player",
@@ -2481,7 +2481,7 @@
       "objectGroups": []
     },
     {
-      "description": "Does Player Have Photo",
+      "description": "Does Player Have Photo.",
       "fullName": "Does Player Have Photo",
       "functionType": "Condition",
       "group": "Player",
@@ -2511,7 +2511,7 @@
       "objectGroups": []
     },
     {
-      "description": "Share",
+      "description": "Share.",
       "fullName": "Share",
       "functionType": "Action",
       "group": "Social",
@@ -2546,7 +2546,7 @@
       "objectGroups": []
     },
     {
-      "description": "Invite Friends",
+      "description": "Invite Friends.",
       "fullName": "Invite Friends",
       "functionType": "Action",
       "group": "Social",
@@ -2581,7 +2581,7 @@
       "objectGroups": []
     },
     {
-      "description": "Join Community",
+      "description": "Join Community.",
       "fullName": "Join Community",
       "functionType": "Action",
       "group": "Social",
@@ -2615,7 +2615,7 @@
       "objectGroups": []
     },
     {
-      "description": "Create Post",
+      "description": "Create Post.",
       "fullName": "Create Post",
       "functionType": "Action",
       "group": "Social",
@@ -2649,7 +2649,7 @@
       "objectGroups": []
     },
     {
-      "description": "Add To Home Screen",
+      "description": "Add To Home Screen.",
       "fullName": "Add To Home Screen",
       "functionType": "Action",
       "group": "Social",
@@ -2682,7 +2682,7 @@
       "objectGroups": []
     },
     {
-      "description": "Add To Favorites",
+      "description": "Add To Favorites.",
       "fullName": "Add To Favorites",
       "functionType": "Action",
       "group": "Social",
@@ -2715,7 +2715,7 @@
       "objectGroups": []
     },
     {
-      "description": "Rate",
+      "description": "Rate.",
       "fullName": "Rate",
       "functionType": "Action",
       "group": "Social",
@@ -2748,7 +2748,7 @@
       "objectGroups": []
     },
     {
-      "description": "Is Share Supported",
+      "description": "Is Share Supported.",
       "fullName": "Is Share Supported",
       "functionType": "Condition",
       "group": "Social",
@@ -2770,7 +2770,7 @@
       "objectGroups": []
     },
     {
-      "description": "On Share Completed",
+      "description": "On Share Completed.",
       "fullName": "On Share Completed",
       "functionType": "Condition",
       "group": "Social",
@@ -2796,7 +2796,7 @@
       "objectGroups": []
     },
     {
-      "description": "Is Invite Friends Supported",
+      "description": "Is Invite Friends Supported.",
       "fullName": "Is Invite Friends Supported",
       "functionType": "Condition",
       "group": "Social",
@@ -2818,7 +2818,7 @@
       "objectGroups": []
     },
     {
-      "description": "On Invite Friends Completed",
+      "description": "On Invite Friends Completed.",
       "fullName": "On Invite Friends Completed",
       "functionType": "Condition",
       "group": "Social",
@@ -2844,7 +2844,7 @@
       "objectGroups": []
     },
     {
-      "description": "Is Join Community Supported",
+      "description": "Is Join Community Supported.",
       "fullName": "Is Join Community Supported",
       "functionType": "Condition",
       "group": "Social",
@@ -2866,7 +2866,7 @@
       "objectGroups": []
     },
     {
-      "description": "On Join Community Completed",
+      "description": "On Join Community Completed.",
       "fullName": "On Join Community Completed",
       "functionType": "Condition",
       "group": "Social",
@@ -2892,7 +2892,7 @@
       "objectGroups": []
     },
     {
-      "description": "Is Create Post Supported",
+      "description": "Is Create Post Supported.",
       "fullName": "Is Create Post Supported",
       "functionType": "Condition",
       "group": "Social",
@@ -2914,7 +2914,7 @@
       "objectGroups": []
     },
     {
-      "description": "On Create Post Completed",
+      "description": "On Create Post Completed.",
       "fullName": "On Create Post Completed",
       "functionType": "Condition",
       "group": "Social",
@@ -2940,7 +2940,7 @@
       "objectGroups": []
     },
     {
-      "description": "Is Add To Home Screen Supported",
+      "description": "Is Add To Home Screen Supported.",
       "fullName": "Is Add To Home Screen Supported",
       "functionType": "Condition",
       "group": "Social",
@@ -2962,7 +2962,7 @@
       "objectGroups": []
     },
     {
-      "description": "On Add To Home Screen Completed",
+      "description": "On Add To Home Screen Completed.",
       "fullName": "On Add To Home Screen Completed",
       "functionType": "Condition",
       "group": "Social",
@@ -2988,7 +2988,7 @@
       "objectGroups": []
     },
     {
-      "description": "Is Add To Favorites Supported",
+      "description": "Is Add To Favorites Supported.",
       "fullName": "Is Add To Favorites Supported",
       "functionType": "Condition",
       "group": "Social",
@@ -3010,7 +3010,7 @@
       "objectGroups": []
     },
     {
-      "description": "On Add To Favorites Completed",
+      "description": "On Add To Favorites Completed.",
       "fullName": "On Add To Favorites Completed",
       "functionType": "Condition",
       "group": "Social",
@@ -3036,7 +3036,7 @@
       "objectGroups": []
     },
     {
-      "description": "Is Rate Supported",
+      "description": "Is Rate Supported.",
       "fullName": "Is Rate Supported",
       "functionType": "Condition",
       "group": "Social",
@@ -3058,7 +3058,7 @@
       "objectGroups": []
     },
     {
-      "description": "On Rate Completed",
+      "description": "On Rate Completed.",
       "fullName": "On Rate Completed",
       "functionType": "Condition",
       "group": "Social",
@@ -3084,7 +3084,7 @@
       "objectGroups": []
     },
     {
-      "description": "Is External Links Allowed",
+      "description": "Is External Links Allowed.",
       "fullName": "Is External Links Allowed",
       "functionType": "Condition",
       "group": "Social",
@@ -3106,7 +3106,7 @@
       "objectGroups": []
     },
     {
-      "description": "Leaderboard Set Score",
+      "description": "Leaderboard Set Score.",
       "fullName": "Leaderboard Set Score",
       "functionType": "Action",
       "group": "Leaderboard",
@@ -3141,7 +3141,7 @@
       "objectGroups": []
     },
     {
-      "description": "Leaderboard Get Score",
+      "description": "Leaderboard Get Score.",
       "fullName": "Leaderboard Get Score",
       "functionType": "Action",
       "group": "Leaderboard",
@@ -3178,7 +3178,7 @@
       "objectGroups": []
     },
     {
-      "description": "Leaderboard Get Entries",
+      "description": "Leaderboard Get Entries.",
       "fullName": "Leaderboard Get Entries",
       "functionType": "Action",
       "group": "Leaderboard",
@@ -3214,7 +3214,7 @@
       "objectGroups": []
     },
     {
-      "description": "Leaderboard Show Native Popup",
+      "description": "Leaderboard Show Native Popup.",
       "fullName": "Leaderboard Show Native Popup",
       "functionType": "Action",
       "group": "Leaderboard",
@@ -3248,7 +3248,7 @@
       "objectGroups": []
     },
     {
-      "description": "Is Leaderboard Supported",
+      "description": "Is Leaderboard Supported.",
       "fullName": "Is Leaderboard Supported",
       "functionType": "Condition",
       "group": "Leaderboard",
@@ -3270,7 +3270,7 @@
       "objectGroups": []
     },
     {
-      "description": "Is Leaderboard Native Popup Supported",
+      "description": "Is Leaderboard Native Popup Supported.",
       "fullName": "Is Leaderboard Native Popup Supported",
       "functionType": "Condition",
       "group": "Leaderboard",
@@ -3292,7 +3292,7 @@
       "objectGroups": []
     },
     {
-      "description": "Is Leaderboard Multiple Boards Supported",
+      "description": "Is Leaderboard Multiple Boards Supported.",
       "fullName": "Is Leaderboard Multiple Boards Supported",
       "functionType": "Condition",
       "group": "Leaderboard",
@@ -3314,7 +3314,7 @@
       "objectGroups": []
     },
     {
-      "description": "Is Leaderboard Set Score Supported",
+      "description": "Is Leaderboard Set Score Supported.",
       "fullName": "Is Leaderboard Set Score Supported",
       "functionType": "Condition",
       "group": "Leaderboard",
@@ -3336,7 +3336,7 @@
       "objectGroups": []
     },
     {
-      "description": "Is Leaderboard Get Score Supported",
+      "description": "Is Leaderboard Get Score Supported.",
       "fullName": "Is Leaderboard Get Score Supported",
       "functionType": "Condition",
       "group": "Leaderboard",
@@ -3358,7 +3358,7 @@
       "objectGroups": []
     },
     {
-      "description": "Is Leaderboard Get Entries Supported",
+      "description": "Is Leaderboard Get Entries Supported.",
       "fullName": "Is Leaderboard Get Entries Supported",
       "functionType": "Condition",
       "group": "Leaderboard",
@@ -3380,7 +3380,7 @@
       "objectGroups": []
     },
     {
-      "description": "On Leaderboard Set Score Completed",
+      "description": "On Leaderboard Set Score Completed.",
       "fullName": "On Leaderboard Set Score Completed",
       "functionType": "Condition",
       "group": "Leaderboard",
@@ -3406,7 +3406,7 @@
       "objectGroups": []
     },
     {
-      "description": "On Leaderboard Get Score Completed",
+      "description": "On Leaderboard Get Score Completed.",
       "fullName": "On Leaderboard Get Score Completed",
       "functionType": "Condition",
       "group": "Leaderboard",
@@ -3432,7 +3432,7 @@
       "objectGroups": []
     },
     {
-      "description": "On Leaderboard Get Entries Completed",
+      "description": "On Leaderboard Get Entries Completed.",
       "fullName": "On Leaderboard Get Entries Completed",
       "functionType": "Condition",
       "group": "Leaderboard",
@@ -3458,7 +3458,7 @@
       "objectGroups": []
     },
     {
-      "description": "On Leaderboard Show Native Popup Completed",
+      "description": "On Leaderboard Show Native Popup Completed.",
       "fullName": "On Leaderboard Show Native Popup Completed",
       "functionType": "Condition",
       "group": "Leaderboard",
@@ -3484,7 +3484,7 @@
       "objectGroups": []
     },
     {
-      "description": "Leaderboard Player Score",
+      "description": "Leaderboard Player Score.",
       "fullName": "Leaderboard Player Score",
       "functionType": "Expression",
       "group": "Leaderboard",
@@ -3509,7 +3509,7 @@
       "objectGroups": []
     },
     {
-      "description": "Leaderboard Entries Count",
+      "description": "Leaderboard Entries Count.",
       "fullName": "Leaderboard Entries Count",
       "functionType": "Expression",
       "group": "Leaderboard",
@@ -3534,7 +3534,7 @@
       "objectGroups": []
     },
     {
-      "description": "Leaderboard Entry Properties Count",
+      "description": "Leaderboard Entry Properties Count.",
       "fullName": "Leaderboard Entry Properties Count",
       "functionType": "Expression",
       "group": "Leaderboard",
@@ -3561,7 +3561,7 @@
       "objectGroups": []
     },
     {
-      "description": "Leaderboard Entry Property Name",
+      "description": "Leaderboard Entry Property Name.",
       "fullName": "Leaderboard Entry Property Name",
       "functionType": "StringExpression",
       "group": "Leaderboard",
@@ -3596,7 +3596,7 @@
       "objectGroups": []
     },
     {
-      "description": "Leaderboard Entry Property Value",
+      "description": "Leaderboard Entry Property Value.",
       "fullName": "Leaderboard Entry Property Value",
       "functionType": "StringExpression",
       "group": "Leaderboard",
@@ -3643,7 +3643,7 @@
       "objectGroups": []
     },
     {
-      "description": "Payments Purchase",
+      "description": "Payments Purchase.",
       "fullName": "Payments Purchase",
       "functionType": "Action",
       "group": "Payments",
@@ -3679,7 +3679,7 @@
       "objectGroups": []
     },
     {
-      "description": "Payments Get Purchases",
+      "description": "Payments Get Purchases.",
       "fullName": "Payments Get Purchases",
       "functionType": "Action",
       "group": "Payments",
@@ -3714,7 +3714,7 @@
       "objectGroups": []
     },
     {
-      "description": "Payments Get Catalog",
+      "description": "Payments Get Catalog.",
       "fullName": "Payments Get Catalog",
       "functionType": "Action",
       "group": "Payments",
@@ -3749,7 +3749,7 @@
       "objectGroups": []
     },
     {
-      "description": "Payments Consume Purchase",
+      "description": "Payments Consume Purchase.",
       "fullName": "Payments Consume Purchase",
       "functionType": "Action",
       "group": "Payments",
@@ -3784,7 +3784,7 @@
       "objectGroups": []
     },
     {
-      "description": "Is Payments Supported",
+      "description": "Is Payments Supported.",
       "fullName": "Is Payments Supported",
       "functionType": "Condition",
       "group": "Payments",
@@ -3806,7 +3806,7 @@
       "objectGroups": []
     },
     {
-      "description": "Is Payments Get Catalog Supported",
+      "description": "Is Payments Get Catalog Supported.",
       "fullName": "Is Payments Get Catalog Supported",
       "functionType": "Condition",
       "group": "Payments",
@@ -3828,7 +3828,7 @@
       "objectGroups": []
     },
     {
-      "description": "Is Payments Get Purchases Supported",
+      "description": "Is Payments Get Purchases Supported.",
       "fullName": "Is Payments Get Purchases Supported",
       "functionType": "Condition",
       "group": "Payments",
@@ -3850,7 +3850,7 @@
       "objectGroups": []
     },
     {
-      "description": "Is Payments Consume Purchase Supported",
+      "description": "Is Payments Consume Purchase Supported.",
       "fullName": "Is Payments Consume Purchase Supported",
       "functionType": "Condition",
       "group": "Payments",
@@ -3872,7 +3872,7 @@
       "objectGroups": []
     },
     {
-      "description": "On Payments Purchase Completed",
+      "description": "On Payments Purchase Completed.",
       "fullName": "On Payments Purchase Completed",
       "functionType": "Condition",
       "group": "Payments",
@@ -3898,7 +3898,7 @@
       "objectGroups": []
     },
     {
-      "description": "On Payments Get Purchases Completed",
+      "description": "On Payments Get Purchases Completed.",
       "fullName": "On Payments Get Purchases Completed",
       "functionType": "Condition",
       "group": "Payments",
@@ -3924,7 +3924,7 @@
       "objectGroups": []
     },
     {
-      "description": "On Payments Get Catalog Completed",
+      "description": "On Payments Get Catalog Completed.",
       "fullName": "On Payments Get Catalog Completed",
       "functionType": "Condition",
       "group": "Payments",
@@ -3950,7 +3950,7 @@
       "objectGroups": []
     },
     {
-      "description": "On Payments Consume Purchase Completed",
+      "description": "On Payments Consume Purchase Completed.",
       "fullName": "On Payments Consume Purchase Completed",
       "functionType": "Condition",
       "group": "Payments",
@@ -3976,7 +3976,7 @@
       "objectGroups": []
     },
     {
-      "description": "Payments Last Purchase Properties Count",
+      "description": "Payments Last Purchase Properties Count.",
       "fullName": "Payments Last Purchase Properties Count",
       "functionType": "Expression",
       "group": "Payments",
@@ -4004,7 +4004,7 @@
       "objectGroups": []
     },
     {
-      "description": "Payments Last Purchase Property Name",
+      "description": "Payments Last Purchase Property Name.",
       "fullName": "Payments Last Purchase Property Name",
       "functionType": "StringExpression",
       "group": "Payments",
@@ -4040,7 +4040,7 @@
       "objectGroups": []
     },
     {
-      "description": "Payments Last Purchase Property Value",
+      "description": "Payments Last Purchase Property Value.",
       "fullName": "Payments Last Purchase Property Value",
       "functionType": "StringExpression",
       "group": "Payments",
@@ -4081,7 +4081,7 @@
       "objectGroups": []
     },
     {
-      "description": "Payments Purchases Count",
+      "description": "Payments Purchases Count.",
       "fullName": "Payments Purchases Count",
       "functionType": "Expression",
       "group": "Payments",
@@ -4106,7 +4106,7 @@
       "objectGroups": []
     },
     {
-      "description": "Payments Purchase Properties Count",
+      "description": "Payments Purchase Properties Count.",
       "fullName": "Payments Purchase Properties Count",
       "functionType": "Expression",
       "group": "Payments",
@@ -4133,7 +4133,7 @@
       "objectGroups": []
     },
     {
-      "description": "Payments Purchase Property Name",
+      "description": "Payments Purchase Property Name.",
       "fullName": "Payments Purchase Property Name",
       "functionType": "StringExpression",
       "group": "Payments",
@@ -4169,7 +4169,7 @@
       "objectGroups": []
     },
     {
-      "description": "Payments Last Purchase Property Value",
+      "description": "Payments Last Purchase Property Value.",
       "fullName": "Payments Last Purchase Property Value",
       "functionType": "StringExpression",
       "group": "Payments",
@@ -4219,7 +4219,7 @@
       "objectGroups": []
     },
     {
-      "description": "Payments Catalog Items Count",
+      "description": "Payments Catalog Items Count.",
       "fullName": "Payments Catalog Items Count",
       "functionType": "Expression",
       "group": "Payments",
@@ -4244,7 +4244,7 @@
       "objectGroups": []
     },
     {
-      "description": "Payments Catalog Item Properties Count",
+      "description": "Payments Catalog Item Properties Count.",
       "fullName": "Payments Catalog Item Properties Count",
       "functionType": "Expression",
       "group": "Payments",
@@ -4271,7 +4271,7 @@
       "objectGroups": []
     },
     {
-      "description": "Payments Catalog Item Property Name",
+      "description": "Payments Catalog Item Property Name.",
       "fullName": "Payments Catalog Item Property Name",
       "functionType": "StringExpression",
       "group": "Payments",
@@ -4307,7 +4307,7 @@
       "objectGroups": []
     },
     {
-      "description": "Payments Last Purchase Property Value",
+      "description": "Payments Last Purchase Property Value.",
       "fullName": "Payments Last Purchase Property Value",
       "functionType": "StringExpression",
       "group": "Payments",
@@ -4357,7 +4357,7 @@
       "objectGroups": []
     },
     {
-      "description": "Is Achievements Supported",
+      "description": "Is Achievements Supported.",
       "fullName": "Is Achievements Supported",
       "functionType": "Condition",
       "group": "Achievements",
@@ -4379,7 +4379,7 @@
       "objectGroups": []
     },
     {
-      "description": "Is Achievements Get List Supported",
+      "description": "Is Achievements Get List Supported.",
       "fullName": "Is Achievements Get List Supported",
       "functionType": "Condition",
       "group": "Achievements",
@@ -4401,7 +4401,7 @@
       "objectGroups": []
     },
     {
-      "description": "Is Achievements Native Popup Supported",
+      "description": "Is Achievements Native Popup Supported.",
       "fullName": "Is Achievements Native Popup Supported",
       "functionType": "Condition",
       "group": "Achievements",
@@ -4423,7 +4423,7 @@
       "objectGroups": []
     },
     {
-      "description": "On Achievements Unlock Completed",
+      "description": "On Achievements Unlock Completed.",
       "fullName": "On Achievements Unlock Completed",
       "functionType": "Condition",
       "group": "Achievements",
@@ -4449,7 +4449,7 @@
       "objectGroups": []
     },
     {
-      "description": "On Achievements Get List Completed",
+      "description": "On Achievements Get List Completed.",
       "fullName": "On Achievements Get List Completed",
       "functionType": "Condition",
       "group": "Achievements",
@@ -4475,7 +4475,7 @@
       "objectGroups": []
     },
     {
-      "description": "On Achievements Show Native Popup Completed",
+      "description": "On Achievements Show Native Popup Completed.",
       "fullName": "On Achievements Show Native Popup Completed",
       "functionType": "Condition",
       "group": "Achievements",
@@ -4501,7 +4501,7 @@
       "objectGroups": []
     },
     {
-      "description": "Achievements Count",
+      "description": "Achievements Count.",
       "fullName": "Achievements Count",
       "functionType": "Expression",
       "group": "Achievements",
@@ -4526,7 +4526,7 @@
       "objectGroups": []
     },
     {
-      "description": "Achievement Properties Count",
+      "description": "Achievement Properties Count.",
       "fullName": "Achievement Properties Count",
       "functionType": "Expression",
       "group": "Achievements",
@@ -4553,7 +4553,7 @@
       "objectGroups": []
     },
     {
-      "description": "Achievement Property Name",
+      "description": "Achievement Property Name.",
       "fullName": "Achievement Property Name",
       "functionType": "StringExpression",
       "group": "Achievements",
@@ -4589,7 +4589,7 @@
       "objectGroups": []
     },
     {
-      "description": "Achievement Property Value",
+      "description": "Achievement Property Value.",
       "fullName": "Achievement Property Value",
       "functionType": "StringExpression",
       "group": "Achievements",
@@ -4639,7 +4639,7 @@
       "objectGroups": []
     },
     {
-      "description": "Achievements Unlock",
+      "description": "Achievements Unlock.",
       "fullName": "Achievements Unlock",
       "functionType": "Action",
       "group": "Achievements",
@@ -4674,7 +4674,7 @@
       "objectGroups": []
     },
     {
-      "description": "Achievements Get List",
+      "description": "Achievements Get List.",
       "fullName": "Achievements Get List",
       "functionType": "Action",
       "group": "Achievements",
@@ -4709,7 +4709,7 @@
       "objectGroups": []
     },
     {
-      "description": "Achievements Show Native Popup",
+      "description": "Achievements Show Native Popup.",
       "fullName": "Achievements Show Native Popup",
       "functionType": "Action",
       "group": "Achievements",
@@ -4744,7 +4744,7 @@
       "objectGroups": []
     },
     {
-      "description": "Is Remote Config Supported",
+      "description": "Is Remote Config Supported.",
       "fullName": "Is Remote Config Supported",
       "functionType": "Condition",
       "group": "Remote",
@@ -4766,7 +4766,7 @@
       "objectGroups": []
     },
     {
-      "description": "On Remote Config Got Completed",
+      "description": "On Remote Config Got Completed.",
       "fullName": "On Remote Config Got Completed",
       "functionType": "Condition",
       "group": "Remote",
@@ -4792,7 +4792,7 @@
       "objectGroups": []
     },
     {
-      "description": "Has Remote Config Value",
+      "description": "Has Remote Config Value.",
       "fullName": "Has Remote Config Value",
       "functionType": "Condition",
       "group": "Remote",
@@ -4825,7 +4825,7 @@
       "objectGroups": []
     },
     {
-      "description": "Remote Config Value",
+      "description": "Remote Config Value.",
       "fullName": "Remote Config Value",
       "functionType": "StringExpression",
       "group": "Remote",
@@ -4859,7 +4859,7 @@
       "objectGroups": []
     },
     {
-      "description": "Send Remote Config Get Request",
+      "description": "Send Remote Config Get Request.",
       "fullName": "Send Remote Config Get Request",
       "functionType": "Action",
       "group": "Remote",
@@ -4894,7 +4894,7 @@
       "objectGroups": []
     },
     {
-      "description": "Is Ad Block Detected",
+      "description": "Is Ad Block Detected.",
       "fullName": "Is Ad Block Detected",
       "functionType": "Condition",
       "name": "IsAdBlockDetected",
