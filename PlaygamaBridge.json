@@ -757,7 +757,7 @@
           "type": "BuiltinCommonInstructions::JsCode",
           "inlineCode": [
             "const key = eventsFunctionContext.getArgument(\"Key\");",
-            "eventsFunctionContext.returnValue = gdjs._playgamaExtension.storageData[key];",
+            "eventsFunctionContext.returnValue = gdjs._playgamaBridgeExtension.storageData[key];",
             ""
           ],
           "parameterObjects": "",
@@ -789,7 +789,7 @@
           "type": "BuiltinCommonInstructions::JsCode",
           "inlineCode": [
             "const key = eventsFunctionContext.getArgument(\"Key\");",
-            "let value = gdjs._playgamaExtension.storageData[key];",
+            "let value = gdjs._playgamaBridgeExtension.storageData[key];",
             "",
             "if (typeof value !== 'string') {",
             "    value = JSON.stringify(value);",
@@ -919,7 +919,7 @@
           "inlineCode": [
             "gdjs._playgamaBridgeExtension.isLastActionCompletedSuccessfully = false;",
             "",
-            "const { storageData, storageDataGetRequestKeys } = gdjs._playgamaExtension;",
+            "const { storageData, storageDataGetRequestKeys } = gdjs._playgamaBridgeExtension;",
             "const storageType = eventsFunctionContext.getArgument(\"StorageType\");",
             "",
             "return new Promise(resolve => {",
