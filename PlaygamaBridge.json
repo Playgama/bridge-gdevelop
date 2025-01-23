@@ -2561,7 +2561,7 @@
             "return new Promise(resolve => {",
             "    bridge.social.inviteFriends(gdjs._playgamaBridgeExtension.actionParametersContainer)",
             "        .then(() => {",
-            "            tgdjs._playgamaBridgeExtensionhis.isLastActionCompletedSuccessfully = true;",
+            "            gdjs._playgamaBridgeExtension.isLastActionCompletedSuccessfully = true;",
             "        })",
             "        .catch(error => console.log(error))",
             "        .finally(() => {",
