@@ -279,12 +279,12 @@
       ],
       "parameters": [
         {
-          "description": "Path.",
+          "description": "Path",
           "name": "Path",
           "type": "string"
         },
         {
-          "description": "Value.",
+          "description": "Value",
           "name": "Value",
           "type": "string"
         }
