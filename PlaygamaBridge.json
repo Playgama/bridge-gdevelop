@@ -1553,21 +1553,21 @@
           "conditions": [
             {
               "type": {
-                "value": "PlaygamaBridge::OnBannerStateChanged"
-              },
-              "parameters": [
-                "",
-                ""
-              ]
-            },
-            {
-              "type": {
                 "value": "BuiltinCommonInstructions::CompareStrings"
               },
               "parameters": [
                 "PlaygamaBridge::BannerState()",
                 "=",
                 "\"loading\""
+              ]
+            },
+            {
+              "type": {
+                "value": "PlaygamaBridge::OnBannerStateChanged"
+              },
+              "parameters": [
+                "",
+                ""
               ]
             }
           ],
@@ -1599,21 +1599,21 @@
           "conditions": [
             {
               "type": {
-                "value": "PlaygamaBridge::OnBannerStateChanged"
-              },
-              "parameters": [
-                "",
-                ""
-              ]
-            },
-            {
-              "type": {
                 "value": "BuiltinCommonInstructions::CompareStrings"
               },
               "parameters": [
                 "PlaygamaBridge::BannerState()",
                 "=",
                 "\"shown\""
+              ]
+            },
+            {
+              "type": {
+                "value": "PlaygamaBridge::OnBannerStateChanged"
+              },
+              "parameters": [
+                "",
+                ""
               ]
             }
           ],
@@ -1645,21 +1645,21 @@
           "conditions": [
             {
               "type": {
-                "value": "PlaygamaBridge::OnBannerStateChanged"
-              },
-              "parameters": [
-                "",
-                ""
-              ]
-            },
-            {
-              "type": {
                 "value": "BuiltinCommonInstructions::CompareStrings"
               },
               "parameters": [
                 "PlaygamaBridge::BannerState()",
                 "=",
                 "\"hidden\""
+              ]
+            },
+            {
+              "type": {
+                "value": "PlaygamaBridge::OnBannerStateChanged"
+              },
+              "parameters": [
+                "",
+                ""
               ]
             }
           ],
@@ -1691,21 +1691,21 @@
           "conditions": [
             {
               "type": {
-                "value": "PlaygamaBridge::OnBannerStateChanged"
-              },
-              "parameters": [
-                "",
-                ""
-              ]
-            },
-            {
-              "type": {
                 "value": "BuiltinCommonInstructions::CompareStrings"
               },
               "parameters": [
                 "PlaygamaBridge::BannerState()",
                 "=",
                 "\"failed\""
+              ]
+            },
+            {
+              "type": {
+                "value": "PlaygamaBridge::OnBannerStateChanged"
+              },
+              "parameters": [
+                "",
+                ""
               ]
             }
           ],
@@ -1763,21 +1763,21 @@
           "conditions": [
             {
               "type": {
-                "value": "PlaygamaBridge::OnInterstitialStateChanged"
-              },
-              "parameters": [
-                "",
-                ""
-              ]
-            },
-            {
-              "type": {
                 "value": "BuiltinCommonInstructions::CompareStrings"
               },
               "parameters": [
                 "PlaygamaBridge::InterstitialState()",
                 "=",
                 "\"loading\""
+              ]
+            },
+            {
+              "type": {
+                "value": "PlaygamaBridge::OnInterstitialStateChanged"
+              },
+              "parameters": [
+                "",
+                ""
               ]
             }
           ],
@@ -1809,21 +1809,21 @@
           "conditions": [
             {
               "type": {
-                "value": "PlaygamaBridge::OnInterstitialStateChanged"
-              },
-              "parameters": [
-                "",
-                ""
-              ]
-            },
-            {
-              "type": {
                 "value": "BuiltinCommonInstructions::CompareStrings"
               },
               "parameters": [
                 "PlaygamaBridge::InterstitialState()",
                 "=",
                 "\"opened\""
+              ]
+            },
+            {
+              "type": {
+                "value": "PlaygamaBridge::OnInterstitialStateChanged"
+              },
+              "parameters": [
+                "",
+                ""
               ]
             }
           ],
@@ -1855,21 +1855,21 @@
           "conditions": [
             {
               "type": {
-                "value": "PlaygamaBridge::OnInterstitialStateChanged"
-              },
-              "parameters": [
-                "",
-                ""
-              ]
-            },
-            {
-              "type": {
                 "value": "BuiltinCommonInstructions::CompareStrings"
               },
               "parameters": [
                 "PlaygamaBridge::InterstitialState()",
                 "=",
                 "\"closed\""
+              ]
+            },
+            {
+              "type": {
+                "value": "PlaygamaBridge::OnInterstitialStateChanged"
+              },
+              "parameters": [
+                "",
+                ""
               ]
             }
           ],
@@ -1901,21 +1901,21 @@
           "conditions": [
             {
               "type": {
-                "value": "PlaygamaBridge::OnInterstitialStateChanged"
-              },
-              "parameters": [
-                "",
-                ""
-              ]
-            },
-            {
-              "type": {
                 "value": "BuiltinCommonInstructions::CompareStrings"
               },
               "parameters": [
                 "PlaygamaBridge::InterstitialState()",
                 "=",
                 "\"failed\""
+              ]
+            },
+            {
+              "type": {
+                "value": "PlaygamaBridge::OnInterstitialStateChanged"
+              },
+              "parameters": [
+                "",
+                ""
               ]
             }
           ],
@@ -1973,21 +1973,21 @@
           "conditions": [
             {
               "type": {
-                "value": "PlaygamaBridge::OnRewardedStateChanged"
-              },
-              "parameters": [
-                "",
-                ""
-              ]
-            },
-            {
-              "type": {
                 "value": "BuiltinCommonInstructions::CompareStrings"
               },
               "parameters": [
                 "PlaygamaBridge::RewardedState()",
                 "=",
                 "\"loading\""
+              ]
+            },
+            {
+              "type": {
+                "value": "PlaygamaBridge::OnRewardedStateChanged"
+              },
+              "parameters": [
+                "",
+                ""
               ]
             }
           ],
@@ -2019,21 +2019,21 @@
           "conditions": [
             {
               "type": {
-                "value": "PlaygamaBridge::OnRewardedStateChanged"
-              },
-              "parameters": [
-                "",
-                ""
-              ]
-            },
-            {
-              "type": {
                 "value": "BuiltinCommonInstructions::CompareStrings"
               },
               "parameters": [
                 "PlaygamaBridge::RewardedState()",
                 "=",
                 "\"opened\""
+              ]
+            },
+            {
+              "type": {
+                "value": "PlaygamaBridge::OnRewardedStateChanged"
+              },
+              "parameters": [
+                "",
+                ""
               ]
             }
           ],
@@ -2065,21 +2065,21 @@
           "conditions": [
             {
               "type": {
-                "value": "PlaygamaBridge::OnRewardedStateChanged"
-              },
-              "parameters": [
-                "",
-                ""
-              ]
-            },
-            {
-              "type": {
                 "value": "BuiltinCommonInstructions::CompareStrings"
               },
               "parameters": [
                 "PlaygamaBridge::RewardedState()",
                 "=",
                 "\"closed\""
+              ]
+            },
+            {
+              "type": {
+                "value": "PlaygamaBridge::OnRewardedStateChanged"
+              },
+              "parameters": [
+                "",
+                ""
               ]
             }
           ],
@@ -2111,21 +2111,21 @@
           "conditions": [
             {
               "type": {
-                "value": "PlaygamaBridge::OnRewardedStateChanged"
-              },
-              "parameters": [
-                "",
-                ""
-              ]
-            },
-            {
-              "type": {
                 "value": "BuiltinCommonInstructions::CompareStrings"
               },
               "parameters": [
                 "PlaygamaBridge::RewardedState()",
                 "=",
                 "\"rewarded\""
+              ]
+            },
+            {
+              "type": {
+                "value": "PlaygamaBridge::OnRewardedStateChanged"
+              },
+              "parameters": [
+                "",
+                ""
               ]
             }
           ],
@@ -2157,21 +2157,21 @@
           "conditions": [
             {
               "type": {
-                "value": "PlaygamaBridge::OnRewardedStateChanged"
-              },
-              "parameters": [
-                "",
-                ""
-              ]
-            },
-            {
-              "type": {
                 "value": "BuiltinCommonInstructions::CompareStrings"
               },
               "parameters": [
                 "PlaygamaBridge::RewardedState()",
                 "=",
                 "\"failed\""
+              ]
+            },
+            {
+              "type": {
+                "value": "PlaygamaBridge::OnRewardedStateChanged"
+              },
+              "parameters": [
+                "",
+                ""
               ]
             }
           ],
