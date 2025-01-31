@@ -118,6 +118,7 @@
             "    isBannerStateChanged: false,",
             "    isInterstitialStateChanged: false,",
             "    isRewardedStateChanged: false,",
+            "    shouldBeRewarded: false,",
             "",
             "    // player",
             "    isAuthorizePlayerCompleted: false,",
@@ -233,6 +234,9 @@
             "        });",
             "",
             "        bridge.advertisement.on('rewarded_state_changed', state => {",
+            "            if (state === bridge.REWARDED_STATE.REWARDED) {",
+            "                gdjs._playgamaBridgeExtension.shouldBeRewarded = true;",
+            "            }",
             "            gdjs._playgamaBridgeExtension.isRewardedStateChanged = true;",
             "        });",
             "",
@@ -2107,38 +2111,17 @@
       "sentence": "On Rewarded Rewarded",
       "events": [
         {
-          "type": "BuiltinCommonInstructions::Standard",
-          "conditions": [
-            {
-              "type": {
-                "value": "BuiltinCommonInstructions::CompareStrings"
-              },
-              "parameters": [
-                "PlaygamaBridge::RewardedState()",
-                "=",
-                "\"rewarded\""
-              ]
-            },
-            {
-              "type": {
-                "value": "PlaygamaBridge::OnRewardedStateChanged"
-              },
-              "parameters": [
-                "",
-                ""
-              ]
-            }
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "eventsFunctionContext.returnValue = gdjs._playgamaBridgeExtension.shouldBeRewarded;",
+            "",
+            "if (gdjs._playgamaBridgeExtension.shouldBeRewarded) {",
+            "    gdjs._playgamaBridgeExtension.shouldBeRewarded = false;",
+            "}"
           ],
-          "actions": [
-            {
-              "type": {
-                "value": "SetReturnBoolean"
-              },
-              "parameters": [
-                "True"
-              ]
-            }
-          ]
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
         }
       ],
       "parameters": [],
