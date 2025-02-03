@@ -1490,7 +1490,7 @@
           ],
           "parameterObjects": "",
           "useStrict": true,
-          "eventsSheetExpanded": true
+          "eventsSheetExpanded": false
         }
       ],
       "expressionType": {
@@ -1524,7 +1524,7 @@
           ],
           "parameterObjects": "",
           "useStrict": true,
-          "eventsSheetExpanded": true
+          "eventsSheetExpanded": false
         }
       ],
       "expressionType": {
