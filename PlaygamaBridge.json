@@ -1510,13 +1510,13 @@
         {
           "type": "BuiltinCommonInstructions::JsCode",
           "inlineCode": [
-            "if (gdjs._playgamaBridgeExtension.currentTimestamp !== gdjs._playgamaBridgeExtension.frameTimestamp) {",
+            "if (gdjs._playgamaBridgeExtension.rewardedTimestamp !== gdjs._playgamaBridgeExtension.frameTimestamp) {",
             "    if (gdjs._playgamaBridgeExtension.rewardedStateStack.length > 0) {",
             "        gdjs._playgamaBridgeExtension.rewardedState = gdjs._playgamaBridgeExtension.rewardedStateStack.shift();",
             "        gdjs._playgamaBridgeExtension.isRewardedStateChanged = true;",
             "    }",
             "",
-            "    gdjs._playgamaBridgeExtension.currentTimestamp = gdjs._playgamaBridgeExtension.frameTimestamp;",
+            "    gdjs._playgamaBridgeExtension.rewardedTimestamp = gdjs._playgamaBridgeExtension.frameTimestamp;",
             "}",
             "",
             "",
