@@ -1,6 +1,6 @@
 {
   "author": "Playgama",
-  "category": "General",
+  "category": "Ads",
   "extensionNamespace": "",
   "fullName": "Playgama Bridge",
   "helpPath": "https://wiki.playgama.com/playgama/sdk/engines/gdevelop",
@@ -91,6 +91,10 @@
           "type": "BuiltinCommonInstructions::JsCode",
           "inlineCode": [
             "gdjs._playgamaBridgeExtension = {",
+            "    frameTimestamp: null,",
+            "    rewardedTimestamp: null,",
+            "    interstitialTimestamp: null,",
+            "",
             "    isLastActionCompletedSuccessfully: false,",
             "    visibilityStateChanged: false,",
             "    actionParametersContainer: {},",
@@ -112,7 +116,9 @@
             "    // advertisement",
             "    bannerState: null,",
             "    interstitialState: null,",
+            "    interstitialStateStack: [],",
             "    rewardedState: null,",
+            "    rewardedStateStack: [],",
             "    isAdBlockDetected: false,",
             "    isCheckAdBlockCompleted: false,",
             "    isBannerStateChanged: false,",
@@ -230,10 +236,13 @@
             "",
             "        bridge.advertisement.on('interstitial_state_changed', state => {",
             "            gdjs._playgamaBridgeExtension.isInterstitialStateChanged = true;",
+            "            gdjs._playgamaBridgeExtension.interstitialStateStack.push(state);",
+            "",
             "        });",
             "",
             "        bridge.advertisement.on('rewarded_state_changed', state => {",
             "            gdjs._playgamaBridgeExtension.isRewardedStateChanged = true;",
+            "            gdjs._playgamaBridgeExtension.rewardedStateStack.push(state);",
             "        });",
             "",
             "        bridge.game.on('visibility_state_changed', state => {",
@@ -245,6 +254,14 @@
             "                bridge.advertisement.showInterstitial()",
             "            }",
             "        }",
+            "",
+            "        function updateTimestamp(timestamp) {",
+            "            gdjs._playgamaBridgeExtension.frameTimestamp = timestamp;",
+            "",
+            "            requestAnimationFrame(updateTimestamp);",
+            "        }",
+            "",
+            "        requestAnimationFrame(updateTimestamp);",
             "    });"
           ],
           "parameterObjects": "",
@@ -1458,7 +1475,19 @@
       "events": [
         {
           "type": "BuiltinCommonInstructions::JsCode",
-          "inlineCode": "eventsFunctionContext.returnValue = bridge.advertisement.interstitialState;",
+          "inlineCode": [
+            "if (gdjs._playgamaBridgeExtension.interstitialTimestamp !== gdjs._playgamaBridgeExtension.frameTimestamp) {",
+            "    if (gdjs._playgamaBridgeExtension.interstitialStateStack.length > 0) {",
+            "        gdjs._playgamaBridgeExtension.interstitialState = gdjs._playgamaBridgeExtension.interstitialStateStack.shift();",
+            "        gdjs._playgamaBridgeExtension.isInterstitialStateChanged = true;",
+            "    }",
+            "",
+            "    gdjs._playgamaBridgeExtension.interstitialTimestamp = gdjs._playgamaBridgeExtension.frameTimestamp;",
+            "}",
+            "",
+            "",
+            "eventsFunctionContext.returnValue = gdjs._playgamaBridgeExtension.interstitialState;"
+          ],
           "parameterObjects": "",
           "useStrict": true,
           "eventsSheetExpanded": false
@@ -1480,7 +1509,19 @@
       "events": [
         {
           "type": "BuiltinCommonInstructions::JsCode",
-          "inlineCode": "eventsFunctionContext.returnValue = bridge.advertisement.rewardedState;",
+          "inlineCode": [
+            "if (gdjs._playgamaBridgeExtension.rewardedTimestamp !== gdjs._playgamaBridgeExtension.frameTimestamp) {",
+            "    if (gdjs._playgamaBridgeExtension.rewardedStateStack.length > 0) {",
+            "        gdjs._playgamaBridgeExtension.rewardedState = gdjs._playgamaBridgeExtension.rewardedStateStack.shift();",
+            "        gdjs._playgamaBridgeExtension.isRewardedStateChanged = true;",
+            "    }",
+            "",
+            "    gdjs._playgamaBridgeExtension.rewardedTimestamp = gdjs._playgamaBridgeExtension.frameTimestamp;",
+            "}",
+            "",
+            "",
+            "eventsFunctionContext.returnValue = gdjs._playgamaBridgeExtension.rewardedState;"
+          ],
           "parameterObjects": "",
           "useStrict": true,
           "eventsSheetExpanded": false
