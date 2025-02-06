@@ -639,7 +639,7 @@
     {
       "description": "Player Photo # _PARAM1_.",
       "fullName": "Player Photo",
-      "functionType": "Expression",
+      "functionType": "StringExpression",
       "group": "Player",
       "name": "PlayerPhoto",
       "sentence": "",
@@ -654,11 +654,11 @@
           ],
           "parameterObjects": "",
           "useStrict": true,
-          "eventsSheetExpanded": false
+          "eventsSheetExpanded": true
         }
       ],
       "expressionType": {
-        "type": "expression"
+        "type": "string"
       },
       "parameters": [
         {
