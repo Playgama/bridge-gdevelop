@@ -198,7 +198,6 @@
             "const laggedPublisherId = variables.get(\"LaggedPublisherId\").getAsString();",
             "const facebookPlacementId = variables.get(\"FacebookPlacementId\").getAsString();",
             "const adsgramBlockId = variables.get(\"AdsgramBlockId\").getAsString();",
-            "const showInterstitialOnInit = variables.get(\"ShowInterstitialOnInit\").getAsBoolean();",
             "",
             "const options = {",
             "    'platforms': {",
