@@ -13,10 +13,6 @@
     "One SDK for cross-platform publishing HTML5 games. ",
     "Please refer to [Playgama documentation](https://wiki.playgama.com/playgama/sdk/engines/gdevelop) for detailed guidance."
   ],
-  "origin": {
-    "identifier": "PlaygamaBridge",
-    "name": "gdevelop-extension-store"
-  },
   "tags": [
     "playgama",
     "bridge",
