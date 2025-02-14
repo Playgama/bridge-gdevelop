@@ -6,13 +6,17 @@
   "helpPath": "https://wiki.playgama.com/playgama/sdk/engines/gdevelop",
   "iconUrl": "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNTEyIiBoZWlnaHQ9IjUxMiIgdmlld0JveD0iMCAwIDUxMiA1MTIiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSI1MTIiIGhlaWdodD0iNTEyIiBmaWxsPSIjOTc0N0ZGIi8+CjxwYXRoIGQ9Ik0xMTcgMTU0LjM2MlY5Ni4wMDAxSDIyMy4xMjlWNDE2SDExN1YzNTkuMjU0SDE1OC40NFYxNTQuMzYySDExN1oiIGZpbGw9IndoaXRlIi8+CjxwYXRoIGQ9Ik0zOTUgMTU0LjM2MlY5NkgyODguODcxVjQxNkgzOTVWMzU5LjI1NEgzNTMuNTZWMTU0LjM2MkgzOTVaIiBmaWxsPSJ3aGl0ZSIvPgo8L3N2Zz4K",
   "name": "PlaygamaBridge",
-  "previewIconUrl": "",
+  "previewIconUrl": "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNTEyIiBoZWlnaHQ9IjUxMiIgdmlld0JveD0iMCAwIDUxMiA1MTIiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxwYXRoIGQ9Ik0xMTcgMTU0LjM2MlY5Ni4wMDAxSDIyMy4xMjlWNDE2SDExN1YzNTkuMjU0SDE1OC40NFYxNTQuMzYySDExN1oiIGZpbGw9ImJsYWNrIi8+CjxwYXRoIGQ9Ik0zOTUgMTU0LjM2MlY5NkgyODguODcxVjQxNkgzOTVWMzU5LjI1NEgzNTMuNTZWMTU0LjM2MkgzOTVaIiBmaWxsPSJibGFjayIvPgo8L3N2Zz4K",
   "shortDescription": "One SDK for cross-platform publishing HTML5 games.",
   "version": "1.20.0",
   "description": [
     "One SDK for cross-platform publishing HTML5 games. ",
     "Please refer to [Playgama documentation](https://wiki.playgama.com/playgama/sdk/engines/gdevelop) for detailed guidance."
   ],
+  "origin": {
+    "identifier": "PlaygamaBridge",
+    "name": "gdevelop-extension-store"
+  },
   "tags": [
     "playgama",
     "bridge",
@@ -3639,7 +3643,7 @@
             "const property = eventsFunctionContext.getArgument(\"Property\");",
             "",
             "if (gdjs._playgamaBridgeExtension.leaderboardEntries.length > 0) {",
-            "    const entry = this.leaderboardEntries[entryIndex];",
+            "    const entry = gdjs._playgamaBridgeExtension.leaderboardEntries[entryIndex];",
             "",
             "    eventsFunctionContext.returnValue = isNaN(+property) ",
             "        ? entry[property]",
