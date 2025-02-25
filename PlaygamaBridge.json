@@ -4386,18 +4386,18 @@
       "objectGroups": []
     },
     {
-      "description": "Payments Catalog Item By Id Property Value.",
-      "fullName": "Payments Catalog Item By Id Property Value",
+      "description": "Payments First Catalog Item Property Value.",
+      "fullName": "Payments First Catalog Item Property Value",
       "functionType": "StringExpression",
       "group": "Payments",
-      "name": "PaymentsCatalogItemByIdPropertyValue",
+      "name": "PaymentsFirstCatalogItemPropertyValue",
       "sentence": "",
       "events": [
         {
           "type": "BuiltinCommonInstructions::JsCode",
           "inlineCode": [
-            "const itemIdProperty = eventsFunctionContext.getArgument(\"ItemIdProperty\");",
-            "const itemId = eventsFunctionContext.getArgument(\"ItemId\");",
+            "const filterProperty = eventsFunctionContext.getArgument(\"FilterProperty\");",
+            "const filterPropertyValue = eventsFunctionContext.getArgument(\"FilterPropertyValue\");",
             "const property = eventsFunctionContext.getArgument(\"Property\");",
             "",
             "const { paymentsCatalog } = gdjs._playgamaBridgeExtension;",
@@ -4407,7 +4407,7 @@
             "    return;",
             "}",
             "",
-            "const product = paymentsCatalog.find(item => item[itemIdProperty] === itemId);",
+            "const product = paymentsCatalog.find(item => item[filterProperty] === filterPropertyValue);",
             "",
             "if (!product) {",
             "    eventsFunctionContext.returnValue = \"\";",
@@ -4431,13 +4431,13 @@
       },
       "parameters": [
         {
-          "description": "Item Id Property",
-          "name": "ItemIdProperty",
+          "description": "Filter Property",
+          "name": "FilterProperty",
           "type": "string"
         },
         {
-          "description": "Item Id",
-          "name": "ItemId",
+          "description": "Filter Property Value",
+          "name": "FilterPropertyValue",
           "type": "string"
         },
         {
