@@ -13,6 +13,10 @@
     "One SDK for cross-platform publishing HTML5 games. ",
     "Please refer to [Playgama documentation](https://wiki.playgama.com/playgama/sdk/engines/gdevelop) for detailed guidance."
   ],
+  "origin": {
+    "identifier": "PlaygamaBridge",
+    "name": "gdevelop-extension-store"
+  },
   "tags": [
     "playgama",
     "bridge",
@@ -97,6 +101,10 @@
             "    // platform",
             "    serverTime: 0,",
             "    isGetServerTimeCompleted: false,",
+            "    allGames: [],",
+            "    gameById: null,",
+            "    isGetAllGamesCompleted: false,",
+            "    isGetGameByIdCompleted: false,",
             "    ",
             "    // storage",
             "    storageData: {},",
@@ -447,6 +455,335 @@
       ],
       "expressionType": {
         "type": "string"
+      },
+      "parameters": [],
+      "objectGroups": []
+    },
+    {
+      "description": "Is Get All Games Supported.",
+      "fullName": "Is Get All Games Supported",
+      "functionType": "Condition",
+      "group": "Platform",
+      "name": "IsGetAllGamesSupported",
+      "sentence": "Is Get All Games Supported",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": "eventsFunctionContext.returnValue = bridge.platform.isGetAllGamesSupported;",
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "parameters": [],
+      "objectGroups": []
+    },
+    {
+      "description": "Is Get Game By Id Supported.",
+      "fullName": "Is Get Game By Id Supported",
+      "functionType": "Condition",
+      "group": "Platform",
+      "name": "IsGetGameByIdSupported",
+      "sentence": "Is Get Game By Id Supported",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": "eventsFunctionContext.returnValue = bridge.platform.isGetGameByIdSupported;",
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "parameters": [],
+      "objectGroups": []
+    },
+    {
+      "description": "On Get All Games Completed.",
+      "fullName": "On Get All Games Completed",
+      "functionType": "Condition",
+      "group": "Platform",
+      "name": "OnGetAllGamesCompleted",
+      "sentence": "On Get All Games Completed",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "eventsFunctionContext.returnValue = gdjs._playgamaBridgeExtension.isGetAllGamesCompleted;",
+            "",
+            "if (gdjs._playgamaBridgeExtension.isGetAllGamesCompleted) {",
+            "    gdjs._playgamaBridgeExtension.isGetAllGamesCompleted = false;",
+            "}"
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "parameters": [],
+      "objectGroups": []
+    },
+    {
+      "description": "On Get Game By Id Completed.",
+      "fullName": "On Get Game By Id Completed",
+      "functionType": "Condition",
+      "group": "Platform",
+      "name": "OnGetGameByIdCompleted",
+      "sentence": "On Get Game By Id Completed",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "eventsFunctionContext.returnValue = gdjs._playgamaBridgeExtension.isGetGameByIdCompleted;",
+            "",
+            "if (gdjs._playgamaBridgeExtension.isGetGameByIdCompleted) {",
+            "    gdjs._playgamaBridgeExtension.isGetGameByIdCompleted = false;",
+            "}"
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "parameters": [],
+      "objectGroups": []
+    },
+    {
+      "description": "Platform Get All Games.",
+      "fullName": "Platform Get All Games",
+      "functionType": "Action",
+      "group": "Platform",
+      "name": "PlatformGetAllGames",
+      "sentence": "Platform Get All Games",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "gdjs._playgamaBridgeExtension.isLastActionCompletedSuccessfully = false;",
+            "",
+            "return new Promise(resolve => {",
+            "    bridge.platform.getAllGames()",
+            "        .then(data => {",
+            "            gdjs._playgamaBridgeExtension.isLastActionCompletedSuccessfully = true;",
+            "            gdjs._playgamaBridgeExtension.allGames = data;",
+            "        })",
+            "        .catch(error => console.log(error))",
+            "        .finally(() => {",
+            "            gdjs._playgamaBridgeExtension.isGetAllGamesCompleted = true;",
+            "            resolve();",
+            "        });",
+            "});",
+            ""
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": true
+        }
+      ],
+      "parameters": [],
+      "objectGroups": []
+    },
+    {
+      "description": "Platform Get Game By Id.",
+      "fullName": "Platform Get Game By Id",
+      "functionType": "Action",
+      "group": "Platform",
+      "name": "PlatformGetGameById",
+      "sentence": "Platform Get Game By Id",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "gdjs._playgamaBridgeExtension.isLastActionCompletedSuccessfully = false;",
+            "",
+            "return new Promise(resolve => {",
+            "    bridge.platform.getGameById(gdjs._playgamaBridgeExtension.actionParametersContainer)",
+            "        .then(data => {",
+            "            gdjs._playgamaBridgeExtension.isLastActionCompletedSuccessfully = true;",
+            "            gdjs._playgamaBridgeExtension.gameById = data;",
+            "        })",
+            "        .catch(error => console.log(error))",
+            "        .finally(() => {",
+            "            gdjs._playgamaBridgeExtension.actionParametersContainer = {};",
+            "            gdjs._playgamaBridgeExtension.isGetGameByIdCompleted = true;",
+            "            resolve();",
+            "        });",
+            "});",
+            ""
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": true
+        }
+      ],
+      "parameters": [],
+      "objectGroups": []
+    },
+    {
+      "description": "Platform All Games Count.",
+      "fullName": "Platform All Games Count",
+      "functionType": "Expression",
+      "group": "Platform",
+      "name": "PlatformAllGamesCount",
+      "sentence": "",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "eventsFunctionContext.returnValue = gdjs._playgamaBridgeExtension.allGames.length;",
+            ""
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "expressionType": {
+        "type": "expression"
+      },
+      "parameters": [],
+      "objectGroups": []
+    },
+    {
+      "description": "Platform All Game Properties Count.",
+      "fullName": "Platform All Game Properties Count",
+      "functionType": "Expression",
+      "group": "Platform",
+      "name": "PlatformAllGamePropertiesCount",
+      "sentence": "",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "eventsFunctionContext.returnValue = gdjs._playgamaBridgeExtension.allGames.length > 0 ",
+            "    ? Object.keys(gdjs._playgamaBridgeExtension.allGames[0] || {}).length",
+            "    : 0"
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "expressionType": {
+        "type": "expression"
+      },
+      "parameters": [],
+      "objectGroups": []
+    },
+    {
+      "description": "Platform All Games Property Name.",
+      "fullName": "Platform All Games Property Name",
+      "functionType": "StringExpression",
+      "group": "Platform",
+      "name": "PlatformAllGamesPropertyName",
+      "sentence": "",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "const propertyIndex = eventsFunctionContext.getArgument(\"PropertyIndex\");",
+            "",
+            "eventsFunctionContext.returnValue = gdjs._playgamaBridgeExtension.allGames",
+            "    ? Object.keys(gdjs._playgamaBridgeExtension.allGames[0])[propertyIndex]",
+            "    : '';",
+            "",
+            ""
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "expressionType": {
+        "type": "string"
+      },
+      "parameters": [
+        {
+          "description": "Property Index",
+          "name": "PropertyIndex",
+          "type": "expression"
+        }
+      ],
+      "objectGroups": []
+    },
+    {
+      "description": "Platform All Games Property Value.",
+      "fullName": "Platform All Games Property Value",
+      "functionType": "StringExpression",
+      "group": "Platform",
+      "name": "PlatformAllGamesPropertyValue",
+      "sentence": "",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "const gameIndex = eventsFunctionContext.getArgument(\"GameIndex\");",
+            "const property = eventsFunctionContext.getArgument(\"Property\");",
+            "",
+            "if (gdjs._playgamaBridgeExtension.allGames.length > 0) {",
+            "    const game = gdjs._playgamaBridgeExtension.allGames[gameIndex];",
+            "",
+            "    eventsFunctionContext.returnValue = isNaN(+property) ",
+            "        ? game[property]",
+            "        : game[Object.keys(game || {})[+property]]",
+            "} else {",
+            "    eventsFunctionContext.returnValue = '';",
+            "}",
+            ""
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "expressionType": {
+        "type": "string"
+      },
+      "parameters": [
+        {
+          "description": "Game Index",
+          "name": "GameIndex",
+          "type": "expression"
+        },
+        {
+          "description": "Property",
+          "name": "Property",
+          "type": "string"
+        }
+      ],
+      "objectGroups": []
+    },
+    {
+      "description": "Platform Game By Id Property Value.",
+      "fullName": "Platform Game By Id Property Value",
+      "functionType": "Expression",
+      "group": "Platform",
+      "name": "PlatformGameByIdPropertyValue",
+      "sentence": "",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "if (!gdjs._playgamaBridgeExtension.gameById) {",
+            "    eventsFunctionContext.returnValue = '';",
+            "    return;",
+            "}",
+            "",
+            "if (typeof property === 'number') {",
+            "    let properties = Object.keys(gdjs._playgamaBridgeExtension.gameById);",
+            "    let propertyName = properties[property];",
+            "    eventsFunctionContext.returnValue = gdjs._playgamaBridgeExtension.gameById[propertyName];",
+            "    return;",
+            "}",
+            "",
+            "eventsFunctionContext.returnValue = gdjs._playgamaBridgeExtension.gameById[property];"
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": true
+        }
+      ],
+      "expressionType": {
+        "type": "expression"
       },
       "parameters": [],
       "objectGroups": []
