@@ -763,6 +763,8 @@
         {
           "type": "BuiltinCommonInstructions::JsCode",
           "inlineCode": [
+            "const property = eventsFunctionContext.getArgument(\"Property\");",
+            "",
             "if (!gdjs._playgamaBridgeExtension.gameById) {",
             "    eventsFunctionContext.returnValue = '';",
             "    return;",
@@ -779,13 +781,19 @@
           ],
           "parameterObjects": "",
           "useStrict": true,
-          "eventsSheetExpanded": true
+          "eventsSheetExpanded": false
         }
       ],
       "expressionType": {
         "type": "expression"
       },
-      "parameters": [],
+      "parameters": [
+        {
+          "description": "Property",
+          "name": "Property",
+          "type": "string"
+        }
+      ],
       "objectGroups": []
     },
     {
