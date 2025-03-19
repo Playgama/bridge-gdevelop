@@ -90,10 +90,6 @@
           "type": "BuiltinCommonInstructions::JsCode",
           "inlineCode": [
             "gdjs._playgamaBridgeExtension = {",
-            "    frameTimestamp: null,",
-            "    rewardedTimestamp: null,",
-            "    interstitialTimestamp: null,",
-            "",
             "    isLastActionCompletedSuccessfully: false,",
             "    visibilityStateChanged: false,",
             "    actionParametersContainer: {},",
@@ -117,10 +113,15 @@
             "    isStorageDataDeleteRequestCompleted: false,",
             "",
             "    // advertisement",
+            "",
             "    bannerState: null,",
+            "    prevBannerState: null,",
+            "    bannerStateStack: [],",
             "    interstitialState: null,",
+            "    prevInterstitialState: null,",
             "    interstitialStateStack: [],",
             "    rewardedState: null,",
+            "    prevRewardedState: null,",
             "    rewardedStateStack: [],",
             "    isAdBlockDetected: false,",
             "    isCheckAdBlockCompleted: false,",
@@ -233,17 +234,15 @@
             "bridge.initialize(options)",
             "    .then(() => {",
             "        bridge.advertisement.on('banner_state_changed', state => {",
-            "            gdjs._playgamaBridgeExtension.isBannerStateChanged = true;",
+            "            gdjs._playgamaBridgeExtension.bannerStateStack.push(state);",
             "        });",
             "",
             "        bridge.advertisement.on('interstitial_state_changed', state => {",
-            "            gdjs._playgamaBridgeExtension.isInterstitialStateChanged = true;",
             "            gdjs._playgamaBridgeExtension.interstitialStateStack.push(state);",
             "",
             "        });",
             "",
             "        bridge.advertisement.on('rewarded_state_changed', state => {",
-            "            gdjs._playgamaBridgeExtension.isRewardedStateChanged = true;",
             "            gdjs._playgamaBridgeExtension.rewardedStateStack.push(state);",
             "        });",
             "",
@@ -251,13 +250,41 @@
             "            gdjs._playgamaBridgeExtension.visibilityStateChanged = true;",
             "        });",
             "",
-            "        function updateTimestamp(timestamp) {",
-            "            gdjs._playgamaBridgeExtension.frameTimestamp = timestamp;",
+            "        function updateAdState() {",
+            "            if (gdjs._playgamaBridgeExtension.bannerStateStack.length > 0) {",
+            "                gdjs._playgamaBridgeExtension.bannerState = gdjs._playgamaBridgeExtension.bannerStateStack.shift();",
+            "            }",
             "",
-            "            requestAnimationFrame(updateTimestamp);",
+            "            gdjs._playgamaBridgeExtension.isBannerStateChanged = gdjs._playgamaBridgeExtension.bannerState !== gdjs._playgamaBridgeExtension.prevBannerState;",
+            "",
+            "            if (gdjs._playgamaBridgeExtension.isBannerStateChanged) {",
+            "                gdjs._playgamaBridgeExtension.prevBannerState = gdjs._playgamaBridgeExtension.bannerState;",
+            "            }",
+            "",
+            "            if (gdjs._playgamaBridgeExtension.interstitialStateStack.length > 0) {",
+            "                gdjs._playgamaBridgeExtension.interstitialState = gdjs._playgamaBridgeExtension.interstitialStateStack.shift();",
+            "            }",
+            "",
+            "            gdjs._playgamaBridgeExtension.isInterstitialStateChanged = gdjs._playgamaBridgeExtension.interstitialState !== gdjs._playgamaBridgeExtension.prevInterstitialState;",
+            "",
+            "            if (gdjs._playgamaBridgeExtension.isInterstitialStateChanged) {",
+            "                gdjs._playgamaBridgeExtension.prevInterstitialState = gdjs._playgamaBridgeExtension.interstitialState;",
+            "            }",
+            "",
+            "            if (gdjs._playgamaBridgeExtension.rewardedStateStack.length > 0) {",
+            "                gdjs._playgamaBridgeExtension.rewardedState = gdjs._playgamaBridgeExtension.rewardedStateStack.shift();",
+            "            }",
+            "",
+            "            gdjs._playgamaBridgeExtension.isRewardedStateChanged = gdjs._playgamaBridgeExtension.rewardedState !== gdjs._playgamaBridgeExtension.prevRewardedState;",
+            "",
+            "            if (gdjs._playgamaBridgeExtension.isRewardedStateChanged) {",
+            "                gdjs._playgamaBridgeExtension.prevRewardedState = gdjs._playgamaBridgeExtension.rewardedState;",
+            "            }",
+            "",
+            "            requestAnimationFrame(updateAdState);",
             "        }",
             "",
-            "        requestAnimationFrame(updateTimestamp);",
+            "        requestAnimationFrame(updateAdState);",
             "    });"
           ],
           "parameterObjects": "",
@@ -1786,7 +1813,7 @@
       "events": [
         {
           "type": "BuiltinCommonInstructions::JsCode",
-          "inlineCode": "eventsFunctionContext.returnValue = bridge.advertisement.bannerState;",
+          "inlineCode": "eventsFunctionContext.returnValue = gdjs._playgamaBridgeExtension.interstitialState;",
           "parameterObjects": "",
           "useStrict": true,
           "eventsSheetExpanded": false
@@ -1808,19 +1835,7 @@
       "events": [
         {
           "type": "BuiltinCommonInstructions::JsCode",
-          "inlineCode": [
-            "if (gdjs._playgamaBridgeExtension.interstitialTimestamp !== gdjs._playgamaBridgeExtension.frameTimestamp) {",
-            "    if (gdjs._playgamaBridgeExtension.interstitialStateStack.length > 0) {",
-            "        gdjs._playgamaBridgeExtension.interstitialState = gdjs._playgamaBridgeExtension.interstitialStateStack.shift();",
-            "        gdjs._playgamaBridgeExtension.isInterstitialStateChanged = true;",
-            "    }",
-            "",
-            "    gdjs._playgamaBridgeExtension.interstitialTimestamp = gdjs._playgamaBridgeExtension.frameTimestamp;",
-            "}",
-            "",
-            "",
-            "eventsFunctionContext.returnValue = gdjs._playgamaBridgeExtension.interstitialState;"
-          ],
+          "inlineCode": "eventsFunctionContext.returnValue = gdjs._playgamaBridgeExtension.interstitialState;",
           "parameterObjects": "",
           "useStrict": true,
           "eventsSheetExpanded": false
@@ -1842,19 +1857,7 @@
       "events": [
         {
           "type": "BuiltinCommonInstructions::JsCode",
-          "inlineCode": [
-            "if (gdjs._playgamaBridgeExtension.rewardedTimestamp !== gdjs._playgamaBridgeExtension.frameTimestamp) {",
-            "    if (gdjs._playgamaBridgeExtension.rewardedStateStack.length > 0) {",
-            "        gdjs._playgamaBridgeExtension.rewardedState = gdjs._playgamaBridgeExtension.rewardedStateStack.shift();",
-            "        gdjs._playgamaBridgeExtension.isRewardedStateChanged = true;",
-            "    }",
-            "",
-            "    gdjs._playgamaBridgeExtension.rewardedTimestamp = gdjs._playgamaBridgeExtension.frameTimestamp;",
-            "}",
-            "",
-            "",
-            "eventsFunctionContext.returnValue = gdjs._playgamaBridgeExtension.rewardedState;"
-          ],
+          "inlineCode": "eventsFunctionContext.returnValue = gdjs._playgamaBridgeExtension.rewardedState;",
           "parameterObjects": "",
           "useStrict": true,
           "eventsSheetExpanded": false
@@ -1898,14 +1901,7 @@
       "events": [
         {
           "type": "BuiltinCommonInstructions::JsCode",
-          "inlineCode": [
-            "eventsFunctionContext.returnValue = gdjs._playgamaBridgeExtension.isBannerStateChanged;",
-            "",
-            "if (gdjs._playgamaBridgeExtension.isBannerStateChanged) {",
-            "    gdjs._playgamaBridgeExtension.isBannerStateChanged = false;",
-            "}",
-            ""
-          ],
+          "inlineCode": "eventsFunctionContext.returnValue = gdjs._playgamaBridgeExtension.isBannerStateChanged;",
           "parameterObjects": "",
           "useStrict": true,
           "eventsSheetExpanded": false
@@ -1937,12 +1933,9 @@
             },
             {
               "type": {
-                "value": "PlaygamaBridge::OnBannerStateChanged"
+                "value": "BuiltinCommonInstructions::Once"
               },
-              "parameters": [
-                "",
-                ""
-              ]
+              "parameters": []
             }
           ],
           "actions": [
@@ -1983,12 +1976,9 @@
             },
             {
               "type": {
-                "value": "PlaygamaBridge::OnBannerStateChanged"
+                "value": "BuiltinCommonInstructions::Once"
               },
-              "parameters": [
-                "",
-                ""
-              ]
+              "parameters": []
             }
           ],
           "actions": [
@@ -2029,12 +2019,9 @@
             },
             {
               "type": {
-                "value": "PlaygamaBridge::OnBannerStateChanged"
+                "value": "BuiltinCommonInstructions::Once"
               },
-              "parameters": [
-                "",
-                ""
-              ]
+              "parameters": []
             }
           ],
           "actions": [
@@ -2075,12 +2062,9 @@
             },
             {
               "type": {
-                "value": "PlaygamaBridge::OnBannerStateChanged"
+                "value": "BuiltinCommonInstructions::Once"
               },
-              "parameters": [
-                "",
-                ""
-              ]
+              "parameters": []
             }
           ],
           "actions": [
@@ -2108,14 +2092,7 @@
       "events": [
         {
           "type": "BuiltinCommonInstructions::JsCode",
-          "inlineCode": [
-            "eventsFunctionContext.returnValue = gdjs._playgamaBridgeExtension.isInterstitialStateChanged;",
-            "",
-            "if (gdjs._playgamaBridgeExtension.isInterstitialStateChanged) {",
-            "    gdjs._playgamaBridgeExtension.isInterstitialStateChanged = false;",
-            "}",
-            ""
-          ],
+          "inlineCode": "eventsFunctionContext.returnValue = gdjs._playgamaBridgeExtension.isInterstitialStateChanged;",
           "parameterObjects": "",
           "useStrict": true,
           "eventsSheetExpanded": false
@@ -2147,12 +2124,9 @@
             },
             {
               "type": {
-                "value": "PlaygamaBridge::OnInterstitialStateChanged"
+                "value": "BuiltinCommonInstructions::Once"
               },
-              "parameters": [
-                "",
-                ""
-              ]
+              "parameters": []
             }
           ],
           "actions": [
@@ -2318,14 +2292,7 @@
       "events": [
         {
           "type": "BuiltinCommonInstructions::JsCode",
-          "inlineCode": [
-            "eventsFunctionContext.returnValue = gdjs._playgamaBridgeExtension.isRewardedStateChanged;",
-            "",
-            "if (gdjs._playgamaBridgeExtension.isRewardedStateChanged) {",
-            "    gdjs._playgamaBridgeExtension.isRewardedStateChanged = false;",
-            "}",
-            ""
-          ],
+          "inlineCode": "eventsFunctionContext.returnValue = gdjs._playgamaBridgeExtension.isRewardedStateChanged;",
           "parameterObjects": "",
           "useStrict": true,
           "eventsSheetExpanded": false
@@ -2357,12 +2324,9 @@
             },
             {
               "type": {
-                "value": "PlaygamaBridge::OnRewardedStateChanged"
+                "value": "BuiltinCommonInstructions::Once"
               },
-              "parameters": [
-                "",
-                ""
-              ]
+              "parameters": []
             }
           ],
           "actions": [
@@ -2403,12 +2367,9 @@
             },
             {
               "type": {
-                "value": "PlaygamaBridge::OnRewardedStateChanged"
+                "value": "BuiltinCommonInstructions::Once"
               },
-              "parameters": [
-                "",
-                ""
-              ]
+              "parameters": []
             }
           ],
           "actions": [
@@ -2449,12 +2410,9 @@
             },
             {
               "type": {
-                "value": "PlaygamaBridge::OnRewardedStateChanged"
+                "value": "BuiltinCommonInstructions::Once"
               },
-              "parameters": [
-                "",
-                ""
-              ]
+              "parameters": []
             }
           ],
           "actions": [
@@ -2495,12 +2453,9 @@
             },
             {
               "type": {
-                "value": "PlaygamaBridge::OnRewardedStateChanged"
+                "value": "BuiltinCommonInstructions::Once"
               },
-              "parameters": [
-                "",
-                ""
-              ]
+              "parameters": []
             }
           ],
           "actions": [
@@ -2541,12 +2496,9 @@
             },
             {
               "type": {
-                "value": "PlaygamaBridge::OnRewardedStateChanged"
+                "value": "BuiltinCommonInstructions::Once"
               },
-              "parameters": [
-                "",
-                ""
-              ]
+              "parameters": []
             }
           ],
           "actions": [
