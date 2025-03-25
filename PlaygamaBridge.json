@@ -99,6 +99,7 @@
             "    // platform",
             "    serverTime: 0,",
             "    isGetServerTimeCompleted: false,",
+            "    nextIsGetServerTimeCompleted: false,",
             "    allGames: [],",
             "    gameById: null,",
             "    isGetAllGamesCompleted: false,",
@@ -310,6 +311,14 @@
             "            }",
             "",
             "            // platform",
+            "            if (gdjs._playgamaBridgeExtension.isGetServerTimeCompleted !== gdjs._playgamaBridgeExtension.nextIsGetServerTimeCompleted) {",
+            "                gdjs._playgamaBridgeExtension.isGetServerTimeCompleted = gdjs._playgamaBridgeExtension.nextIsGetServerTimeCompleted",
+            "            }",
+            "",
+            "            if (gdjs._playgamaBridgeExtension.nextIsGetServerTimeCompleted) {",
+            "                gdjs._playgamaBridgeExtension.nextIsGetServerTimeCompleted = false;",
+            "            }",
+            "",
             "            if (gdjs._playgamaBridgeExtension.isGetAllGamesCompleted !== gdjs._playgamaBridgeExtension.nextIsGetAllGamesCompleted) {",
             "                gdjs._playgamaBridgeExtension.isGetAllGamesCompleted = gdjs._playgamaBridgeExtension.nextIsGetAllGamesCompleted",
             "            }",
@@ -2621,7 +2630,7 @@
             "        })",
             "        .catch(error => console.log(error))",
             "        .finally(() => {",
-            "            gdjs._playgamaBridgeExtension.isGetServerTimeCompleted = true;",
+            "            gdjs._playgamaBridgeExtension.nextIsGetServerTimeCompleted = true;",
             "            resolve();",
             "        });",
             "});",
@@ -2670,13 +2679,7 @@
       "events": [
         {
           "type": "BuiltinCommonInstructions::JsCode",
-          "inlineCode": [
-            "eventsFunctionContext.returnValue = gdjs._playgamaBridgeExtension.isGetServerTimeCompleted;",
-            "",
-            "if (gdjs._playgamaBridgeExtension.isGetServerTimeCompleted) {",
-            "    gdjs._playgamaBridgeExtension.isGetServerTimeCompleted = false;",
-            "}"
-          ],
+          "inlineCode": "eventsFunctionContext.returnValue = gdjs._playgamaBridgeExtension.isGetServerTimeCompleted;",
           "parameterObjects": "",
           "useStrict": true,
           "eventsSheetExpanded": false
