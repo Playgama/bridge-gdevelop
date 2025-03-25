@@ -116,6 +116,9 @@
             "    isStorageDataGetRequestCompleted: false,",
             "    isStorageDataSetRequestCompleted: false,",
             "    isStorageDataDeleteRequestCompleted: false,",
+            "    nextIsStorageDataGetRequestCompleted: false,",
+            "    nextIsStorageDataSetRequestCompleted: false,",
+            "    nextIsStorageDataDeleteRequestCompleted: false,",
             "",
             "    // advertisement",
             "",
@@ -314,6 +317,33 @@
             "            if (gdjs._playgamaBridgeExtension.nextIsGetGameByIdCompleted) {",
             "                gdjs._playgamaBridgeExtension.nextIsGetGameByIdCompleted = false;",
             "            }",
+            "",
+            "            // storage",
+            "",
+            "            if (gdjs._playgamaBridgeExtension.isStorageDataGetRequestCompleted !== gdjs._playgamaBridgeExtension.nextIsStorageDataGetRequestCompleted) {",
+            "                gdjs._playgamaBridgeExtension.isStorageDataGetRequestCompleted = gdjs._playgamaBridgeExtension.nextIsStorageDataGetRequestCompleted",
+            "            }",
+            "",
+            "            if (gdjs._playgamaBridgeExtension.nextIsStorageDataGetRequestCompleted) {",
+            "                gdjs._playgamaBridgeExtension.nextIsStorageDataGetRequestCompleted = false;",
+            "            }",
+            "",
+            "            if (gdjs._playgamaBridgeExtension.isStorageDataSetRequestCompleted !== gdjs._playgamaBridgeExtension.nextIsStorageDataSetRequestCompleted) {",
+            "                gdjs._playgamaBridgeExtension.isStorageDataSetRequestCompleted = gdjs._playgamaBridgeExtension.nextIsStorageDataSetRequestCompleted",
+            "            }",
+            "",
+            "            if (gdjs._playgamaBridgeExtension.nextIsStorageDataSetRequestCompleted) {",
+            "                gdjs._playgamaBridgeExtension.nextIsStorageDataSetRequestCompleted = false;",
+            "            }",
+            "",
+            "            if (gdjs._playgamaBridgeExtension.isStorageDataDeleteRequestCompleted !== gdjs._playgamaBridgeExtension.nextIsStorageDataDeleteRequestCompleted) {",
+            "                gdjs._playgamaBridgeExtension.isStorageDataDeleteRequestCompleted = gdjs._playgamaBridgeExtension.nextIsStorageDataDeleteRequestCompleted",
+            "            }",
+            "",
+            "            if (gdjs._playgamaBridgeExtension.nextIsStorageDataDeleteRequestCompleted) {",
+            "                gdjs._playgamaBridgeExtension.nextIsStorageDataDeleteRequestCompleted = false;",
+            "            }",
+            "",
             "",
             "            requestAnimationFrame(updateAdState);",
             "        }",
@@ -1299,6 +1329,25 @@
       "objectGroups": []
     },
     {
+      "description": "Is Last Action Completed Successfully.",
+      "fullName": "Is Last Action Completed Successfully",
+      "functionType": "Condition",
+      "group": "Common",
+      "name": "IsLastActionCompletedSuccessfully",
+      "sentence": "Is Last Action Completed Successfully",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": "eventsFunctionContext.returnValue = gdjs._playgamaBridgeExtension.isLastActionCompletedSuccessfully;",
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "parameters": [],
+      "objectGroups": []
+    },
+    {
       "description": "Send Storage Data Get Request.",
       "fullName": "Send Storage Data Get Request",
       "functionType": "Action",
@@ -1328,7 +1377,7 @@
             "        .catch(error => console.log(error))",
             "        .finally(() => {",
             "            gdjs._playgamaBridgeExtension.storageDataGetRequestKeys = []",
-            "            gdjs._playgamaBridgeExtension.isStorageDataGetRequestCompleted = true;",
+            "            gdjs._playgamaBridgeExtension.nextIsStorageDataGetRequestCompleted = true;",
             "            resolve()",
             "        });",
             "})",
@@ -1347,25 +1396,6 @@
           "type": "stringWithSelector"
         }
       ],
-      "objectGroups": []
-    },
-    {
-      "description": "Is Last Action Completed Successfully.",
-      "fullName": "Is Last Action Completed Successfully",
-      "functionType": "Condition",
-      "group": "Common",
-      "name": "IsLastActionCompletedSuccessfully",
-      "sentence": "Is Last Action Completed Successfully",
-      "events": [
-        {
-          "type": "BuiltinCommonInstructions::JsCode",
-          "inlineCode": "eventsFunctionContext.returnValue = gdjs._playgamaBridgeExtension.isLastActionCompletedSuccessfully;",
-          "parameterObjects": "",
-          "useStrict": true,
-          "eventsSheetExpanded": false
-        }
-      ],
-      "parameters": [],
       "objectGroups": []
     },
     {
@@ -1399,7 +1429,7 @@
             "            gdjs._playgamaBridgeExtension.storageDataSetRequestKeys = []",
             "            gdjs._playgamaBridgeExtension.storageDataSetRequestValues = []",
             "",
-            "            gdjs._playgamaBridgeExtension.isStorageDataSetRequestCompleted = true;",
+            "            gdjs._playgamaBridgeExtension.nextIsStorageDataSetRequestCompleted = true;",
             "            resolve()",
             "        })",
             "})"
@@ -1449,7 +1479,7 @@
             "        .catch(error => console.log(error))",
             "        .finally(() => {",
             "            gdjs._playgamaBridgeExtension.storageDataDeleteRequestKeys = [];",
-            "            gdjs._playgamaBridgeExtension.isStorageDataDeleteRequestCompleted = true;",
+            "            gdjs._playgamaBridgeExtension.nextIsStorageDataDeleteRequestCompleted = true;",
             "            resolve()",
             "        })",
             "})",
@@ -1480,13 +1510,7 @@
       "events": [
         {
           "type": "BuiltinCommonInstructions::JsCode",
-          "inlineCode": [
-            "eventsFunctionContext.returnValue = gdjs._playgamaBridgeExtension.isStorageDataGetRequestCompleted;",
-            "",
-            "if (gdjs._playgamaBridgeExtension.isStorageDataGetRequestCompleted) {",
-            "    gdjs._playgamaBridgeExtension.isStorageDataGetRequestCompleted = false;",
-            "}"
-          ],
+          "inlineCode": "eventsFunctionContext.returnValue = gdjs._playgamaBridgeExtension.isStorageDataGetRequestCompleted;",
           "parameterObjects": "",
           "useStrict": true,
           "eventsSheetExpanded": false
@@ -1505,13 +1529,7 @@
       "events": [
         {
           "type": "BuiltinCommonInstructions::JsCode",
-          "inlineCode": [
-            "eventsFunctionContext.returnValue = gdjs._playgamaBridgeExtension.isStorageDataSetRequestCompleted;",
-            "",
-            "if (gdjs._playgamaBridgeExtension.isStorageDataSetRequestCompleted) {",
-            "    gdjs._playgamaBridgeExtension.isStorageDataSetRequestCompleted = false;",
-            "}"
-          ],
+          "inlineCode": "eventsFunctionContext.returnValue = gdjs._playgamaBridgeExtension.isStorageDataSetRequestCompleted;",
           "parameterObjects": "",
           "useStrict": true,
           "eventsSheetExpanded": false
@@ -1530,13 +1548,7 @@
       "events": [
         {
           "type": "BuiltinCommonInstructions::JsCode",
-          "inlineCode": [
-            "eventsFunctionContext.returnValue = gdjs._playgamaBridgeExtension.isStorageDataDeleteRequestCompleted;",
-            "",
-            "if (gdjs._playgamaBridgeExtension.isStorageDataDeleteRequestCompleted) {",
-            "    gdjs._playgamaBridgeExtension.isStorageDataDeleteRequestCompleted = false;",
-            "}"
-          ],
+          "inlineCode": "eventsFunctionContext.returnValue = gdjs._playgamaBridgeExtension.isStorageDataDeleteRequestCompleted;",
           "parameterObjects": "",
           "useStrict": true,
           "eventsSheetExpanded": false
