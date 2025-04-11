@@ -4261,28 +4261,6 @@
       "objectGroups": []
     },
     {
-      "description": "Is Payments Available.",
-      "fullName": "Is Payments Available",
-      "functionType": "Condition",
-      "group": "Payments",
-      "name": "IsPaymentsAvailable",
-      "sentence": "Is Payments Available",
-      "events": [
-        {
-          "type": "BuiltinCommonInstructions::JsCode",
-          "inlineCode": [
-            "eventsFunctionContext.returnValue = bridge.payments.isAvailable;",
-            ""
-          ],
-          "parameterObjects": "",
-          "useStrict": true,
-          "eventsSheetExpanded": false
-        }
-      ],
-      "parameters": [],
-      "objectGroups": []
-    },
-    {
       "description": "Is Payments Get Catalog Supported.",
       "fullName": "Is Payments Get Catalog Supported",
       "functionType": "Condition",
