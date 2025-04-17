@@ -81,6 +81,7 @@
             "                \"amount\": 1",
             "            },",
             "            \"qa_tool\": {",
+            "                \"id\": \"test_product\",",
             "                \"amount\": 1",
             "            },",
             "            \"playdeck\": {",
@@ -89,11 +90,12 @@
             "            }",
             "        }",
             "    ]",
-            "}"
+            "}",
+            ""
           ],
           "parameterObjects": "",
           "useStrict": true,
-          "eventsSheetExpanded": false
+          "eventsSheetExpanded": true
         },
         {
           "type": "BuiltinCommonInstructions::JsCode",
