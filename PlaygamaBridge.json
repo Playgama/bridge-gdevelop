@@ -1349,11 +1349,11 @@
       "objectGroups": []
     },
     {
-      "description": "Storage Data Key.",
-      "fullName": "Storage Data Key",
+      "description": "Storage Data.",
+      "fullName": "Storage Data",
       "functionType": "StringExpression",
       "group": "Storage",
-      "name": "StorageDataKey",
+      "name": "StorageData",
       "sentence": "",
       "events": [
         {
@@ -1381,11 +1381,11 @@
       "objectGroups": []
     },
     {
-      "description": "Storage Data Key As JSON.",
-      "fullName": "Storage Data Key As JSON",
+      "description": "Storage Data As JSON.",
+      "fullName": "Storage Data As JSON",
       "functionType": "StringExpression",
       "group": "Storage",
-      "name": "StorageDataKeyAsJSON",
+      "name": "StorageDataAsJSON",
       "sentence": "",
       "events": [
         {
@@ -4119,7 +4119,7 @@
       "functionType": "Action",
       "group": "Payments",
       "name": "PaymentsPurchase",
-      "sentence": "Payments Purchase. Id: _PARAM1_.",
+      "sentence": "Payments Purchase - Id: _PARAM1_",
       "events": [
         {
           "type": "BuiltinCommonInstructions::JsCode",
@@ -4148,7 +4148,7 @@
       ],
       "parameters": [
         {
-          "description": "",
+          "description": "Id",
           "name": "Id",
           "type": "string"
         }
@@ -4231,7 +4231,7 @@
       "functionType": "Action",
       "group": "Payments",
       "name": "PaymentsConsumePurchase",
-      "sentence": "Payments Consume Purchase. Id: _PARAM1_.",
+      "sentence": "Payments Consume Purchase - Id: _PARAM1_",
       "events": [
         {
           "type": "BuiltinCommonInstructions::JsCode",
@@ -4260,7 +4260,7 @@
       ],
       "parameters": [
         {
-          "description": "",
+          "description": "Id",
           "name": "Id",
           "type": "string"
         }
