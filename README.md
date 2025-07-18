@@ -29,6 +29,7 @@ One SDK for cross-platform publishing HTML5 games.
 + [Defold](https://github.com/playgama/bridge-defold)
 + [GDevelop](https://github.com/playgama/bridge-gdevelop)
 + [Cocos Creator](https://github.com/playgama/bridge-cocos-creator)
++ [Scratch](https://github.com/playgama/bridge-scratch)
 
 ## Useful links
 + [Documentation](https://wiki.playgama.com/?utm_source=github&utm_medium=bridge)
