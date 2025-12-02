@@ -4449,7 +4449,7 @@
       "functionType": "Action",
       "group": "Payments",
       "name": "PaymentsPurchase",
-      "sentence": "Payments Purchase - Id: _PARAM1_, Options: _PARAM2_",
+      "sentence": "Payments Purchase - Id: _PARAM1_",
       "events": [
         {
           "type": "BuiltinCommonInstructions::JsCode",
@@ -4458,14 +4458,7 @@
             "",
             "return new Promise(resolve => {",
             "    const id = eventsFunctionContext.getArgument(\"Id\");",
-            "    const optionsString = eventsFunctionContext.getArgument(\"Options\");",
-            "    let options;",
-            "    try {",
-            "        options = optionsString ? JSON.parse(optionsString) : undefined;",
-            "    } catch (e) {",
-            "        console.error('Invalid options JSON:', e);",
-            "        options = undefined;",
-            "    }",
+            "    const options = gdjs._playgamaBridgeExtension.actionParametersContainer;",
             "    bridge.payments.purchase(id, options)",
             "        .then(data => {",
             "            gdjs._playgamaBridgeExtension.isLastActionCompletedSuccessfully = true;",
@@ -4476,6 +4469,7 @@
             "        })",
             "        .catch(error => console.log(error))",
             "        .finally(() => {",
+            "            gdjs._playgamaBridgeExtension.actionParametersContainer = {};",
             "            gdjs._playgamaBridgeExtension.nextIsPaymentsPurchaseCompleted = true;",
             "            resolve();",
             "        });",
@@ -4492,13 +4486,6 @@
           "description": "Id",
           "name": "Id",
           "type": "string"
-        },
-        {
-          "description": "Options (JSON string)",
-          "name": "Options",
-          "type": "string",
-          "optional": true,
-          "defaultValue": ""
         }
       ],
       "objectGroups": []
