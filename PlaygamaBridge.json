@@ -2236,7 +2236,7 @@
       "events": [
         {
           "type": "BuiltinCommonInstructions::JsCode",
-          "inlineCode": "eventsFunctionContext.returnValue = gdjs._playgamaBridgeExtension.interstitialState;",
+          "inlineCode": "eventsFunctionContext.returnValue = gdjs._playgamaBridgeExtension.bannerState;",
           "parameterObjects": "",
           "useStrict": true,
           "eventsSheetExpanded": false
