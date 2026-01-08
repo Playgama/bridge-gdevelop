@@ -64,6 +64,7 @@
             "",
             "    // game",
             "    isVisibilityStateChanged: false,",
+            "    visibilityState: \"visible\",",
             "    prevVisibilityState: null,",
             "    visibilityStateStack: [],",
             "",
@@ -1480,7 +1481,7 @@
         {
           "type": "BuiltinCommonInstructions::JsCode",
           "inlineCode": [
-            "eventsFunctionContext.returnValue = bridge.game.visibilityState;",
+            "eventsFunctionContext.returnValue = gdjs._playgamaBridgeExtension.visibilityState;",
             ""
           ],
           "parameterObjects": "",
