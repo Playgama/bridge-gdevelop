@@ -64,6 +64,7 @@
             "",
             "    // game",
             "    isVisibilityStateChanged: false,",
+            "    visibilityState: null,",
             "    prevVisibilityState: null,",
             "    visibilityStateStack: [],",
             "",
@@ -766,7 +767,11 @@
       "events": [
         {
           "type": "BuiltinCommonInstructions::JsCode",
-          "inlineCode": "eventsFunctionContext.returnValue = bridge.platform.isAudioEnabled;",
+          "inlineCode": [
+            "eventsFunctionContext.returnValue = gdjs._playgamaBridgeExtension.platformAudioState !== null",
+            "    ? gdjs._playgamaBridgeExtension.platformAudioState",
+            "    : bridge.platform.isAudioEnabled;"
+          ],
           "parameterObjects": "",
           "useStrict": true,
           "eventsSheetExpanded": false
@@ -785,7 +790,11 @@
       "events": [
         {
           "type": "BuiltinCommonInstructions::JsCode",
-          "inlineCode": "eventsFunctionContext.returnValue = bridge.platform.isPaused;",
+          "inlineCode": [
+            "eventsFunctionContext.returnValue = gdjs._playgamaBridgeExtension.platformPauseState !== null",
+            "    ? gdjs._playgamaBridgeExtension.platformPauseState",
+            "    : bridge.platform.isPaused;"
+          ],
           "parameterObjects": "",
           "useStrict": true,
           "eventsSheetExpanded": false
@@ -1480,8 +1489,9 @@
         {
           "type": "BuiltinCommonInstructions::JsCode",
           "inlineCode": [
-            "eventsFunctionContext.returnValue = bridge.game.visibilityState;",
-            ""
+            "eventsFunctionContext.returnValue = gdjs._playgamaBridgeExtension.visibilityState !== null",
+            "    ? gdjs._playgamaBridgeExtension.visibilityState",
+            "    : bridge.game.visibilityState;"
           ],
           "parameterObjects": "",
           "useStrict": true,
