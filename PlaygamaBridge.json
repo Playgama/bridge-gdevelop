@@ -3038,20 +3038,17 @@
       "functionType": "Action",
       "group": "Platform",
       "name": "SendMessage",
-      "sentence": "Send Message _PARAM1_ with options _PARAM2_",
+      "sentence": "Send Message _PARAM1_",
       "events": [
         {
           "type": "BuiltinCommonInstructions::JsCode",
           "inlineCode": [
             "const message = eventsFunctionContext.getArgument(\"Message\")",
-            "const optionsStr = eventsFunctionContext.getArgument(\"Options\")",
-            "",
-            "let options = {}",
-            "if (optionsStr !== \"\") {",
-            "    try { options = JSON.parse(optionsStr) } catch(e) {}",
-            "}",
+            "const options = gdjs._playgamaBridgeExtension.actionParametersContainer",
             "",
             "bridge.platform.sendMessage(bridge.PLATFORM_MESSAGE[message], options)",
+            "",
+            "gdjs._playgamaBridgeExtension.actionParametersContainer = {}",
             ""
           ],
           "parameterObjects": "",
@@ -3065,12 +3062,6 @@
           "name": "Message",
           "supplementaryInformation": "[\"GAME_READY\",\"LEVEL_STARTED\",\"LEVEL_COMPLETED\",\"LEVEL_FAILED\",\"LEVEL_PAUSED\",\"LEVEL_RESUMED\",\"IN_GAME_LOADING_STARTED\",\"IN_GAME_LOADING_STOPPED\",\"GAMEPLAY_STARTED\",\"GAMEPLAY_STOPPED\",\"PLAYER_GOT_ACHIEVEMENT\"]",
           "type": "stringWithSelector"
-        },
-        {
-          "description": "Options (optional JSON, e.g. {\"world\": \"1\", \"level\": \"5\"})",
-          "name": "Options",
-          "type": "string",
-          "defaultValue": "\"\""
         }
       ],
       "objectGroups": []
