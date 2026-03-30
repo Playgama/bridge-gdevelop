@@ -3067,6 +3067,38 @@
       "objectGroups": []
     },
     {
+      "description": "Send Custom Message.",
+      "fullName": "Send Custom Message",
+      "functionType": "Action",
+      "group": "Platform",
+      "name": "SendCustomMessage",
+      "sentence": "Send Custom Message _PARAM1_",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "const id = eventsFunctionContext.getArgument(\"Id\")",
+            "const options = gdjs._playgamaBridgeExtension.actionParametersContainer",
+            "",
+            "bridge.platform.sendCustomMessage(id, options)",
+            "",
+            "gdjs._playgamaBridgeExtension.actionParametersContainer = {}"
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "parameters": [
+        {
+          "description": "Id",
+          "name": "Id",
+          "type": "string"
+        }
+      ],
+      "objectGroups": []
+    },
+    {
       "description": "Get Server Time.",
       "fullName": "Get Server Time",
       "functionType": "Action",
