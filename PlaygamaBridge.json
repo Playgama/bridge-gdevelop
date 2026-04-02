@@ -110,6 +110,10 @@
             "    rewardedState: null,",
             "    prevRewardedState: null,",
             "    rewardedStateStack: [],",
+            "    advancedBannersState: null,",
+            "    prevAdvancedBannersState: null,",
+            "    advancedBannersStateStack: [],",
+            "    isAdvancedBannersStateChanged: false,",
             "    isAdBlockDetected: false,",
             "    isBannerStateChanged: false,",
             "    isInterstitialStateChanged: false,",
@@ -225,6 +229,10 @@
             "                gdjs._playgamaBridgeExtension.rewardedStateStack.push(state);",
             "            });",
             "",
+            "            bridge.advertisement.on('advanced_banners_state_changed', state => {",
+            "                gdjs._playgamaBridgeExtension.advancedBannersStateStack.push(state);",
+            "            });",
+            "",
             "            bridge.game.on('visibility_state_changed', state => {",
             "                gdjs._playgamaBridgeExtension.visibilityStateStack.push(state)",
             "            });",
@@ -278,6 +286,16 @@
             "",
             "                if (gdjs._playgamaBridgeExtension.isRewardedStateChanged) {",
             "                    gdjs._playgamaBridgeExtension.prevRewardedState = gdjs._playgamaBridgeExtension.rewardedState;",
+            "                }",
+            "",
+            "                if (gdjs._playgamaBridgeExtension.advancedBannersStateStack.length > 0) {",
+            "                    gdjs._playgamaBridgeExtension.advancedBannersState = gdjs._playgamaBridgeExtension.advancedBannersStateStack.shift();",
+            "                }",
+            "",
+            "                gdjs._playgamaBridgeExtension.isAdvancedBannersStateChanged = gdjs._playgamaBridgeExtension.advancedBannersState !== gdjs._playgamaBridgeExtension.prevAdvancedBannersState;",
+            "",
+            "                if (gdjs._playgamaBridgeExtension.isAdvancedBannersStateChanged) {",
+            "                    gdjs._playgamaBridgeExtension.prevAdvancedBannersState = gdjs._playgamaBridgeExtension.advancedBannersState;",
             "                }",
             "",
             "                if (gdjs._playgamaBridgeExtension.isCheckAdBlockCompleted !== gdjs._playgamaBridgeExtension.nextIsCheckAdBlockCompleted) {",
@@ -2123,6 +2141,55 @@
       "objectGroups": []
     },
     {
+      "description": "Show Advanced Banners.",
+      "fullName": "Show Advanced Banners",
+      "functionType": "Action",
+      "group": "Advertisement",
+      "name": "ShowAdvancedBanners",
+      "sentence": "Show Advanced Banners with placement _PARAM1_",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "const placement = eventsFunctionContext.getArgument(\"Placement\");",
+            "bridge.advertisement.showAdvancedBanners(placement);"
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "parameters": [
+        {
+          "description": "Placement (optional)",
+          "name": "Placement",
+          "type": "string"
+        }
+      ],
+      "objectGroups": []
+    },
+    {
+      "description": "Hide Advanced Banners.",
+      "fullName": "Hide Advanced Banners",
+      "functionType": "Action",
+      "group": "Advertisement",
+      "name": "HideAdvancedBanners",
+      "sentence": "Hide Advanced Banners",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "bridge.advertisement.hideAdvancedBanners();"
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "parameters": [],
+      "objectGroups": []
+    },
+    {
       "description": "Show Interstitial.",
       "fullName": "Show Interstitial",
       "functionType": "Action",
@@ -2323,6 +2390,28 @@
       "objectGroups": []
     },
     {
+      "description": "Advanced Banners State.",
+      "fullName": "Advanced Banners State",
+      "functionType": "StringExpression",
+      "group": "Advertisement",
+      "name": "AdvancedBannersState",
+      "sentence": "",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": "eventsFunctionContext.returnValue = gdjs._playgamaBridgeExtension.advancedBannersState;",
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "expressionType": {
+        "type": "string"
+      },
+      "parameters": [],
+      "objectGroups": []
+    },
+    {
       "description": "Is Banner Supported.",
       "fullName": "Is Banner Supported",
       "functionType": "Condition",
@@ -2378,6 +2467,28 @@
           "type": "BuiltinCommonInstructions::JsCode",
           "inlineCode": [
             "eventsFunctionContext.returnValue = bridge.advertisement.isRewardedSupported;",
+            ""
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "parameters": [],
+      "objectGroups": []
+    },
+    {
+      "description": "Is Advanced Banners Supported.",
+      "fullName": "Is Advanced Banners Supported",
+      "functionType": "Condition",
+      "group": "Advertisement",
+      "name": "IsAdvancedBannersSupported",
+      "sentence": "Is Advanced Banners Supported",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "eventsFunctionContext.returnValue = bridge.advertisement.isAdvancedBannersSupported;",
             ""
           ],
           "parameterObjects": "",
@@ -2553,6 +2664,197 @@
               },
               "parameters": [
                 "PlaygamaBridge::BannerState()",
+                "=",
+                "\"failed\""
+              ]
+            },
+            {
+              "type": {
+                "value": "BuiltinCommonInstructions::Once"
+              },
+              "parameters": []
+            }
+          ],
+          "actions": [
+            {
+              "type": {
+                "value": "SetReturnBoolean"
+              },
+              "parameters": [
+                "True"
+              ]
+            }
+          ]
+        }
+      ],
+      "parameters": [],
+      "objectGroups": []
+    },
+    {
+      "description": "On Advanced Banners State Changed.",
+      "fullName": "On Advanced Banners State Changed",
+      "functionType": "Condition",
+      "group": "Advertisement",
+      "name": "OnAdvancedBannersStateChanged",
+      "sentence": "On Advanced Banners State Changed",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": "eventsFunctionContext.returnValue = gdjs._playgamaBridgeExtension.isAdvancedBannersStateChanged;",
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "parameters": [],
+      "objectGroups": []
+    },
+    {
+      "description": "On Advanced Banners Loading.",
+      "fullName": "On Advanced Banners Loading",
+      "functionType": "Condition",
+      "group": "Advertisement",
+      "name": "OnAdvancedBannersLoading",
+      "sentence": "On Advanced Banners Loading",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::Standard",
+          "conditions": [
+            {
+              "type": {
+                "value": "BuiltinCommonInstructions::CompareStrings"
+              },
+              "parameters": [
+                "PlaygamaBridge::AdvancedBannersState()",
+                "=",
+                "\"loading\""
+              ]
+            },
+            {
+              "type": {
+                "value": "BuiltinCommonInstructions::Once"
+              },
+              "parameters": []
+            }
+          ],
+          "actions": [
+            {
+              "type": {
+                "value": "SetReturnBoolean"
+              },
+              "parameters": [
+                "True"
+              ]
+            }
+          ]
+        }
+      ],
+      "parameters": [],
+      "objectGroups": []
+    },
+    {
+      "description": "On Advanced Banners Shown.",
+      "fullName": "On Advanced Banners Shown",
+      "functionType": "Condition",
+      "group": "Advertisement",
+      "name": "OnAdvancedBannersShown",
+      "sentence": "On Advanced Banners Shown",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::Standard",
+          "conditions": [
+            {
+              "type": {
+                "value": "BuiltinCommonInstructions::CompareStrings"
+              },
+              "parameters": [
+                "PlaygamaBridge::AdvancedBannersState()",
+                "=",
+                "\"shown\""
+              ]
+            },
+            {
+              "type": {
+                "value": "BuiltinCommonInstructions::Once"
+              },
+              "parameters": []
+            }
+          ],
+          "actions": [
+            {
+              "type": {
+                "value": "SetReturnBoolean"
+              },
+              "parameters": [
+                "True"
+              ]
+            }
+          ]
+        }
+      ],
+      "parameters": [],
+      "objectGroups": []
+    },
+    {
+      "description": "On Advanced Banners Hidden.",
+      "fullName": "On Advanced Banners Hidden",
+      "functionType": "Condition",
+      "group": "Advertisement",
+      "name": "OnAdvancedBannersHidden",
+      "sentence": "On Advanced Banners Hidden",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::Standard",
+          "conditions": [
+            {
+              "type": {
+                "value": "BuiltinCommonInstructions::CompareStrings"
+              },
+              "parameters": [
+                "PlaygamaBridge::AdvancedBannersState()",
+                "=",
+                "\"hidden\""
+              ]
+            },
+            {
+              "type": {
+                "value": "BuiltinCommonInstructions::Once"
+              },
+              "parameters": []
+            }
+          ],
+          "actions": [
+            {
+              "type": {
+                "value": "SetReturnBoolean"
+              },
+              "parameters": [
+                "True"
+              ]
+            }
+          ]
+        }
+      ],
+      "parameters": [],
+      "objectGroups": []
+    },
+    {
+      "description": "On Advanced Banners Failed.",
+      "fullName": "On Advanced Banners Failed",
+      "functionType": "Condition",
+      "group": "Advertisement",
+      "name": "OnAdvancedBannersFailed",
+      "sentence": "On Advanced Banners Failed",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::Standard",
+          "conditions": [
+            {
+              "type": {
+                "value": "BuiltinCommonInstructions::CompareStrings"
+              },
+              "parameters": [
+                "PlaygamaBridge::AdvancedBannersState()",
                 "=",
                 "\"failed\""
               ]
