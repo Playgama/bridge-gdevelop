@@ -62,12 +62,6 @@
             "    isLastActionCompletedSuccessfully: false,",
             "    actionParametersContainer: {},",
             "",
-            "    // game",
-            "    isVisibilityStateChanged: false,",
-            "    visibilityState: null,",
-            "    prevVisibilityState: null,",
-            "    visibilityStateStack: [],",
-            "",
             "    // platform",
             "    serverTime: 0,",
             "    isGetServerTimeCompleted: false,",
@@ -233,10 +227,6 @@
             "                gdjs._playgamaBridgeExtension.advancedBannersStateStack.push(state);",
             "            });",
             "",
-            "            bridge.game.on('visibility_state_changed', state => {",
-            "                gdjs._playgamaBridgeExtension.visibilityStateStack.push(state)",
-            "            });",
-            "",
             "            bridge.platform.on('audio_state_changed', state => {",
             "                gdjs._playgamaBridgeExtension.platformAudioStateStack.push(state)",
             "            });",
@@ -246,17 +236,6 @@
             "            });",
             "",
             "            function updateState() {",
-            "                // visibility",
-            "                if (gdjs._playgamaBridgeExtension.visibilityStateStack.length > 0) {",
-            "                    gdjs._playgamaBridgeExtension.visibilityState = gdjs._playgamaBridgeExtension.visibilityStateStack.shift();",
-            "                }",
-            "",
-            "                gdjs._playgamaBridgeExtension.isVisibilityStateChanged = gdjs._playgamaBridgeExtension.visibilityState !== gdjs._playgamaBridgeExtension.prevVisibilityState;",
-            "",
-            "                if (gdjs._playgamaBridgeExtension.isVisibilityStateChanged) {",
-            "                    gdjs._playgamaBridgeExtension.prevVisibilityState = gdjs._playgamaBridgeExtension.visibilityState;",
-            "                }",
-            "",
             "                // advertisement",
             "                if (gdjs._playgamaBridgeExtension.bannerStateStack.length > 0) {",
             "                    gdjs._playgamaBridgeExtension.bannerState = gdjs._playgamaBridgeExtension.bannerStateStack.shift();",
@@ -1494,56 +1473,6 @@
           "type": "expression"
         }
       ],
-      "objectGroups": []
-    },
-    {
-      "description": "Visibility State.",
-      "fullName": "Visibility State",
-      "functionType": "StringExpression",
-      "group": "Game",
-      "name": "VisibilityState",
-      "sentence": "",
-      "events": [
-        {
-          "type": "BuiltinCommonInstructions::JsCode",
-          "inlineCode": [
-            "eventsFunctionContext.returnValue = gdjs._playgamaBridgeExtension.visibilityState !== null",
-            "    ? gdjs._playgamaBridgeExtension.visibilityState",
-            "    : bridge.game.visibilityState;"
-          ],
-          "parameterObjects": "",
-          "useStrict": true,
-          "eventsSheetExpanded": false
-        }
-      ],
-      "expressionType": {
-        "type": "string"
-      },
-      "parameters": [],
-      "objectGroups": []
-    },
-    {
-      "description": "On Visibility State Changed.",
-      "fullName": "On Visibility State Changed",
-      "functionType": "Condition",
-      "group": "Game",
-      "name": "OnVisibilityStateChanged",
-      "sentence": "On Visibility State Changed",
-      "events": [
-        {
-          "type": "BuiltinCommonInstructions::JsCode",
-          "inlineCode": "eventsFunctionContext.returnValue = gdjs._playgamaBridgeExtension.isVisibilityStateChanged;",
-          "parameterObjects": "",
-          "useStrict": true,
-          "eventsSheetExpanded": false
-        },
-        {
-          "type": "BuiltinCommonInstructions::Standard",
-          "conditions": [],
-          "actions": []
-        }
-      ],
-      "parameters": [],
       "objectGroups": []
     },
     {
