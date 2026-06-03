@@ -3422,6 +3422,28 @@
       "objectGroups": []
     },
     {
+      "description": "Is Player Guest.",
+      "fullName": "Is Player Guest",
+      "functionType": "Condition",
+      "group": "Player",
+      "name": "IsPlayerGuest",
+      "sentence": "Is Player Guest",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "eventsFunctionContext.returnValue = bridge.player.isGuest;",
+            ""
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "parameters": [],
+      "objectGroups": []
+    },
+    {
       "description": "On Authorize Player Completed.",
       "fullName": "On Authorize Player Completed",
       "functionType": "Condition",
