@@ -5606,7 +5606,7 @@
       "functionType": "Action",
       "group": "Achievements",
       "name": "AchievementsUnlock",
-      "sentence": "Achievements Unlock",
+      "sentence": "Achievements Unlock - Id: _PARAM1_",
       "events": [
         {
           "type": "BuiltinCommonInstructions::JsCode",
@@ -5614,13 +5614,13 @@
             "gdjs._playgamaBridgeExtension.isLastActionCompletedSuccessfully = false;",
             "",
             "return new Promise(resolve => {",
-            "    bridge.achievements.unlock(gdjs._playgamaBridgeExtension.actionParametersContainer)",
+            "    const id = eventsFunctionContext.getArgument('Id');",
+            "    bridge.achievements.unlock(id)",
             "        .then(() => {",
             "            gdjs._playgamaBridgeExtension.isLastActionCompletedSuccessfully = true;",
             "        })",
             "        .catch(error => console.log(error))",
             "        .finally(() => {",
-            "            gdjs._playgamaBridgeExtension.actionParametersContainer = {};",
             "            gdjs._playgamaBridgeExtension.nextIsAchievementsUnlockCompleted = true;",
             "            resolve();",
             "        });",
@@ -5632,7 +5632,13 @@
           "eventsSheetExpanded": true
         }
       ],
-      "parameters": [],
+      "parameters": [
+        {
+          "description": "Id",
+          "name": "Id",
+          "type": "string"
+        }
+      ],
       "objectGroups": []
     },
     {
@@ -5649,14 +5655,13 @@
             "gdjs._playgamaBridgeExtension.isLastActionCompletedSuccessfully = false;",
             "",
             "return new Promise(resolve => {",
-            "    bridge.achievements.getList(gdjs._playgamaBridgeExtension.actionParametersContainer)",
+            "    bridge.achievements.getList()",
             "        .then(data => {",
             "            gdjs._playgamaBridgeExtension.isLastActionCompletedSuccessfully = true;",
             "            gdjs._playgamaBridgeExtension.achievementsList = data;",
             "        })",
             "        .catch(error => console.log(error))",
             "        .finally(() => {",
-            "            gdjs._playgamaBridgeExtension.actionParametersContainer = {};",
             "            gdjs._playgamaBridgeExtension.nextIsAchievementsGetListCompleted = true;",
             "            resolve();",
             "        });",
@@ -5684,13 +5689,12 @@
             "gdjs._playgamaBridgeExtension.isLastActionCompletedSuccessfully = false;",
             "",
             "return new Promise(resolve => {",
-            "    bridge.achievements.showNativePopup(gdjs._playgamaBridgeExtension.actionParametersContainer)",
+            "    bridge.achievements.showNativePopup()",
             "        .then(() => {",
             "            gdjs._playgamaBridgeExtension.isLastActionCompletedSuccessfully = true;",
             "        })",
             "        .catch(error => console.log(error))",
             "        .finally(() => {",
-            "            gdjs._playgamaBridgeExtension.actionParametersContainer = {};",
             "            gdjs._playgamaBridgeExtension.nextIsAchievementsShowNativePopupCompleted = true;",
             "            resolve();",
             "        });",
