@@ -167,6 +167,19 @@
             "    nextIsTasksClaimRewardCompleted: false,",
             "    tasksList: [],",
             "",
+            "    // daily rewards",
+            "    isDailyRewardsGetRewardsCompleted: false,",
+            "    nextIsDailyRewardsGetRewardsCompleted: false,",
+            "    isDailyRewardsGetCurrentDayCompleted: false,",
+            "    nextIsDailyRewardsGetCurrentDayCompleted: false,",
+            "    isDailyRewardsGetCurrentRewardCompleted: false,",
+            "    nextIsDailyRewardsGetCurrentRewardCompleted: false,",
+            "    isDailyRewardsClaimCurrentRewardCompleted: false,",
+            "    nextIsDailyRewardsClaimCurrentRewardCompleted: false,",
+            "    dailyRewardsList: [],",
+            "    dailyRewardsCurrentDay: 0,",
+            "    dailyRewardsCurrentReward: null,",
+            "",
             "    // remote",
             "    remoteConfig: {},",
             "    isRemoteConfigGotCompleted: false,",
@@ -522,6 +535,39 @@
             "                    gdjs._playgamaBridgeExtension.nextIsTasksClaimRewardCompleted = false;",
             "                }",
             "",
+            "                // daily rewards",
+            "                if (gdjs._playgamaBridgeExtension.isDailyRewardsGetRewardsCompleted !== gdjs._playgamaBridgeExtension.nextIsDailyRewardsGetRewardsCompleted) {",
+            "                    gdjs._playgamaBridgeExtension.isDailyRewardsGetRewardsCompleted = gdjs._playgamaBridgeExtension.nextIsDailyRewardsGetRewardsCompleted",
+            "                }",
+            "",
+            "                if (gdjs._playgamaBridgeExtension.nextIsDailyRewardsGetRewardsCompleted) {",
+            "                    gdjs._playgamaBridgeExtension.nextIsDailyRewardsGetRewardsCompleted = false;",
+            "                }",
+            "",
+            "                if (gdjs._playgamaBridgeExtension.isDailyRewardsGetCurrentDayCompleted !== gdjs._playgamaBridgeExtension.nextIsDailyRewardsGetCurrentDayCompleted) {",
+            "                    gdjs._playgamaBridgeExtension.isDailyRewardsGetCurrentDayCompleted = gdjs._playgamaBridgeExtension.nextIsDailyRewardsGetCurrentDayCompleted",
+            "                }",
+            "",
+            "                if (gdjs._playgamaBridgeExtension.nextIsDailyRewardsGetCurrentDayCompleted) {",
+            "                    gdjs._playgamaBridgeExtension.nextIsDailyRewardsGetCurrentDayCompleted = false;",
+            "                }",
+            "",
+            "                if (gdjs._playgamaBridgeExtension.isDailyRewardsGetCurrentRewardCompleted !== gdjs._playgamaBridgeExtension.nextIsDailyRewardsGetCurrentRewardCompleted) {",
+            "                    gdjs._playgamaBridgeExtension.isDailyRewardsGetCurrentRewardCompleted = gdjs._playgamaBridgeExtension.nextIsDailyRewardsGetCurrentRewardCompleted",
+            "                }",
+            "",
+            "                if (gdjs._playgamaBridgeExtension.nextIsDailyRewardsGetCurrentRewardCompleted) {",
+            "                    gdjs._playgamaBridgeExtension.nextIsDailyRewardsGetCurrentRewardCompleted = false;",
+            "                }",
+            "",
+            "                if (gdjs._playgamaBridgeExtension.isDailyRewardsClaimCurrentRewardCompleted !== gdjs._playgamaBridgeExtension.nextIsDailyRewardsClaimCurrentRewardCompleted) {",
+            "                    gdjs._playgamaBridgeExtension.isDailyRewardsClaimCurrentRewardCompleted = gdjs._playgamaBridgeExtension.nextIsDailyRewardsClaimCurrentRewardCompleted",
+            "                }",
+            "",
+            "                if (gdjs._playgamaBridgeExtension.nextIsDailyRewardsClaimCurrentRewardCompleted) {",
+            "                    gdjs._playgamaBridgeExtension.nextIsDailyRewardsClaimCurrentRewardCompleted = false;",
+            "                }",
+            "",
             "                // remote configs",
             "                if (gdjs._playgamaBridgeExtension.isRemoteConfigGotCompleted !== gdjs._playgamaBridgeExtension.nextIsRemoteConfigGotCompleted) {",
             "                    gdjs._playgamaBridgeExtension.isRemoteConfigGotCompleted = gdjs._playgamaBridgeExtension.nextIsRemoteConfigGotCompleted",
@@ -868,7 +914,7 @@
             "gdjs._playgamaBridgeExtension.isLastActionCompletedSuccessfully = false;",
             "",
             "return new Promise(resolve => {",
-            "    bridge.crossPromo.getGamesList()",
+            "    bridge.crossPromo.getGames()",
             "        .then(data => {",
             "            gdjs._playgamaBridgeExtension.isLastActionCompletedSuccessfully = true;",
             "            gdjs._playgamaBridgeExtension.crossPromoGames = Array.isArray(data) ? data : [];",
@@ -5281,28 +5327,6 @@
       "objectGroups": []
     },
     {
-      "description": "Is Achievements Supported.",
-      "fullName": "Is Achievements Supported",
-      "functionType": "Condition",
-      "group": "Achievements",
-      "name": "IsAchievementsSupported",
-      "sentence": "Is Achievements Supported",
-      "events": [
-        {
-          "type": "BuiltinCommonInstructions::JsCode",
-          "inlineCode": [
-            "eventsFunctionContext.returnValue = bridge.achievements.isSupported;",
-            ""
-          ],
-          "parameterObjects": "",
-          "useStrict": true,
-          "eventsSheetExpanded": false
-        }
-      ],
-      "parameters": [],
-      "objectGroups": []
-    },
-    {
       "description": "On Achievements Unlock Completed.",
       "fullName": "On Achievements Unlock Completed",
       "functionType": "Condition",
@@ -5539,7 +5563,7 @@
             "gdjs._playgamaBridgeExtension.isLastActionCompletedSuccessfully = false;",
             "",
             "return new Promise(resolve => {",
-            "    bridge.achievements.getList()",
+            "    bridge.achievements.getAchievements()",
             "        .then(data => {",
             "            gdjs._playgamaBridgeExtension.isLastActionCompletedSuccessfully = true;",
             "            gdjs._playgamaBridgeExtension.achievementsList = data;",
@@ -5684,7 +5708,7 @@
             "gdjs._playgamaBridgeExtension.isLastActionCompletedSuccessfully = false;",
             "",
             "return new Promise(resolve => {",
-            "    window.bridge.remoteConfig.setDynamicParameters(gdjs._playgamaBridgeExtension.actionParametersContainer)",
+            "    window.bridge.remoteConfig.setContext(gdjs._playgamaBridgeExtension.actionParametersContainer)",
             "    window.bridge.remoteConfig.get()",
             "        .then(data => {",
             "            gdjs._playgamaBridgeExtension.isLastActionCompletedSuccessfully = true;",
@@ -6374,6 +6398,362 @@
           "type": "expression"
         }
       ],
+      "objectGroups": []
+    },
+    {
+      "description": "Daily Rewards Get Rewards.",
+      "fullName": "Daily Rewards Get Rewards",
+      "functionType": "Action",
+      "group": "Daily Rewards",
+      "name": "DailyRewardsGetRewards",
+      "sentence": "Daily Rewards Get Rewards",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "gdjs._playgamaBridgeExtension.isLastActionCompletedSuccessfully = false;",
+            "",
+            "return new Promise(resolve => {",
+            "    bridge.dailyRewards.getRewards()",
+            "        .then(data => {",
+            "            gdjs._playgamaBridgeExtension.isLastActionCompletedSuccessfully = true;",
+            "            gdjs._playgamaBridgeExtension.dailyRewardsList = data;",
+            "        })",
+            "        .catch(error => console.log(error))",
+            "        .finally(() => {",
+            "            gdjs._playgamaBridgeExtension.nextIsDailyRewardsGetRewardsCompleted = true;",
+            "            resolve();",
+            "        });",
+            "});"
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "parameters": [],
+      "objectGroups": []
+    },
+    {
+      "description": "Daily Rewards Get Current Day.",
+      "fullName": "Daily Rewards Get Current Day",
+      "functionType": "Action",
+      "group": "Daily Rewards",
+      "name": "DailyRewardsGetCurrentDay",
+      "sentence": "Daily Rewards Get Current Day",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "gdjs._playgamaBridgeExtension.isLastActionCompletedSuccessfully = false;",
+            "",
+            "return new Promise(resolve => {",
+            "    bridge.dailyRewards.getCurrentDay()",
+            "        .then(day => {",
+            "            gdjs._playgamaBridgeExtension.isLastActionCompletedSuccessfully = true;",
+            "            gdjs._playgamaBridgeExtension.dailyRewardsCurrentDay = day;",
+            "        })",
+            "        .catch(error => console.log(error))",
+            "        .finally(() => {",
+            "            gdjs._playgamaBridgeExtension.nextIsDailyRewardsGetCurrentDayCompleted = true;",
+            "            resolve();",
+            "        });",
+            "});"
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "parameters": [],
+      "objectGroups": []
+    },
+    {
+      "description": "Daily Rewards Get Current Reward.",
+      "fullName": "Daily Rewards Get Current Reward",
+      "functionType": "Action",
+      "group": "Daily Rewards",
+      "name": "DailyRewardsGetCurrentReward",
+      "sentence": "Daily Rewards Get Current Reward",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "gdjs._playgamaBridgeExtension.isLastActionCompletedSuccessfully = false;",
+            "",
+            "return new Promise(resolve => {",
+            "    bridge.dailyRewards.getCurrentReward()",
+            "        .then(reward => {",
+            "            gdjs._playgamaBridgeExtension.isLastActionCompletedSuccessfully = true;",
+            "            gdjs._playgamaBridgeExtension.dailyRewardsCurrentReward = reward;",
+            "        })",
+            "        .catch(error => console.log(error))",
+            "        .finally(() => {",
+            "            gdjs._playgamaBridgeExtension.nextIsDailyRewardsGetCurrentRewardCompleted = true;",
+            "            resolve();",
+            "        });",
+            "});"
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "parameters": [],
+      "objectGroups": []
+    },
+    {
+      "description": "Daily Rewards Claim Current Reward.",
+      "fullName": "Daily Rewards Claim Current Reward",
+      "functionType": "Action",
+      "group": "Daily Rewards",
+      "name": "DailyRewardsClaimCurrentReward",
+      "sentence": "Daily Rewards Claim Current Reward",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "gdjs._playgamaBridgeExtension.isLastActionCompletedSuccessfully = false;",
+            "",
+            "return new Promise(resolve => {",
+            "    bridge.dailyRewards.claimCurrentReward()",
+            "        .then(claimed => {",
+            "            gdjs._playgamaBridgeExtension.isLastActionCompletedSuccessfully = claimed === true;",
+            "        })",
+            "        .catch(error => console.log(error))",
+            "        .finally(() => {",
+            "            gdjs._playgamaBridgeExtension.nextIsDailyRewardsClaimCurrentRewardCompleted = true;",
+            "            resolve();",
+            "        });",
+            "});"
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "parameters": [],
+      "objectGroups": []
+    },
+    {
+      "description": "On Daily Rewards Get Rewards Completed.",
+      "fullName": "On Daily Rewards Get Rewards Completed",
+      "functionType": "Condition",
+      "group": "Daily Rewards",
+      "name": "OnDailyRewardsGetRewardsCompleted",
+      "sentence": "On Daily Rewards Get Rewards Completed",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "eventsFunctionContext.returnValue = gdjs._playgamaBridgeExtension.isDailyRewardsGetRewardsCompleted;",
+            ""
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "parameters": [],
+      "objectGroups": []
+    },
+    {
+      "description": "On Daily Rewards Get Current Day Completed.",
+      "fullName": "On Daily Rewards Get Current Day Completed",
+      "functionType": "Condition",
+      "group": "Daily Rewards",
+      "name": "OnDailyRewardsGetCurrentDayCompleted",
+      "sentence": "On Daily Rewards Get Current Day Completed",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "eventsFunctionContext.returnValue = gdjs._playgamaBridgeExtension.isDailyRewardsGetCurrentDayCompleted;",
+            ""
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "parameters": [],
+      "objectGroups": []
+    },
+    {
+      "description": "On Daily Rewards Get Current Reward Completed.",
+      "fullName": "On Daily Rewards Get Current Reward Completed",
+      "functionType": "Condition",
+      "group": "Daily Rewards",
+      "name": "OnDailyRewardsGetCurrentRewardCompleted",
+      "sentence": "On Daily Rewards Get Current Reward Completed",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "eventsFunctionContext.returnValue = gdjs._playgamaBridgeExtension.isDailyRewardsGetCurrentRewardCompleted;",
+            ""
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "parameters": [],
+      "objectGroups": []
+    },
+    {
+      "description": "On Daily Rewards Claim Current Reward Completed.",
+      "fullName": "On Daily Rewards Claim Current Reward Completed",
+      "functionType": "Condition",
+      "group": "Daily Rewards",
+      "name": "OnDailyRewardsClaimCurrentRewardCompleted",
+      "sentence": "On Daily Rewards Claim Current Reward Completed",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "eventsFunctionContext.returnValue = gdjs._playgamaBridgeExtension.isDailyRewardsClaimCurrentRewardCompleted;",
+            ""
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "parameters": [],
+      "objectGroups": []
+    },
+    {
+      "description": "Daily Rewards Count.",
+      "fullName": "Daily Rewards Count",
+      "functionType": "Expression",
+      "group": "Daily Rewards",
+      "name": "DailyRewardsCount",
+      "sentence": "",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "eventsFunctionContext.returnValue = gdjs._playgamaBridgeExtension.dailyRewardsList.length;",
+            ""
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "expressionType": {
+        "type": "expression"
+      },
+      "parameters": [],
+      "objectGroups": []
+    },
+    {
+      "description": "Daily Rewards Current Day.",
+      "fullName": "Daily Rewards Current Day",
+      "functionType": "Expression",
+      "group": "Daily Rewards",
+      "name": "DailyRewardsCurrentDay",
+      "sentence": "",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "eventsFunctionContext.returnValue = gdjs._playgamaBridgeExtension.dailyRewardsCurrentDay;",
+            ""
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "expressionType": {
+        "type": "expression"
+      },
+      "parameters": [],
+      "objectGroups": []
+    },
+    {
+      "description": "Daily Rewards As JSON.",
+      "fullName": "Daily Rewards As JSON",
+      "functionType": "StringExpression",
+      "group": "Daily Rewards",
+      "name": "DailyRewardsAsJSON",
+      "sentence": "",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "eventsFunctionContext.returnValue = JSON.stringify(gdjs._playgamaBridgeExtension.dailyRewardsList);",
+            ""
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "expressionType": {
+        "type": "string"
+      },
+      "parameters": [],
+      "objectGroups": []
+    },
+    {
+      "description": "Daily Reward Id.",
+      "fullName": "Daily Reward Id",
+      "functionType": "StringExpression",
+      "group": "Daily Rewards",
+      "name": "DailyRewardId",
+      "sentence": "",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "const reward = gdjs._playgamaBridgeExtension.dailyRewardsList[eventsFunctionContext.getArgument(\"RewardIndex\")];",
+            "eventsFunctionContext.returnValue = reward ? reward : \"\";",
+            ""
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "expressionType": {
+        "type": "string"
+      },
+      "parameters": [
+        {
+          "description": "Reward Index",
+          "name": "RewardIndex",
+          "type": "expression"
+        }
+      ],
+      "objectGroups": []
+    },
+    {
+      "description": "Daily Rewards Current Reward.",
+      "fullName": "Daily Rewards Current Reward",
+      "functionType": "StringExpression",
+      "group": "Daily Rewards",
+      "name": "DailyRewardsCurrentReward",
+      "sentence": "",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "const reward = gdjs._playgamaBridgeExtension.dailyRewardsCurrentReward;",
+            "eventsFunctionContext.returnValue = reward ? reward : \"\";",
+            ""
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "expressionType": {
+        "type": "string"
+      },
+      "parameters": [],
       "objectGroups": []
     }
   ],
