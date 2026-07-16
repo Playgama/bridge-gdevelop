@@ -215,6 +215,7 @@
             "function initializeBridge() {",
             "    clearTimeout(bridgeTimeout)",
             "    bridge.engine = 'gdevelop'",
+            "    bridge.gameVersion = gdjs.projectData.properties.version",
             "    bridge.initialize(bridgeOptions)",
             "        .then(() => {",
             "            bridge.advertisement.on('banner_state_changed', state => {",
