@@ -189,6 +189,14 @@
             "    crossPromoGames: [],",
             "    isGetGamesListCompleted: false,",
             "    nextIsGetGamesListCompleted: false,",
+            "",
+            "    // notifications",
+            "    isNotificationsScheduleCompleted: false,",
+            "    nextIsNotificationsScheduleCompleted: false,",
+            "    isNotificationsCancelCompleted: false,",
+            "    nextIsNotificationsCancelCompleted: false,",
+            "    isNotificationsCancelAllCompleted: false,",
+            "    nextIsNotificationsCancelAllCompleted: false,",
             "}",
             "",
             "// utils",
@@ -576,6 +584,31 @@
             "",
             "                if (gdjs._playgamaBridgeExtension.nextIsRemoteConfigGotCompleted) {",
             "                    gdjs._playgamaBridgeExtension.nextIsRemoteConfigGotCompleted = false;",
+            "                }",
+            "",
+            "                // notifications",
+            "                if (gdjs._playgamaBridgeExtension.isNotificationsScheduleCompleted !== gdjs._playgamaBridgeExtension.nextIsNotificationsScheduleCompleted) {",
+            "                    gdjs._playgamaBridgeExtension.isNotificationsScheduleCompleted = gdjs._playgamaBridgeExtension.nextIsNotificationsScheduleCompleted",
+            "                }",
+            "",
+            "                if (gdjs._playgamaBridgeExtension.nextIsNotificationsScheduleCompleted) {",
+            "                    gdjs._playgamaBridgeExtension.nextIsNotificationsScheduleCompleted = false;",
+            "                }",
+            "",
+            "                if (gdjs._playgamaBridgeExtension.isNotificationsCancelCompleted !== gdjs._playgamaBridgeExtension.nextIsNotificationsCancelCompleted) {",
+            "                    gdjs._playgamaBridgeExtension.isNotificationsCancelCompleted = gdjs._playgamaBridgeExtension.nextIsNotificationsCancelCompleted",
+            "                }",
+            "",
+            "                if (gdjs._playgamaBridgeExtension.nextIsNotificationsCancelCompleted) {",
+            "                    gdjs._playgamaBridgeExtension.nextIsNotificationsCancelCompleted = false;",
+            "                }",
+            "",
+            "                if (gdjs._playgamaBridgeExtension.isNotificationsCancelAllCompleted !== gdjs._playgamaBridgeExtension.nextIsNotificationsCancelAllCompleted) {",
+            "                    gdjs._playgamaBridgeExtension.isNotificationsCancelAllCompleted = gdjs._playgamaBridgeExtension.nextIsNotificationsCancelAllCompleted",
+            "                }",
+            "",
+            "                if (gdjs._playgamaBridgeExtension.nextIsNotificationsCancelAllCompleted) {",
+            "                    gdjs._playgamaBridgeExtension.nextIsNotificationsCancelAllCompleted = false;",
             "                }",
             "            }",
             "",
@@ -6754,6 +6787,203 @@
       "expressionType": {
         "type": "string"
       },
+      "parameters": [],
+      "objectGroups": []
+    },
+    {
+      "description": "Schedule a notification built with Add Action Parameter (id, title, description, delaySeconds, image, callToAction, payload).",
+      "fullName": "Notifications Schedule",
+      "functionType": "Action",
+      "group": "Notifications",
+      "name": "NotificationsSchedule",
+      "sentence": "Notifications Schedule",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "gdjs._playgamaBridgeExtension.isLastActionCompletedSuccessfully = false;",
+            "",
+            "const notification = gdjs._playgamaBridgeExtension.actionParametersContainer;",
+            "gdjs._playgamaBridgeExtension.actionParametersContainer = {};",
+            "",
+            "return new Promise(resolve => {",
+            "    bridge.notifications.schedule(notification)",
+            "        .then(() => {",
+            "            gdjs._playgamaBridgeExtension.isLastActionCompletedSuccessfully = true;",
+            "        })",
+            "        .catch(error => console.log(error))",
+            "        .finally(() => {",
+            "            gdjs._playgamaBridgeExtension.nextIsNotificationsScheduleCompleted = true;",
+            "            resolve();",
+            "        });",
+            "});"
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "parameters": [],
+      "objectGroups": []
+    },
+    {
+      "description": "On Notifications Schedule Completed.",
+      "fullName": "On Notifications Schedule Completed",
+      "functionType": "Condition",
+      "group": "Notifications",
+      "name": "OnNotificationsScheduleCompleted",
+      "sentence": "On Notifications Schedule Completed",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "eventsFunctionContext.returnValue = gdjs._playgamaBridgeExtension.isNotificationsScheduleCompleted;",
+            ""
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "parameters": [],
+      "objectGroups": []
+    },
+    {
+      "description": "Cancel a previously scheduled notification with the given id.",
+      "fullName": "Notifications Cancel",
+      "functionType": "Action",
+      "group": "Notifications",
+      "name": "NotificationsCancel",
+      "sentence": "Notifications Cancel - Id: _PARAM1_",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "gdjs._playgamaBridgeExtension.isLastActionCompletedSuccessfully = false;",
+            "",
+            "return new Promise(resolve => {",
+            "    const id = eventsFunctionContext.getArgument('Id');",
+            "    bridge.notifications.cancel(id)",
+            "        .then(() => {",
+            "            gdjs._playgamaBridgeExtension.isLastActionCompletedSuccessfully = true;",
+            "        })",
+            "        .catch(error => console.log(error))",
+            "        .finally(() => {",
+            "            gdjs._playgamaBridgeExtension.nextIsNotificationsCancelCompleted = true;",
+            "            resolve();",
+            "        });",
+            "});"
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "parameters": [
+        {
+          "description": "Id",
+          "name": "Id",
+          "type": "string"
+        }
+      ],
+      "objectGroups": []
+    },
+    {
+      "description": "On Notifications Cancel Completed.",
+      "fullName": "On Notifications Cancel Completed",
+      "functionType": "Condition",
+      "group": "Notifications",
+      "name": "OnNotificationsCancelCompleted",
+      "sentence": "On Notifications Cancel Completed",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "eventsFunctionContext.returnValue = gdjs._playgamaBridgeExtension.isNotificationsCancelCompleted;",
+            ""
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "parameters": [],
+      "objectGroups": []
+    },
+    {
+      "description": "Cancel every notification scheduled by the game.",
+      "fullName": "Notifications Cancel All",
+      "functionType": "Action",
+      "group": "Notifications",
+      "name": "NotificationsCancelAll",
+      "sentence": "Notifications Cancel All",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "gdjs._playgamaBridgeExtension.isLastActionCompletedSuccessfully = false;",
+            "",
+            "return new Promise(resolve => {",
+            "    bridge.notifications.cancelAll()",
+            "        .then(() => {",
+            "            gdjs._playgamaBridgeExtension.isLastActionCompletedSuccessfully = true;",
+            "        })",
+            "        .catch(error => console.log(error))",
+            "        .finally(() => {",
+            "            gdjs._playgamaBridgeExtension.nextIsNotificationsCancelAllCompleted = true;",
+            "            resolve();",
+            "        });",
+            "});"
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "parameters": [],
+      "objectGroups": []
+    },
+    {
+      "description": "On Notifications Cancel All Completed.",
+      "fullName": "On Notifications Cancel All Completed",
+      "functionType": "Condition",
+      "group": "Notifications",
+      "name": "OnNotificationsCancelAllCompleted",
+      "sentence": "On Notifications Cancel All Completed",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "eventsFunctionContext.returnValue = gdjs._playgamaBridgeExtension.isNotificationsCancelAllCompleted;",
+            ""
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "parameters": [],
+      "objectGroups": []
+    },
+    {
+      "description": "Is Notifications Supported.",
+      "fullName": "Is Notifications Supported",
+      "functionType": "Condition",
+      "group": "Notifications",
+      "name": "IsNotificationsSupported",
+      "sentence": "Is Notifications Supported",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "eventsFunctionContext.returnValue = bridge.notifications.isSupported;",
+            ""
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
       "parameters": [],
       "objectGroups": []
     }
