@@ -7332,6 +7332,38 @@
       ],
       "parameters": [],
       "objectGroups": []
+    },
+    {
+      "description": "Send a game event to Playgama analytics. The event name and the parameters added before it are entirely up to the game.",
+      "fullName": "Send Analytics Event",
+      "functionType": "Action",
+      "group": "Analytics",
+      "name": "SendAnalyticsEvent",
+      "sentence": "Send Analytics Event _PARAM1_",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "const eventName = eventsFunctionContext.getArgument(\"EventName\")",
+            "const data = gdjs._playgamaBridgeExtension.actionParametersContainer",
+            "",
+            "bridge.analytics.send(eventName, data)",
+            "",
+            "gdjs._playgamaBridgeExtension.actionParametersContainer = {}"
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "parameters": [
+        {
+          "description": "Event Name",
+          "name": "EventName",
+          "type": "string"
+        }
+      ],
+      "objectGroups": []
     }
   ],
   "eventsBasedBehaviors": [],
