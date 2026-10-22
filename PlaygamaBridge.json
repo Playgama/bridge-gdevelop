@@ -200,6 +200,35 @@
             "    nextIsNotificationsCancelCompleted: false,",
             "    isNotificationsCancelAllCompleted: false,",
             "    nextIsNotificationsCancelAllCompleted: false,",
+            "",
+            "    // multiplayer",
+            "    multiplayerState: null,",
+            "    prevMultiplayerState: null,",
+            "    multiplayerStateStack: [],",
+            "    isMultiplayerStateChanged: false,",
+            "    multiplayerRoomLeftStack: [],",
+            "    isMultiplayerRoomLeft: false,",
+            "    multiplayerRoomLeftReason: '',",
+            "    isMultiplayerRoomUpdated: false,",
+            "    nextIsMultiplayerRoomUpdated: false,",
+            "    multiplayerPlayerEventStack: [],",
+            "    multiplayerPlayerEventType: null,",
+            "    multiplayerEventPlayer: null,",
+            "    multiplayerMessageStack: [],",
+            "    isMultiplayerMessageReceived: false,",
+            "    multiplayerLastMessage: null,",
+            "    multiplayerRooms: [],",
+            "    multiplayerLastError: '',",
+            "    isMultiplayerCreateRoomCompleted: false,",
+            "    nextIsMultiplayerCreateRoomCompleted: false,",
+            "    isMultiplayerJoinRoomCompleted: false,",
+            "    nextIsMultiplayerJoinRoomCompleted: false,",
+            "    isMultiplayerJoinOrCreateRoomCompleted: false,",
+            "    nextIsMultiplayerJoinOrCreateRoomCompleted: false,",
+            "    isMultiplayerGetRoomsCompleted: false,",
+            "    nextIsMultiplayerGetRoomsCompleted: false,",
+            "    isMultiplayerInviteToRoomCompleted: false,",
+            "    nextIsMultiplayerInviteToRoomCompleted: false,",
             "}",
             "",
             "// utils",
@@ -265,6 +294,40 @@
             "            bridge.platform.on('pause_state_changed', state => {",
             "                gdjs._playgamaBridgeExtension.platformPauseStateStack.push(state)",
             "            });",
+            "",
+            "            if (bridge.multiplayer) {",
+            "                bridge.multiplayer.on('multiplayer_state_changed', state => {",
+            "                    gdjs._playgamaBridgeExtension.multiplayerStateStack.push(state);",
+            "                });",
+            "",
+            "                bridge.multiplayer.on('multiplayer_room_left', reason => {",
+            "                    gdjs._playgamaBridgeExtension.multiplayerRoomLeftStack.push(reason);",
+            "                });",
+            "",
+            "                bridge.multiplayer.on('multiplayer_room_updated', () => {",
+            "                    gdjs._playgamaBridgeExtension.nextIsMultiplayerRoomUpdated = true;",
+            "                });",
+            "",
+            "                bridge.multiplayer.on('multiplayer_player_joined', player => {",
+            "                    gdjs._playgamaBridgeExtension.multiplayerPlayerEventStack.push({ type: 'joined', player });",
+            "                });",
+            "",
+            "                bridge.multiplayer.on('multiplayer_player_left', player => {",
+            "                    gdjs._playgamaBridgeExtension.multiplayerPlayerEventStack.push({ type: 'left', player });",
+            "                });",
+            "",
+            "                bridge.multiplayer.on('multiplayer_player_updated', player => {",
+            "                    gdjs._playgamaBridgeExtension.multiplayerPlayerEventStack.push({ type: 'updated', player });",
+            "                });",
+            "",
+            "                bridge.multiplayer.on('multiplayer_host_changed', player => {",
+            "                    gdjs._playgamaBridgeExtension.multiplayerPlayerEventStack.push({ type: 'host_changed', player });",
+            "                });",
+            "",
+            "                bridge.multiplayer.on('multiplayer_message_received', message => {",
+            "                    gdjs._playgamaBridgeExtension.multiplayerMessageStack.push(message);",
+            "                });",
+            "            }",
             "",
             "            function updateState() {",
             "                // advertisement",
@@ -620,6 +683,86 @@
             "",
             "                if (gdjs._playgamaBridgeExtension.nextIsNotificationsCancelAllCompleted) {",
             "                    gdjs._playgamaBridgeExtension.nextIsNotificationsCancelAllCompleted = false;",
+            "                }",
+            "",
+            "                // multiplayer",
+            "                if (gdjs._playgamaBridgeExtension.multiplayerStateStack.length > 0) {",
+            "                    gdjs._playgamaBridgeExtension.multiplayerState = gdjs._playgamaBridgeExtension.multiplayerStateStack.shift();",
+            "                }",
+            "",
+            "                gdjs._playgamaBridgeExtension.isMultiplayerStateChanged = gdjs._playgamaBridgeExtension.multiplayerState !== gdjs._playgamaBridgeExtension.prevMultiplayerState;",
+            "",
+            "                if (gdjs._playgamaBridgeExtension.isMultiplayerStateChanged) {",
+            "                    gdjs._playgamaBridgeExtension.prevMultiplayerState = gdjs._playgamaBridgeExtension.multiplayerState;",
+            "                }",
+            "",
+            "                // one room left, player and message event per frame, so each one is seen by the conditions",
+            "                gdjs._playgamaBridgeExtension.isMultiplayerRoomLeft = gdjs._playgamaBridgeExtension.multiplayerRoomLeftStack.length > 0;",
+            "",
+            "                if (gdjs._playgamaBridgeExtension.isMultiplayerRoomLeft) {",
+            "                    gdjs._playgamaBridgeExtension.multiplayerRoomLeftReason = gdjs._playgamaBridgeExtension.multiplayerRoomLeftStack.shift();",
+            "                }",
+            "",
+            "                const multiplayerPlayerEvent = gdjs._playgamaBridgeExtension.multiplayerPlayerEventStack.shift();",
+            "                gdjs._playgamaBridgeExtension.multiplayerPlayerEventType = multiplayerPlayerEvent ? multiplayerPlayerEvent.type : null;",
+            "",
+            "                if (multiplayerPlayerEvent) {",
+            "                    gdjs._playgamaBridgeExtension.multiplayerEventPlayer = multiplayerPlayerEvent.player;",
+            "                }",
+            "",
+            "                const multiplayerMessage = gdjs._playgamaBridgeExtension.multiplayerMessageStack.shift();",
+            "                gdjs._playgamaBridgeExtension.isMultiplayerMessageReceived = !!multiplayerMessage;",
+            "",
+            "                if (multiplayerMessage) {",
+            "                    gdjs._playgamaBridgeExtension.multiplayerLastMessage = multiplayerMessage;",
+            "                }",
+            "",
+            "                if (gdjs._playgamaBridgeExtension.isMultiplayerRoomUpdated !== gdjs._playgamaBridgeExtension.nextIsMultiplayerRoomUpdated) {",
+            "                    gdjs._playgamaBridgeExtension.isMultiplayerRoomUpdated = gdjs._playgamaBridgeExtension.nextIsMultiplayerRoomUpdated",
+            "                }",
+            "",
+            "                if (gdjs._playgamaBridgeExtension.nextIsMultiplayerRoomUpdated) {",
+            "                    gdjs._playgamaBridgeExtension.nextIsMultiplayerRoomUpdated = false;",
+            "                }",
+            "",
+            "                if (gdjs._playgamaBridgeExtension.isMultiplayerCreateRoomCompleted !== gdjs._playgamaBridgeExtension.nextIsMultiplayerCreateRoomCompleted) {",
+            "                    gdjs._playgamaBridgeExtension.isMultiplayerCreateRoomCompleted = gdjs._playgamaBridgeExtension.nextIsMultiplayerCreateRoomCompleted",
+            "                }",
+            "",
+            "                if (gdjs._playgamaBridgeExtension.nextIsMultiplayerCreateRoomCompleted) {",
+            "                    gdjs._playgamaBridgeExtension.nextIsMultiplayerCreateRoomCompleted = false;",
+            "                }",
+            "",
+            "                if (gdjs._playgamaBridgeExtension.isMultiplayerJoinRoomCompleted !== gdjs._playgamaBridgeExtension.nextIsMultiplayerJoinRoomCompleted) {",
+            "                    gdjs._playgamaBridgeExtension.isMultiplayerJoinRoomCompleted = gdjs._playgamaBridgeExtension.nextIsMultiplayerJoinRoomCompleted",
+            "                }",
+            "",
+            "                if (gdjs._playgamaBridgeExtension.nextIsMultiplayerJoinRoomCompleted) {",
+            "                    gdjs._playgamaBridgeExtension.nextIsMultiplayerJoinRoomCompleted = false;",
+            "                }",
+            "",
+            "                if (gdjs._playgamaBridgeExtension.isMultiplayerJoinOrCreateRoomCompleted !== gdjs._playgamaBridgeExtension.nextIsMultiplayerJoinOrCreateRoomCompleted) {",
+            "                    gdjs._playgamaBridgeExtension.isMultiplayerJoinOrCreateRoomCompleted = gdjs._playgamaBridgeExtension.nextIsMultiplayerJoinOrCreateRoomCompleted",
+            "                }",
+            "",
+            "                if (gdjs._playgamaBridgeExtension.nextIsMultiplayerJoinOrCreateRoomCompleted) {",
+            "                    gdjs._playgamaBridgeExtension.nextIsMultiplayerJoinOrCreateRoomCompleted = false;",
+            "                }",
+            "",
+            "                if (gdjs._playgamaBridgeExtension.isMultiplayerGetRoomsCompleted !== gdjs._playgamaBridgeExtension.nextIsMultiplayerGetRoomsCompleted) {",
+            "                    gdjs._playgamaBridgeExtension.isMultiplayerGetRoomsCompleted = gdjs._playgamaBridgeExtension.nextIsMultiplayerGetRoomsCompleted",
+            "                }",
+            "",
+            "                if (gdjs._playgamaBridgeExtension.nextIsMultiplayerGetRoomsCompleted) {",
+            "                    gdjs._playgamaBridgeExtension.nextIsMultiplayerGetRoomsCompleted = false;",
+            "                }",
+            "",
+            "                if (gdjs._playgamaBridgeExtension.isMultiplayerInviteToRoomCompleted !== gdjs._playgamaBridgeExtension.nextIsMultiplayerInviteToRoomCompleted) {",
+            "                    gdjs._playgamaBridgeExtension.isMultiplayerInviteToRoomCompleted = gdjs._playgamaBridgeExtension.nextIsMultiplayerInviteToRoomCompleted",
+            "                }",
+            "",
+            "                if (gdjs._playgamaBridgeExtension.nextIsMultiplayerInviteToRoomCompleted) {",
+            "                    gdjs._playgamaBridgeExtension.nextIsMultiplayerInviteToRoomCompleted = false;",
             "                }",
             "            }",
             "",
@@ -7359,6 +7502,1238 @@
           "type": "string"
         }
       ],
+      "objectGroups": []
+    },
+    {
+      "description": "Is Multiplayer Supported.",
+      "fullName": "Is Multiplayer Supported",
+      "functionType": "Condition",
+      "group": "Multiplayer",
+      "name": "IsMultiplayerSupported",
+      "sentence": "Is Multiplayer Supported",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "eventsFunctionContext.returnValue = !!bridge.multiplayer && bridge.multiplayer.isSupported;"
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "parameters": [],
+      "objectGroups": []
+    },
+    {
+      "description": "Is Multiplayer Invite Supported.",
+      "fullName": "Is Multiplayer Invite Supported",
+      "functionType": "Condition",
+      "group": "Multiplayer",
+      "name": "IsMultiplayerInviteSupported",
+      "sentence": "Is Multiplayer Invite Supported",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "eventsFunctionContext.returnValue = !!bridge.multiplayer && bridge.multiplayer.isInviteSupported;"
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "parameters": [],
+      "objectGroups": []
+    },
+    {
+      "description": "The local player is in a room (connected or reconnecting).",
+      "fullName": "Multiplayer Is In Room",
+      "functionType": "Condition",
+      "group": "Multiplayer",
+      "name": "MultiplayerIsInRoom",
+      "sentence": "Multiplayer Is In Room",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "eventsFunctionContext.returnValue = !!bridge.multiplayer && bridge.multiplayer.isInRoom;"
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "parameters": [],
+      "objectGroups": []
+    },
+    {
+      "description": "The local player is the room host.",
+      "fullName": "Multiplayer Is Host",
+      "functionType": "Condition",
+      "group": "Multiplayer",
+      "name": "MultiplayerIsHost",
+      "sentence": "Multiplayer Is Host",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "eventsFunctionContext.returnValue = !!bridge.multiplayer && bridge.multiplayer.isHost;"
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "parameters": [],
+      "objectGroups": []
+    },
+    {
+      "description": "Compare the multiplayer connection state.",
+      "fullName": "Multiplayer Is State",
+      "functionType": "Condition",
+      "group": "Multiplayer",
+      "name": "MultiplayerIsState",
+      "sentence": "Multiplayer State is _PARAM1_",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "const state = eventsFunctionContext.getArgument('State');",
+            "const currentState = gdjs._playgamaBridgeExtension.multiplayerState !== null",
+            "    ? gdjs._playgamaBridgeExtension.multiplayerState",
+            "    : (bridge.multiplayer ? bridge.multiplayer.state : 'disconnected');",
+            "",
+            "eventsFunctionContext.returnValue = currentState === state;"
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "parameters": [
+        {
+          "description": "State",
+          "name": "State",
+          "supplementaryInformation": "[\"disconnected\",\"connecting\",\"connected\",\"reconnecting\"]",
+          "type": "stringWithSelector"
+        }
+      ],
+      "objectGroups": []
+    },
+    {
+      "description": "On Multiplayer State Changed.",
+      "fullName": "On Multiplayer State Changed",
+      "functionType": "Condition",
+      "group": "Multiplayer",
+      "name": "OnMultiplayerStateChanged",
+      "sentence": "On Multiplayer State Changed",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "eventsFunctionContext.returnValue = gdjs._playgamaBridgeExtension.isMultiplayerStateChanged;"
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "parameters": [],
+      "objectGroups": []
+    },
+    {
+      "description": "On Multiplayer Room Left. The reason is available in Multiplayer Room Left Reason.",
+      "fullName": "On Multiplayer Room Left",
+      "functionType": "Condition",
+      "group": "Multiplayer",
+      "name": "OnMultiplayerRoomLeft",
+      "sentence": "On Multiplayer Room Left",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "eventsFunctionContext.returnValue = gdjs._playgamaBridgeExtension.isMultiplayerRoomLeft;"
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "parameters": [],
+      "objectGroups": []
+    },
+    {
+      "description": "On Multiplayer Room Updated.",
+      "fullName": "On Multiplayer Room Updated",
+      "functionType": "Condition",
+      "group": "Multiplayer",
+      "name": "OnMultiplayerRoomUpdated",
+      "sentence": "On Multiplayer Room Updated",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "eventsFunctionContext.returnValue = gdjs._playgamaBridgeExtension.isMultiplayerRoomUpdated;"
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "parameters": [],
+      "objectGroups": []
+    },
+    {
+      "description": "On Multiplayer Player Joined. The player is available in the Multiplayer Event Player expressions.",
+      "fullName": "On Multiplayer Player Joined",
+      "functionType": "Condition",
+      "group": "Multiplayer",
+      "name": "OnMultiplayerPlayerJoined",
+      "sentence": "On Multiplayer Player Joined",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "eventsFunctionContext.returnValue = gdjs._playgamaBridgeExtension.multiplayerPlayerEventType === 'joined';"
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "parameters": [],
+      "objectGroups": []
+    },
+    {
+      "description": "On Multiplayer Player Left. The player is available in the Multiplayer Event Player expressions.",
+      "fullName": "On Multiplayer Player Left",
+      "functionType": "Condition",
+      "group": "Multiplayer",
+      "name": "OnMultiplayerPlayerLeft",
+      "sentence": "On Multiplayer Player Left",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "eventsFunctionContext.returnValue = gdjs._playgamaBridgeExtension.multiplayerPlayerEventType === 'left';"
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "parameters": [],
+      "objectGroups": []
+    },
+    {
+      "description": "On Multiplayer Player Updated. The player is available in the Multiplayer Event Player expressions.",
+      "fullName": "On Multiplayer Player Updated",
+      "functionType": "Condition",
+      "group": "Multiplayer",
+      "name": "OnMultiplayerPlayerUpdated",
+      "sentence": "On Multiplayer Player Updated",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "eventsFunctionContext.returnValue = gdjs._playgamaBridgeExtension.multiplayerPlayerEventType === 'updated';"
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "parameters": [],
+      "objectGroups": []
+    },
+    {
+      "description": "On Multiplayer Host Changed. The new host is available in the Multiplayer Event Player expressions.",
+      "fullName": "On Multiplayer Host Changed",
+      "functionType": "Condition",
+      "group": "Multiplayer",
+      "name": "OnMultiplayerHostChanged",
+      "sentence": "On Multiplayer Host Changed",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "eventsFunctionContext.returnValue = gdjs._playgamaBridgeExtension.multiplayerPlayerEventType === 'host_changed';"
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "parameters": [],
+      "objectGroups": []
+    },
+    {
+      "description": "On Multiplayer Message Received. Messages are handled one per frame, read them with the Multiplayer Last Message expressions.",
+      "fullName": "On Multiplayer Message Received",
+      "functionType": "Condition",
+      "group": "Multiplayer",
+      "name": "OnMultiplayerMessageReceived",
+      "sentence": "On Multiplayer Message Received",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "eventsFunctionContext.returnValue = gdjs._playgamaBridgeExtension.isMultiplayerMessageReceived;"
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "parameters": [],
+      "objectGroups": []
+    },
+    {
+      "description": "Create a new room and join it. Options are taken from Add Action Parameter (maxPlayers, isVisible, isOpen, properties, playerName, playerProperties).",
+      "fullName": "Multiplayer Create Room",
+      "functionType": "Action",
+      "group": "Multiplayer",
+      "name": "MultiplayerCreateRoom",
+      "sentence": "Multiplayer Create Room",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "gdjs._playgamaBridgeExtension.isLastActionCompletedSuccessfully = false;",
+            "gdjs._playgamaBridgeExtension.multiplayerLastError = '';",
+            "",
+            "const options = gdjs._playgamaBridgeExtension.actionParametersContainer;",
+            "gdjs._playgamaBridgeExtension.actionParametersContainer = {};",
+            "",
+            "return new Promise(resolve => {",
+            "    Promise.resolve()",
+            "        .then(() => bridge.multiplayer.createRoom(options))",
+            "        .then(() => {",
+            "            gdjs._playgamaBridgeExtension.isLastActionCompletedSuccessfully = true;",
+            "        })",
+            "        .catch(error => {",
+            "            console.log(error);",
+            "            gdjs._playgamaBridgeExtension.multiplayerLastError = error && error.code ? error.code : String(error);",
+            "        })",
+            "        .finally(() => {",
+            "            gdjs._playgamaBridgeExtension.nextIsMultiplayerCreateRoomCompleted = true;",
+            "            resolve();",
+            "        });",
+            "});"
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "parameters": [],
+      "objectGroups": []
+    },
+    {
+      "description": "On Multiplayer Create Room Completed.",
+      "fullName": "On Multiplayer Create Room Completed",
+      "functionType": "Condition",
+      "group": "Multiplayer",
+      "name": "OnMultiplayerCreateRoomCompleted",
+      "sentence": "On Multiplayer Create Room Completed",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "eventsFunctionContext.returnValue = gdjs._playgamaBridgeExtension.isMultiplayerCreateRoomCompleted;"
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "parameters": [],
+      "objectGroups": []
+    },
+    {
+      "description": "Join a room by its id. Options are taken from Add Action Parameter (playerName, playerProperties).",
+      "fullName": "Multiplayer Join Room",
+      "functionType": "Action",
+      "group": "Multiplayer",
+      "name": "MultiplayerJoinRoom",
+      "sentence": "Multiplayer Join Room - Id: _PARAM1_",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "gdjs._playgamaBridgeExtension.isLastActionCompletedSuccessfully = false;",
+            "gdjs._playgamaBridgeExtension.multiplayerLastError = '';",
+            "",
+            "const roomId = eventsFunctionContext.getArgument('RoomId');",
+            "const options = gdjs._playgamaBridgeExtension.actionParametersContainer;",
+            "gdjs._playgamaBridgeExtension.actionParametersContainer = {};",
+            "",
+            "return new Promise(resolve => {",
+            "    Promise.resolve()",
+            "        .then(() => bridge.multiplayer.joinRoom(roomId, options))",
+            "        .then(() => {",
+            "            gdjs._playgamaBridgeExtension.isLastActionCompletedSuccessfully = true;",
+            "        })",
+            "        .catch(error => {",
+            "            console.log(error);",
+            "            gdjs._playgamaBridgeExtension.multiplayerLastError = error && error.code ? error.code : String(error);",
+            "        })",
+            "        .finally(() => {",
+            "            gdjs._playgamaBridgeExtension.nextIsMultiplayerJoinRoomCompleted = true;",
+            "            resolve();",
+            "        });",
+            "});"
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "parameters": [
+        {
+          "description": "Room Id",
+          "name": "RoomId",
+          "type": "string"
+        }
+      ],
+      "objectGroups": []
+    },
+    {
+      "description": "On Multiplayer Join Room Completed.",
+      "fullName": "On Multiplayer Join Room Completed",
+      "functionType": "Condition",
+      "group": "Multiplayer",
+      "name": "OnMultiplayerJoinRoomCompleted",
+      "sentence": "On Multiplayer Join Room Completed",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "eventsFunctionContext.returnValue = gdjs._playgamaBridgeExtension.isMultiplayerJoinRoomCompleted;"
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "parameters": [],
+      "objectGroups": []
+    },
+    {
+      "description": "Join a matching public room or create a new one. Options are taken from Add Action Parameter (maxPlayers, filter, properties, playerName, playerProperties).",
+      "fullName": "Multiplayer Join Or Create Room",
+      "functionType": "Action",
+      "group": "Multiplayer",
+      "name": "MultiplayerJoinOrCreateRoom",
+      "sentence": "Multiplayer Join Or Create Room",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "gdjs._playgamaBridgeExtension.isLastActionCompletedSuccessfully = false;",
+            "gdjs._playgamaBridgeExtension.multiplayerLastError = '';",
+            "",
+            "const options = gdjs._playgamaBridgeExtension.actionParametersContainer;",
+            "gdjs._playgamaBridgeExtension.actionParametersContainer = {};",
+            "",
+            "return new Promise(resolve => {",
+            "    Promise.resolve()",
+            "        .then(() => bridge.multiplayer.joinOrCreateRoom(options))",
+            "        .then(() => {",
+            "            gdjs._playgamaBridgeExtension.isLastActionCompletedSuccessfully = true;",
+            "        })",
+            "        .catch(error => {",
+            "            console.log(error);",
+            "            gdjs._playgamaBridgeExtension.multiplayerLastError = error && error.code ? error.code : String(error);",
+            "        })",
+            "        .finally(() => {",
+            "            gdjs._playgamaBridgeExtension.nextIsMultiplayerJoinOrCreateRoomCompleted = true;",
+            "            resolve();",
+            "        });",
+            "});"
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "parameters": [],
+      "objectGroups": []
+    },
+    {
+      "description": "On Multiplayer Join Or Create Room Completed.",
+      "fullName": "On Multiplayer Join Or Create Room Completed",
+      "functionType": "Condition",
+      "group": "Multiplayer",
+      "name": "OnMultiplayerJoinOrCreateRoomCompleted",
+      "sentence": "On Multiplayer Join Or Create Room Completed",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "eventsFunctionContext.returnValue = gdjs._playgamaBridgeExtension.isMultiplayerJoinOrCreateRoomCompleted;"
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "parameters": [],
+      "objectGroups": []
+    },
+    {
+      "description": "Get the list of public rooms. Options are taken from Add Action Parameter (filter, maxPlayers, limit). Read the result with Multiplayer Rooms As JSON.",
+      "fullName": "Multiplayer Get Rooms",
+      "functionType": "Action",
+      "group": "Multiplayer",
+      "name": "MultiplayerGetRooms",
+      "sentence": "Multiplayer Get Rooms",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "gdjs._playgamaBridgeExtension.isLastActionCompletedSuccessfully = false;",
+            "gdjs._playgamaBridgeExtension.multiplayerLastError = '';",
+            "",
+            "const options = gdjs._playgamaBridgeExtension.actionParametersContainer;",
+            "gdjs._playgamaBridgeExtension.actionParametersContainer = {};",
+            "",
+            "return new Promise(resolve => {",
+            "    Promise.resolve()",
+            "        .then(() => bridge.multiplayer.getRooms(options))",
+            "        .then(result => {",
+            "            gdjs._playgamaBridgeExtension.isLastActionCompletedSuccessfully = true;",
+            "            gdjs._playgamaBridgeExtension.multiplayerRooms = result || [];",
+            "        })",
+            "        .catch(error => {",
+            "            console.log(error);",
+            "            gdjs._playgamaBridgeExtension.multiplayerLastError = error && error.code ? error.code : String(error);",
+            "        })",
+            "        .finally(() => {",
+            "            gdjs._playgamaBridgeExtension.nextIsMultiplayerGetRoomsCompleted = true;",
+            "            resolve();",
+            "        });",
+            "});"
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "parameters": [],
+      "objectGroups": []
+    },
+    {
+      "description": "On Multiplayer Get Rooms Completed.",
+      "fullName": "On Multiplayer Get Rooms Completed",
+      "functionType": "Condition",
+      "group": "Multiplayer",
+      "name": "OnMultiplayerGetRoomsCompleted",
+      "sentence": "On Multiplayer Get Rooms Completed",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "eventsFunctionContext.returnValue = gdjs._playgamaBridgeExtension.isMultiplayerGetRoomsCompleted;"
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "parameters": [],
+      "objectGroups": []
+    },
+    {
+      "description": "Share an invite link to the current room. Options are taken from Add Action Parameter (text, image).",
+      "fullName": "Multiplayer Invite To Room",
+      "functionType": "Action",
+      "group": "Multiplayer",
+      "name": "MultiplayerInviteToRoom",
+      "sentence": "Multiplayer Invite To Room",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "gdjs._playgamaBridgeExtension.isLastActionCompletedSuccessfully = false;",
+            "gdjs._playgamaBridgeExtension.multiplayerLastError = '';",
+            "",
+            "const options = gdjs._playgamaBridgeExtension.actionParametersContainer;",
+            "gdjs._playgamaBridgeExtension.actionParametersContainer = {};",
+            "",
+            "return new Promise(resolve => {",
+            "    Promise.resolve()",
+            "        .then(() => bridge.multiplayer.inviteToRoom(options))",
+            "        .then(() => {",
+            "            gdjs._playgamaBridgeExtension.isLastActionCompletedSuccessfully = true;",
+            "        })",
+            "        .catch(error => {",
+            "            console.log(error);",
+            "            gdjs._playgamaBridgeExtension.multiplayerLastError = error && error.code ? error.code : String(error);",
+            "        })",
+            "        .finally(() => {",
+            "            gdjs._playgamaBridgeExtension.nextIsMultiplayerInviteToRoomCompleted = true;",
+            "            resolve();",
+            "        });",
+            "});"
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "parameters": [],
+      "objectGroups": []
+    },
+    {
+      "description": "On Multiplayer Invite To Room Completed.",
+      "fullName": "On Multiplayer Invite To Room Completed",
+      "functionType": "Condition",
+      "group": "Multiplayer",
+      "name": "OnMultiplayerInviteToRoomCompleted",
+      "sentence": "On Multiplayer Invite To Room Completed",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "eventsFunctionContext.returnValue = gdjs._playgamaBridgeExtension.isMultiplayerInviteToRoomCompleted;"
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "parameters": [],
+      "objectGroups": []
+    },
+    {
+      "description": "Leave the current room.",
+      "fullName": "Multiplayer Leave Room",
+      "functionType": "Action",
+      "group": "Multiplayer",
+      "name": "MultiplayerLeaveRoom",
+      "sentence": "Multiplayer Leave Room",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "if (bridge.multiplayer) {",
+            "    bridge.multiplayer.leaveRoom();",
+            "}"
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "parameters": [],
+      "objectGroups": []
+    },
+    {
+      "description": "Allow or forbid new players to join the room (host only).",
+      "fullName": "Multiplayer Set Room Open",
+      "functionType": "Action",
+      "group": "Multiplayer",
+      "name": "MultiplayerSetRoomOpen",
+      "sentence": "Multiplayer Set Room Open: _PARAM1_",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "const isOpen = eventsFunctionContext.getArgument('IsOpen');",
+            "if (bridge.multiplayer) {",
+            "    bridge.multiplayer.setRoomOpen(isOpen);",
+            "}"
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "parameters": [
+        {
+          "description": "Is Open",
+          "name": "IsOpen",
+          "type": "trueorfalse"
+        }
+      ],
+      "objectGroups": []
+    },
+    {
+      "description": "Show or hide the room in the rooms list (host only).",
+      "fullName": "Multiplayer Set Room Visible",
+      "functionType": "Action",
+      "group": "Multiplayer",
+      "name": "MultiplayerSetRoomVisible",
+      "sentence": "Multiplayer Set Room Visible: _PARAM1_",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "const isVisible = eventsFunctionContext.getArgument('IsVisible');",
+            "if (bridge.multiplayer) {",
+            "    bridge.multiplayer.setRoomVisible(isVisible);",
+            "}"
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "parameters": [
+        {
+          "description": "Is Visible",
+          "name": "IsVisible",
+          "type": "trueorfalse"
+        }
+      ],
+      "objectGroups": []
+    },
+    {
+      "description": "Merge the properties added with Add Action Parameter into the room properties (host only).",
+      "fullName": "Multiplayer Set Room Properties",
+      "functionType": "Action",
+      "group": "Multiplayer",
+      "name": "MultiplayerSetRoomProperties",
+      "sentence": "Multiplayer Set Room Properties",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "const properties = gdjs._playgamaBridgeExtension.actionParametersContainer;",
+            "gdjs._playgamaBridgeExtension.actionParametersContainer = {};",
+            "",
+            "if (bridge.multiplayer) {",
+            "    bridge.multiplayer.setRoomProperties(properties);",
+            "}"
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "parameters": [],
+      "objectGroups": []
+    },
+    {
+      "description": "Merge the properties added with Add Action Parameter into the local player properties.",
+      "fullName": "Multiplayer Set Player Properties",
+      "functionType": "Action",
+      "group": "Multiplayer",
+      "name": "MultiplayerSetPlayerProperties",
+      "sentence": "Multiplayer Set Player Properties",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "const properties = gdjs._playgamaBridgeExtension.actionParametersContainer;",
+            "gdjs._playgamaBridgeExtension.actionParametersContainer = {};",
+            "",
+            "if (bridge.multiplayer) {",
+            "    bridge.multiplayer.setPlayerProperties(properties);",
+            "}"
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "parameters": [],
+      "objectGroups": []
+    },
+    {
+      "description": "Send a message to the room. The message data is built with Add Action Parameter. Target: all, others (default), host or a player id.",
+      "fullName": "Multiplayer Send",
+      "functionType": "Action",
+      "group": "Multiplayer",
+      "name": "MultiplayerSend",
+      "sentence": "Multiplayer Send - Type: _PARAM1_, Target: _PARAM2_",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "const type = eventsFunctionContext.getArgument('Type');",
+            "const target = eventsFunctionContext.getArgument('Target');",
+            "const data = gdjs._playgamaBridgeExtension.actionParametersContainer;",
+            "gdjs._playgamaBridgeExtension.actionParametersContainer = {};",
+            "",
+            "if (bridge.multiplayer) {",
+            "    bridge.multiplayer.send(type, data, target ? { to: target } : undefined);",
+            "}"
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "parameters": [
+        {
+          "description": "Type",
+          "name": "Type",
+          "type": "string"
+        },
+        {
+          "description": "Target (optional): all, others, host or player id",
+          "name": "Target",
+          "type": "string"
+        }
+      ],
+      "objectGroups": []
+    },
+    {
+      "description": "Multiplayer connection state: disconnected, connecting, connected or reconnecting.",
+      "fullName": "Multiplayer State",
+      "functionType": "StringExpression",
+      "group": "Multiplayer",
+      "name": "MultiplayerState",
+      "sentence": "",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "eventsFunctionContext.returnValue = gdjs._playgamaBridgeExtension.multiplayerState !== null",
+            "    ? gdjs._playgamaBridgeExtension.multiplayerState",
+            "    : (bridge.multiplayer ? bridge.multiplayer.state : 'disconnected');"
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "expressionType": {
+        "supplementaryInformation": "[\"disconnected\",\"connecting\",\"connected\",\"reconnecting\"]",
+        "type": "string"
+      },
+      "parameters": [],
+      "objectGroups": []
+    },
+    {
+      "description": "Id of the current room (players type it to join).",
+      "fullName": "Multiplayer Room Id",
+      "functionType": "StringExpression",
+      "group": "Multiplayer",
+      "name": "MultiplayerRoomId",
+      "sentence": "",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "eventsFunctionContext.returnValue = bridge.multiplayer && bridge.multiplayer.roomId ? bridge.multiplayer.roomId : '';"
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "expressionType": {
+        "type": "string"
+      },
+      "parameters": [],
+      "objectGroups": []
+    },
+    {
+      "description": "Id of the local player in the room.",
+      "fullName": "Multiplayer Player Id",
+      "functionType": "StringExpression",
+      "group": "Multiplayer",
+      "name": "MultiplayerPlayerId",
+      "sentence": "",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "eventsFunctionContext.returnValue = bridge.multiplayer && bridge.multiplayer.playerId ? bridge.multiplayer.playerId : '';"
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "expressionType": {
+        "type": "string"
+      },
+      "parameters": [],
+      "objectGroups": []
+    },
+    {
+      "description": "Id of the room host.",
+      "fullName": "Multiplayer Host Id",
+      "functionType": "StringExpression",
+      "group": "Multiplayer",
+      "name": "MultiplayerHostId",
+      "sentence": "",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "eventsFunctionContext.returnValue = bridge.multiplayer && bridge.multiplayer.hostId ? bridge.multiplayer.hostId : '';"
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "expressionType": {
+        "type": "string"
+      },
+      "parameters": [],
+      "objectGroups": []
+    },
+    {
+      "description": "Room id from the invite link the game was opened with.",
+      "fullName": "Multiplayer Launch Room Id",
+      "functionType": "StringExpression",
+      "group": "Multiplayer",
+      "name": "MultiplayerLaunchRoomId",
+      "sentence": "",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "eventsFunctionContext.returnValue = bridge.multiplayer && bridge.multiplayer.launchRoomId ? bridge.multiplayer.launchRoomId : '';"
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "expressionType": {
+        "type": "string"
+      },
+      "parameters": [],
+      "objectGroups": []
+    },
+    {
+      "description": "Current room as JSON: id, type, maxPlayers, isOpen, isVisible, hostId, properties.",
+      "fullName": "Multiplayer Room As JSON",
+      "functionType": "StringExpression",
+      "group": "Multiplayer",
+      "name": "MultiplayerRoomAsJSON",
+      "sentence": "",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "eventsFunctionContext.returnValue = JSON.stringify(bridge.multiplayer ? bridge.multiplayer.room : null);"
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "expressionType": {
+        "type": "string"
+      },
+      "parameters": [],
+      "objectGroups": []
+    },
+    {
+      "description": "Players in the current room as JSON array: id, name, isHost, isConnected, properties.",
+      "fullName": "Multiplayer Players As JSON",
+      "functionType": "StringExpression",
+      "group": "Multiplayer",
+      "name": "MultiplayerPlayersAsJSON",
+      "sentence": "",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "eventsFunctionContext.returnValue = JSON.stringify(bridge.multiplayer ? bridge.multiplayer.players : []);"
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "expressionType": {
+        "type": "string"
+      },
+      "parameters": [],
+      "objectGroups": []
+    },
+    {
+      "description": "Number of players in the current room.",
+      "fullName": "Multiplayer Players Count",
+      "functionType": "Expression",
+      "group": "Multiplayer",
+      "name": "MultiplayerPlayersCount",
+      "sentence": "",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "eventsFunctionContext.returnValue = bridge.multiplayer ? bridge.multiplayer.players.length : 0;"
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "expressionType": {
+        "type": "expression"
+      },
+      "parameters": [],
+      "objectGroups": []
+    },
+    {
+      "description": "Rooms from the last Multiplayer Get Rooms as JSON array: id, type, maxPlayers, playerCount, properties.",
+      "fullName": "Multiplayer Rooms As JSON",
+      "functionType": "StringExpression",
+      "group": "Multiplayer",
+      "name": "MultiplayerRoomsAsJSON",
+      "sentence": "",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "eventsFunctionContext.returnValue = JSON.stringify(gdjs._playgamaBridgeExtension.multiplayerRooms);"
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "expressionType": {
+        "type": "string"
+      },
+      "parameters": [],
+      "objectGroups": []
+    },
+    {
+      "description": "Reason of the last room leave: left, connection_lost or room_closed.",
+      "fullName": "Multiplayer Room Left Reason",
+      "functionType": "StringExpression",
+      "group": "Multiplayer",
+      "name": "MultiplayerRoomLeftReason",
+      "sentence": "",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "eventsFunctionContext.returnValue = gdjs._playgamaBridgeExtension.multiplayerRoomLeftReason;"
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "expressionType": {
+        "supplementaryInformation": "[\"left\",\"connection_lost\",\"room_closed\"]",
+        "type": "string"
+      },
+      "parameters": [],
+      "objectGroups": []
+    },
+    {
+      "description": "Type of the last received message.",
+      "fullName": "Multiplayer Last Message Type",
+      "functionType": "StringExpression",
+      "group": "Multiplayer",
+      "name": "MultiplayerLastMessageType",
+      "sentence": "",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "const message = gdjs._playgamaBridgeExtension.multiplayerLastMessage;",
+            "eventsFunctionContext.returnValue = message ? String(message.type) : '';"
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "expressionType": {
+        "type": "string"
+      },
+      "parameters": [],
+      "objectGroups": []
+    },
+    {
+      "description": "Data of the last received message as JSON.",
+      "fullName": "Multiplayer Last Message Data As JSON",
+      "functionType": "StringExpression",
+      "group": "Multiplayer",
+      "name": "MultiplayerLastMessageDataAsJSON",
+      "sentence": "",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "const message = gdjs._playgamaBridgeExtension.multiplayerLastMessage;",
+            "eventsFunctionContext.returnValue = message && message.data !== undefined ? JSON.stringify(message.data) : '';"
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "expressionType": {
+        "type": "string"
+      },
+      "parameters": [],
+      "objectGroups": []
+    },
+    {
+      "description": "Value of a key in the data of the last received message.",
+      "fullName": "Multiplayer Last Message Data Value",
+      "functionType": "StringExpression",
+      "group": "Multiplayer",
+      "name": "MultiplayerLastMessageDataValue",
+      "sentence": "",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "const key = eventsFunctionContext.getArgument('Key');",
+            "const message = gdjs._playgamaBridgeExtension.multiplayerLastMessage;",
+            "const data = message && message.data && typeof message.data === 'object' ? message.data : {};",
+            "",
+            "if (data[key] === undefined || data[key] === null) {",
+            "    eventsFunctionContext.returnValue = '';",
+            "} else {",
+            "    eventsFunctionContext.returnValue = typeof data[key] === 'object' ? JSON.stringify(data[key]) : String(data[key]);",
+            "}"
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "expressionType": {
+        "type": "string"
+      },
+      "parameters": [
+        {
+          "description": "Key",
+          "name": "Key",
+          "type": "string"
+        }
+      ],
+      "objectGroups": []
+    },
+    {
+      "description": "Id of the player who sent the last received message.",
+      "fullName": "Multiplayer Last Message From",
+      "functionType": "StringExpression",
+      "group": "Multiplayer",
+      "name": "MultiplayerLastMessageFrom",
+      "sentence": "",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "const message = gdjs._playgamaBridgeExtension.multiplayerLastMessage;",
+            "eventsFunctionContext.returnValue = message && message.from ? String(message.from) : '';"
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "expressionType": {
+        "type": "string"
+      },
+      "parameters": [],
+      "objectGroups": []
+    },
+    {
+      "description": "Id of the player from the last player joined / left / updated / host changed event.",
+      "fullName": "Multiplayer Event Player Id",
+      "functionType": "StringExpression",
+      "group": "Multiplayer",
+      "name": "MultiplayerEventPlayerId",
+      "sentence": "",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "const player = gdjs._playgamaBridgeExtension.multiplayerEventPlayer;",
+            "eventsFunctionContext.returnValue = player && player.id ? player.id : '';"
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "expressionType": {
+        "type": "string"
+      },
+      "parameters": [],
+      "objectGroups": []
+    },
+    {
+      "description": "Name of the player from the last player joined / left / updated / host changed event.",
+      "fullName": "Multiplayer Event Player Name",
+      "functionType": "StringExpression",
+      "group": "Multiplayer",
+      "name": "MultiplayerEventPlayerName",
+      "sentence": "",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "const player = gdjs._playgamaBridgeExtension.multiplayerEventPlayer;",
+            "eventsFunctionContext.returnValue = player && player.name ? player.name : '';"
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "expressionType": {
+        "type": "string"
+      },
+      "parameters": [],
+      "objectGroups": []
+    },
+    {
+      "description": "Player from the last player joined / left / updated / host changed event as JSON: id, name, isHost, isConnected, properties.",
+      "fullName": "Multiplayer Event Player As JSON",
+      "functionType": "StringExpression",
+      "group": "Multiplayer",
+      "name": "MultiplayerEventPlayerAsJSON",
+      "sentence": "",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "eventsFunctionContext.returnValue = JSON.stringify(gdjs._playgamaBridgeExtension.multiplayerEventPlayer);"
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "expressionType": {
+        "type": "string"
+      },
+      "parameters": [],
+      "objectGroups": []
+    },
+    {
+      "description": "Error code of the last failed multiplayer operation, empty if it succeeded.",
+      "fullName": "Multiplayer Last Error",
+      "functionType": "StringExpression",
+      "group": "Multiplayer",
+      "name": "MultiplayerLastError",
+      "sentence": "",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "eventsFunctionContext.returnValue = gdjs._playgamaBridgeExtension.multiplayerLastError;"
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "expressionType": {
+        "type": "string"
+      },
+      "parameters": [],
       "objectGroups": []
     }
   ],
