@@ -7795,7 +7795,7 @@
       "objectGroups": []
     },
     {
-      "description": "Create a new room and join it. Options are taken from Add Action Parameter (maxPlayers, isVisible, isOpen, properties, playerName, playerProperties).",
+      "description": "Create a new room and join it. Options are taken from Add Action Parameter (maxPlayers, isVisible, isOpen, filter, properties, playerName, playerProperties).",
       "fullName": "Multiplayer Create Room",
       "functionType": "Action",
       "group": "Multiplayer",
@@ -7926,7 +7926,7 @@
       "objectGroups": []
     },
     {
-      "description": "Join a matching public room or create a new one. Options are taken from Add Action Parameter (maxPlayers, filter, properties, playerName, playerProperties).",
+      "description": "Join a public room with the same maxPlayers and exactly the same filter, or create a new one. Options are taken from Add Action Parameter (maxPlayers, filter, properties, playerName, playerProperties).",
       "fullName": "Multiplayer Join Or Create Room",
       "functionType": "Action",
       "group": "Multiplayer",
@@ -7988,7 +7988,7 @@
       "objectGroups": []
     },
     {
-      "description": "Get the list of public rooms. Options are taken from Add Action Parameter (filter, maxPlayers, limit). Read the result with Multiplayer Room List Count and the Multiplayer Room List expressions.",
+      "description": "Get the list of public rooms; with a filter, only rooms created with exactly that filter. Options are taken from Add Action Parameter (filter, maxPlayers, limit). Read the result with Multiplayer Room List Count and the Multiplayer Room List expressions.",
       "fullName": "Multiplayer Get Rooms",
       "functionType": "Action",
       "group": "Multiplayer",
