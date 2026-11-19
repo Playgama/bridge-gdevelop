@@ -220,6 +220,7 @@
             "    isMultiplayerSyncStateReceived: false,",
             "    nextIsMultiplayerSyncStateReceived: false,",
             "    multiplayerRooms: [],",
+            "    multiplayerRegions: [],",
             "    multiplayerLastError: '',",
             "    isMultiplayerCreateRoomCompleted: false,",
             "    nextIsMultiplayerCreateRoomCompleted: false,",
@@ -229,6 +230,8 @@
             "    nextIsMultiplayerJoinOrCreateRoomCompleted: false,",
             "    isMultiplayerGetRoomsCompleted: false,",
             "    nextIsMultiplayerGetRoomsCompleted: false,",
+            "    isMultiplayerGetRegionsCompleted: false,",
+            "    nextIsMultiplayerGetRegionsCompleted: false,",
             "    isMultiplayerInviteToRoomCompleted: false,",
             "    nextIsMultiplayerInviteToRoomCompleted: false,",
             "}",
@@ -787,6 +790,14 @@
             "",
             "                if (gdjs._playgamaBridgeExtension.nextIsMultiplayerGetRoomsCompleted) {",
             "                    gdjs._playgamaBridgeExtension.nextIsMultiplayerGetRoomsCompleted = false;",
+            "                }",
+            "",
+            "                if (gdjs._playgamaBridgeExtension.isMultiplayerGetRegionsCompleted !== gdjs._playgamaBridgeExtension.nextIsMultiplayerGetRegionsCompleted) {",
+            "                    gdjs._playgamaBridgeExtension.isMultiplayerGetRegionsCompleted = gdjs._playgamaBridgeExtension.nextIsMultiplayerGetRegionsCompleted",
+            "                }",
+            "",
+            "                if (gdjs._playgamaBridgeExtension.nextIsMultiplayerGetRegionsCompleted) {",
+            "                    gdjs._playgamaBridgeExtension.nextIsMultiplayerGetRegionsCompleted = false;",
             "                }",
             "",
             "                if (gdjs._playgamaBridgeExtension.isMultiplayerInviteToRoomCompleted !== gdjs._playgamaBridgeExtension.nextIsMultiplayerInviteToRoomCompleted) {",
@@ -8096,6 +8107,96 @@
       "objectGroups": []
     },
     {
+      "description": "Get the list of region ids for a region picker. If the region is not chosen yet, it becomes the default one. Read the result with Multiplayer Region List Count and Multiplayer Region List Id.",
+      "fullName": "Multiplayer Get Regions",
+      "functionType": "Action",
+      "group": "Multiplayer",
+      "name": "MultiplayerGetRegions",
+      "sentence": "Multiplayer Get Regions",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "gdjs._playgamaBridgeExtension.isLastActionCompletedSuccessfully = false;",
+            "gdjs._playgamaBridgeExtension.multiplayerLastError = '';",
+            "",
+            "return new Promise(resolve => {",
+            "    Promise.resolve()",
+            "        .then(() => bridge.multiplayer.getRegions())",
+            "        .then(result => {",
+            "            gdjs._playgamaBridgeExtension.isLastActionCompletedSuccessfully = true;",
+            "            gdjs._playgamaBridgeExtension.multiplayerRegions = result || [];",
+            "        })",
+            "        .catch(error => {",
+            "            console.log(error);",
+            "            gdjs._playgamaBridgeExtension.multiplayerLastError = error && error.code ? error.code : String(error);",
+            "        })",
+            "        .finally(() => {",
+            "            gdjs._playgamaBridgeExtension.nextIsMultiplayerGetRegionsCompleted = true;",
+            "            resolve();",
+            "        });",
+            "});"
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "parameters": [],
+      "objectGroups": []
+    },
+    {
+      "description": "On Multiplayer Get Regions Completed.",
+      "fullName": "On Multiplayer Get Regions Completed",
+      "functionType": "Condition",
+      "group": "Multiplayer",
+      "name": "OnMultiplayerGetRegionsCompleted",
+      "sentence": "On Multiplayer Get Regions Completed",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "eventsFunctionContext.returnValue = gdjs._playgamaBridgeExtension.isMultiplayerGetRegionsCompleted;"
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "parameters": [],
+      "objectGroups": []
+    },
+    {
+      "description": "Set the region of the next created or matched room and of Multiplayer Get Rooms. The current room stays where it is; joining by room id always enters the region of that room.",
+      "fullName": "Multiplayer Set Region",
+      "functionType": "Action",
+      "group": "Multiplayer",
+      "name": "MultiplayerSetRegion",
+      "sentence": "Multiplayer Set Region: _PARAM1_",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "const region = eventsFunctionContext.getArgument('Region');",
+            "if (bridge.multiplayer) {",
+            "    bridge.multiplayer.setRegion(region);",
+            "}"
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "parameters": [
+        {
+          "description": "Region",
+          "name": "Region",
+          "type": "string"
+        }
+      ],
+      "objectGroups": []
+    },
+    {
       "description": "Share an invite link to the current room. Options are taken from Add Action Parameter (text, image).",
       "fullName": "Multiplayer Invite To Room",
       "functionType": "Action",
@@ -8396,6 +8497,30 @@
           "type": "BuiltinCommonInstructions::JsCode",
           "inlineCode": [
             "eventsFunctionContext.returnValue = bridge.multiplayer && bridge.multiplayer.roomId ? bridge.multiplayer.roomId : '';"
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "expressionType": {
+        "type": "string"
+      },
+      "parameters": [],
+      "objectGroups": []
+    },
+    {
+      "description": "Region of the next created or matched room and of Multiplayer Get Rooms, e.g. eu. Empty until Multiplayer Set Region, Multiplayer Get Regions or the first room action.",
+      "fullName": "Multiplayer Region",
+      "functionType": "StringExpression",
+      "group": "Multiplayer",
+      "name": "MultiplayerRegion",
+      "sentence": "",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "eventsFunctionContext.returnValue = bridge.multiplayer && bridge.multiplayer.region ? bridge.multiplayer.region : '';"
           ],
           "parameterObjects": "",
           "useStrict": true,
@@ -8961,6 +9086,85 @@
           "description": "Key",
           "name": "Key",
           "type": "string"
+        }
+      ],
+      "objectGroups": []
+    },
+    {
+      "description": "Region ids from the last Multiplayer Get Regions as JSON array.",
+      "fullName": "Multiplayer Regions As JSON",
+      "functionType": "StringExpression",
+      "group": "Multiplayer",
+      "name": "MultiplayerRegionsAsJSON",
+      "sentence": "",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "eventsFunctionContext.returnValue = JSON.stringify(gdjs._playgamaBridgeExtension.multiplayerRegions);"
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "expressionType": {
+        "type": "string"
+      },
+      "parameters": [],
+      "objectGroups": []
+    },
+    {
+      "description": "Number of regions from the last Multiplayer Get Regions.",
+      "fullName": "Multiplayer Region List Count",
+      "functionType": "Expression",
+      "group": "Multiplayer",
+      "name": "MultiplayerRegionListCount",
+      "sentence": "",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "eventsFunctionContext.returnValue = gdjs._playgamaBridgeExtension.multiplayerRegions.length;"
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "expressionType": {
+        "type": "expression"
+      },
+      "parameters": [],
+      "objectGroups": []
+    },
+    {
+      "description": "Id of a region from the last Multiplayer Get Regions by index.",
+      "fullName": "Multiplayer Region List Id",
+      "functionType": "StringExpression",
+      "group": "Multiplayer",
+      "name": "MultiplayerRegionListId",
+      "sentence": "",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "const region = gdjs._playgamaBridgeExtension.multiplayerRegions[eventsFunctionContext.getArgument('RegionIndex')];",
+            "eventsFunctionContext.returnValue = region ? String(region) : '';"
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "expressionType": {
+        "type": "string"
+      },
+      "parameters": [
+        {
+          "description": "Region Index",
+          "name": "RegionIndex",
+          "type": "expression"
         }
       ],
       "objectGroups": []
