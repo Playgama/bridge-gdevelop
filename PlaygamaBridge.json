@@ -136,13 +136,10 @@
             "    isLeaderboardsSetScoreCompleted: false,",
             "    isLeaderboardsGetEntriesCompleted: false,",
             "    isLeaderboardsShowNativePopupCompleted: false,",
-            "    isLeaderboardsGetInfoCompleted: false,",
             "    nextIsLeaderboardsSetScoreCompleted: false,",
             "    nextIsLeaderboardsGetEntriesCompleted: false,",
             "    nextIsLeaderboardsShowNativePopupCompleted: false,",
-            "    nextIsLeaderboardsGetInfoCompleted: false,",
             "    leaderboardEntries: [],",
-            "    leaderboardInfo: null,",
             "    ",
             "    // payments",
             "    isPaymentsPurchaseCompleted: false,",
@@ -581,14 +578,6 @@
             "",
             "                if (gdjs._playgamaBridgeExtension.nextIsLeaderboardsGetEntriesCompleted) {",
             "                    gdjs._playgamaBridgeExtension.nextIsLeaderboardsGetEntriesCompleted = false;",
-            "                }",
-            "",
-            "                if (gdjs._playgamaBridgeExtension.isLeaderboardsGetInfoCompleted !== gdjs._playgamaBridgeExtension.nextIsLeaderboardsGetInfoCompleted) {",
-            "                    gdjs._playgamaBridgeExtension.isLeaderboardsGetInfoCompleted = gdjs._playgamaBridgeExtension.nextIsLeaderboardsGetInfoCompleted",
-            "                }",
-            "",
-            "                if (gdjs._playgamaBridgeExtension.nextIsLeaderboardsGetInfoCompleted) {",
-            "                    gdjs._playgamaBridgeExtension.nextIsLeaderboardsGetInfoCompleted = false;",
             "                }",
             "",
             "                if (gdjs._playgamaBridgeExtension.isLeaderboardsShowNativePopupCompleted !== gdjs._playgamaBridgeExtension.nextIsLeaderboardsShowNativePopupCompleted) {",
@@ -4670,7 +4659,7 @@
       "objectGroups": []
     },
     {
-      "description": "Leaderboards Set Score. A leaderboard with the sum score mode adds every submitted score, so send what the player earned (e.g. 120), not the total.",
+      "description": "Leaderboards Set Score. On a leaderboard configured as sum in the developer console the score is an increment: send the points the player earned (e.g. 120), not the total.",
       "fullName": "Leaderboards Set Score",
       "functionType": "Action",
       "group": "Leaderboards",
@@ -4745,7 +4734,7 @@
       "objectGroups": []
     },
     {
-      "description": "Get the entries of the permanent (all time), daily, weekly or monthly standings. Completes On Leaderboards Get Entries Completed and fills the Leaderboard Entry expressions. Only Playgama leaderboards have daily, weekly and monthly standings (check with Leaderboard Has Period); on native platform leaderboards they fail.",
+      "description": "Get the entries of the permanent (all time), daily, weekly or monthly standings. Completes On Leaderboards Get Entries Completed and fills the Leaderboard Entry expressions. Only Playgama leaderboards have daily, weekly and monthly standings; on native platform leaderboards these periods fail.",
       "fullName": "Leaderboards Get Entries For Period",
       "functionType": "Action",
       "group": "Leaderboards",
@@ -4775,49 +4764,6 @@
           "name": "Period",
           "supplementaryInformation": "[\"permanent\",\"daily\",\"weekly\",\"monthly\"]",
           "type": "stringWithSelector"
-        }
-      ],
-      "objectGroups": []
-    },
-    {
-      "description": "Get the leaderboard score mode, the periods it has standings for and the time left until each period resets. Playgama leaderboards have permanent, daily, weekly and monthly standings (reset at 00:00 UTC, weekly on Monday, monthly on the 1st); native platform leaderboards have only permanent and the best score mode. Read the result with Leaderboard Score Mode, Leaderboard Has Period and Leaderboard Time Left.",
-      "fullName": "Leaderboards Get Info",
-      "functionType": "Action",
-      "group": "Leaderboards",
-      "name": "LeaderboardsGetInfo",
-      "sentence": "Leaderboards Get Info - Id: _PARAM1_",
-      "events": [
-        {
-          "type": "BuiltinCommonInstructions::JsCode",
-          "inlineCode": [
-            "gdjs._playgamaBridgeExtension.isLastActionCompletedSuccessfully = false;",
-            "gdjs._playgamaBridgeExtension.leaderboardInfo = null;",
-            "",
-            "return new Promise(resolve => {",
-            "    const id = eventsFunctionContext.getArgument('Id');",
-            "    Promise.resolve()",
-            "        .then(() => bridge.leaderboards.getInfo(id))",
-            "        .then(info => {",
-            "            gdjs._playgamaBridgeExtension.leaderboardInfo = info || null;",
-            "            gdjs._playgamaBridgeExtension.isLastActionCompletedSuccessfully = true;",
-            "        })",
-            "        .catch(error => console.log(error))",
-            "        .finally(() => {",
-            "            gdjs._playgamaBridgeExtension.nextIsLeaderboardsGetInfoCompleted = true;",
-            "            resolve();",
-            "        });",
-            "});"
-          ],
-          "parameterObjects": "",
-          "useStrict": true,
-          "eventsSheetExpanded": false
-        }
-      ],
-      "parameters": [
-        {
-          "description": "Id",
-          "name": "Id",
-          "type": "string"
         }
       ],
       "objectGroups": []
@@ -4977,68 +4923,6 @@
       "objectGroups": []
     },
     {
-      "description": "Check that the leaderboard from the last Leaderboards Get Info has standings of the period. Playgama leaderboards have all of them, native platform leaderboards only permanent.",
-      "fullName": "Leaderboard Has Period",
-      "functionType": "Condition",
-      "group": "Leaderboards",
-      "name": "LeaderboardHasPeriod",
-      "sentence": "Leaderboard has period _PARAM1_",
-      "events": [
-        {
-          "type": "BuiltinCommonInstructions::JsCode",
-          "inlineCode": [
-            "const period = eventsFunctionContext.getArgument('Period');",
-            "const info = gdjs._playgamaBridgeExtension.leaderboardInfo;",
-            "",
-            "eventsFunctionContext.returnValue = !!info && Array.isArray(info.periods) && info.periods.includes(period);"
-          ],
-          "parameterObjects": "",
-          "useStrict": true,
-          "eventsSheetExpanded": false
-        }
-      ],
-      "parameters": [
-        {
-          "description": "Period",
-          "name": "Period",
-          "supplementaryInformation": "[\"permanent\",\"daily\",\"weekly\",\"monthly\"]",
-          "type": "stringWithSelector"
-        }
-      ],
-      "objectGroups": []
-    },
-    {
-      "description": "Compare the leaderboard score mode from the last Leaderboards Get Info: best keeps the best score, sum adds every submitted score.",
-      "fullName": "Leaderboard Is Score Mode",
-      "functionType": "Condition",
-      "group": "Leaderboards",
-      "name": "LeaderboardIsScoreMode",
-      "sentence": "Leaderboard Score Mode is _PARAM1_",
-      "events": [
-        {
-          "type": "BuiltinCommonInstructions::JsCode",
-          "inlineCode": [
-            "const scoreMode = eventsFunctionContext.getArgument('ScoreMode');",
-            "const info = gdjs._playgamaBridgeExtension.leaderboardInfo;",
-            "",
-            "eventsFunctionContext.returnValue = !!info && info.scoreMode === scoreMode;"
-          ],
-          "parameterObjects": "",
-          "useStrict": true,
-          "eventsSheetExpanded": false
-        }
-      ],
-      "parameters": [
-        {
-          "description": "Score Mode",
-          "name": "ScoreMode",
-          "supplementaryInformation": "[\"best\",\"sum\"]",
-          "type": "stringWithSelector"
-        }
-      ],
-      "objectGroups": []
-    },
-    {
       "description": "On Leaderboards Set Score Completed.",
       "fullName": "On Leaderboards Set Score Completed",
       "functionType": "Condition",
@@ -5073,27 +4957,6 @@
           "inlineCode": [
             "eventsFunctionContext.returnValue = gdjs._playgamaBridgeExtension.isLeaderboardsGetEntriesCompleted;",
             ""
-          ],
-          "parameterObjects": "",
-          "useStrict": true,
-          "eventsSheetExpanded": false
-        }
-      ],
-      "parameters": [],
-      "objectGroups": []
-    },
-    {
-      "description": "On Leaderboards Get Info Completed.",
-      "fullName": "On Leaderboards Get Info Completed",
-      "functionType": "Condition",
-      "group": "Leaderboards",
-      "name": "OnLeaderboardsGetInfoCompleted",
-      "sentence": "On Leaderboards Get Info Completed",
-      "events": [
-        {
-          "type": "BuiltinCommonInstructions::JsCode",
-          "inlineCode": [
-            "eventsFunctionContext.returnValue = gdjs._playgamaBridgeExtension.isLeaderboardsGetInfoCompleted;"
           ],
           "parameterObjects": "",
           "useStrict": true,
@@ -5336,67 +5199,6 @@
           "description": "Entry Index",
           "name": "EntryIndex",
           "type": "expression"
-        }
-      ],
-      "objectGroups": []
-    },
-    {
-      "description": "Score mode of the leaderboard from the last Leaderboards Get Info: best (keeps the best score) or sum (adds every submitted score). Empty until Leaderboards Get Info succeeds.",
-      "fullName": "Leaderboard Score Mode",
-      "functionType": "StringExpression",
-      "group": "Leaderboards",
-      "name": "LeaderboardScoreMode",
-      "sentence": "",
-      "events": [
-        {
-          "type": "BuiltinCommonInstructions::JsCode",
-          "inlineCode": [
-            "const info = gdjs._playgamaBridgeExtension.leaderboardInfo;",
-            "eventsFunctionContext.returnValue = info ? String(info.scoreMode) : '';"
-          ],
-          "parameterObjects": "",
-          "useStrict": true,
-          "eventsSheetExpanded": false
-        }
-      ],
-      "expressionType": {
-        "supplementaryInformation": "[\"best\",\"sum\"]",
-        "type": "string"
-      },
-      "parameters": [],
-      "objectGroups": []
-    },
-    {
-      "description": "Seconds until the period of the leaderboard resets, from the last Leaderboards Get Info. -1 for permanent, a period the leaderboard does not have, or until Leaderboards Get Info succeeds.",
-      "fullName": "Leaderboard Time Left",
-      "functionType": "Expression",
-      "group": "Leaderboards",
-      "name": "LeaderboardTimeLeft",
-      "sentence": "",
-      "events": [
-        {
-          "type": "BuiltinCommonInstructions::JsCode",
-          "inlineCode": [
-            "const period = eventsFunctionContext.getArgument('Period');",
-            "const info = gdjs._playgamaBridgeExtension.leaderboardInfo;",
-            "const timeLeft = info && info.timeLeft ? info.timeLeft[period] : undefined;",
-            "",
-            "eventsFunctionContext.returnValue = typeof timeLeft === 'number' ? timeLeft : -1;"
-          ],
-          "parameterObjects": "",
-          "useStrict": true,
-          "eventsSheetExpanded": false
-        }
-      ],
-      "expressionType": {
-        "type": "expression"
-      },
-      "parameters": [
-        {
-          "description": "Period",
-          "name": "Period",
-          "supplementaryInformation": "[\"daily\",\"weekly\",\"monthly\"]",
-          "type": "stringWithSelector"
         }
       ],
       "objectGroups": []
