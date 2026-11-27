@@ -281,6 +281,25 @@
             "    return options;",
             "}",
             "",
+            "// shared by Leaderboards Get Entries and Leaderboards Get Entries For Period",
+            "gdjs._playgamaBridgeExtension.getLeaderboardEntries = function (id, options) {",
+            "    gdjs._playgamaBridgeExtension.isLastActionCompletedSuccessfully = false;",
+            "    gdjs._playgamaBridgeExtension.leaderboardEntries = [];",
+            "",
+            "    return new Promise(resolve => {",
+            "        bridge.leaderboards.getEntries(id, options)",
+            "            .then(entries => {",
+            "                gdjs._playgamaBridgeExtension.leaderboardEntries = entries || [];",
+            "                gdjs._playgamaBridgeExtension.isLastActionCompletedSuccessfully = true;",
+            "            })",
+            "            .catch(error => console.log(error))",
+            "            .finally(() => {",
+            "                gdjs._playgamaBridgeExtension.nextIsLeaderboardsGetEntriesCompleted = true;",
+            "                resolve();",
+            "            });",
+            "    });",
+            "}",
+            "",
             "",
             "let bridgeScript = null",
             "let bridgeTimeout = null",
@@ -4640,7 +4659,7 @@
       "objectGroups": []
     },
     {
-      "description": "Leaderboards Set Score.",
+      "description": "Leaderboards Set Score. On a leaderboard configured as sum in the developer console the score is an increment: send the points the player earned (e.g. 120), not the total.",
       "fullName": "Leaderboards Set Score",
       "functionType": "Action",
       "group": "Leaderboards",
@@ -4687,7 +4706,7 @@
       "objectGroups": []
     },
     {
-      "description": "Leaderboards Get Entries.",
+      "description": "Get the entries of the permanent (all time) standings. Use Leaderboards Get Entries For Period for daily, weekly or monthly standings.",
       "fullName": "Leaderboards Get Entries",
       "functionType": "Action",
       "group": "Leaderboards",
@@ -4697,22 +4716,8 @@
         {
           "type": "BuiltinCommonInstructions::JsCode",
           "inlineCode": [
-            "gdjs._playgamaBridgeExtension.isLastActionCompletedSuccessfully = false;",
-            "gdjs._playgamaBridgeExtension.leaderboardEntries = [];",
-            "",
-            "return new Promise(resolve => {",
-            "    const id = eventsFunctionContext.getArgument('Id');",
-            "    bridge.leaderboards.getEntries(id)",
-            "        .then(entries => {",
-            "            gdjs._playgamaBridgeExtension.leaderboardEntries = entries || [];",
-            "            gdjs._playgamaBridgeExtension.isLastActionCompletedSuccessfully = true;",
-            "        })",
-            "        .catch(error => console.log(error))",
-            "        .finally(() => {",
-            "            gdjs._playgamaBridgeExtension.nextIsLeaderboardsGetEntriesCompleted = true;",
-            "            resolve();",
-            "        });",
-            "});"
+            "const id = eventsFunctionContext.getArgument('Id');",
+            "return gdjs._playgamaBridgeExtension.getLeaderboardEntries(id);"
           ],
           "parameterObjects": "",
           "useStrict": true,
@@ -4724,6 +4729,41 @@
           "description": "Id",
           "name": "Id",
           "type": "string"
+        }
+      ],
+      "objectGroups": []
+    },
+    {
+      "description": "Get the entries of the permanent (all time), daily, weekly or monthly standings. Completes On Leaderboards Get Entries Completed and fills the Leaderboard Entry expressions. Only Playgama leaderboards have daily, weekly and monthly standings; on native platform leaderboards these periods fail.",
+      "fullName": "Leaderboards Get Entries For Period",
+      "functionType": "Action",
+      "group": "Leaderboards",
+      "name": "LeaderboardsGetEntriesForPeriod",
+      "sentence": "Leaderboards Get Entries For Period - Id: _PARAM1_, Period: _PARAM2_",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "const id = eventsFunctionContext.getArgument('Id');",
+            "const period = eventsFunctionContext.getArgument('Period') || 'permanent';",
+            "return gdjs._playgamaBridgeExtension.getLeaderboardEntries(id, { period });"
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "parameters": [
+        {
+          "description": "Id",
+          "name": "Id",
+          "type": "string"
+        },
+        {
+          "description": "Period (daily, weekly and monthly reset at 00:00 UTC, weekly on Monday, monthly on the 1st)",
+          "name": "Period",
+          "supplementaryInformation": "[\"permanent\",\"daily\",\"weekly\",\"monthly\"]",
+          "type": "stringWithSelector"
         }
       ],
       "objectGroups": []
