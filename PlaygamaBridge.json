@@ -136,10 +136,13 @@
             "    isLeaderboardsSetScoreCompleted: false,",
             "    isLeaderboardsGetEntriesCompleted: false,",
             "    isLeaderboardsShowNativePopupCompleted: false,",
+            "    isLeaderboardsGetInfoCompleted: false,",
             "    nextIsLeaderboardsSetScoreCompleted: false,",
             "    nextIsLeaderboardsGetEntriesCompleted: false,",
             "    nextIsLeaderboardsShowNativePopupCompleted: false,",
+            "    nextIsLeaderboardsGetInfoCompleted: false,",
             "    leaderboardEntries: [],",
+            "    leaderboardInfo: null,",
             "    ",
             "    // payments",
             "    isPaymentsPurchaseCompleted: false,",
@@ -559,6 +562,14 @@
             "",
             "                if (gdjs._playgamaBridgeExtension.nextIsLeaderboardsGetEntriesCompleted) {",
             "                    gdjs._playgamaBridgeExtension.nextIsLeaderboardsGetEntriesCompleted = false;",
+            "                }",
+            "",
+            "                if (gdjs._playgamaBridgeExtension.isLeaderboardsGetInfoCompleted !== gdjs._playgamaBridgeExtension.nextIsLeaderboardsGetInfoCompleted) {",
+            "                    gdjs._playgamaBridgeExtension.isLeaderboardsGetInfoCompleted = gdjs._playgamaBridgeExtension.nextIsLeaderboardsGetInfoCompleted",
+            "                }",
+            "",
+            "                if (gdjs._playgamaBridgeExtension.nextIsLeaderboardsGetInfoCompleted) {",
+            "                    gdjs._playgamaBridgeExtension.nextIsLeaderboardsGetInfoCompleted = false;",
             "                }",
             "",
             "                if (gdjs._playgamaBridgeExtension.isLeaderboardsShowNativePopupCompleted !== gdjs._playgamaBridgeExtension.nextIsLeaderboardsShowNativePopupCompleted) {",
@@ -4729,6 +4740,49 @@
       "objectGroups": []
     },
     {
+      "description": "Get the leaderboard period and the time left until it resets. Daily, weekly and monthly periods exist only for Playgama leaderboards and reset at 00:00 UTC (weekly on Monday, monthly on the 1st); native platform leaderboards are always permanent. Read the result with Leaderboard Period and Leaderboard Time Left.",
+      "fullName": "Leaderboards Get Info",
+      "functionType": "Action",
+      "group": "Leaderboards",
+      "name": "LeaderboardsGetInfo",
+      "sentence": "Leaderboards Get Info - Id: _PARAM1_",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "gdjs._playgamaBridgeExtension.isLastActionCompletedSuccessfully = false;",
+            "gdjs._playgamaBridgeExtension.leaderboardInfo = null;",
+            "",
+            "return new Promise(resolve => {",
+            "    const id = eventsFunctionContext.getArgument('Id');",
+            "    Promise.resolve()",
+            "        .then(() => bridge.leaderboards.getInfo(id))",
+            "        .then(info => {",
+            "            gdjs._playgamaBridgeExtension.leaderboardInfo = info || null;",
+            "            gdjs._playgamaBridgeExtension.isLastActionCompletedSuccessfully = true;",
+            "        })",
+            "        .catch(error => console.log(error))",
+            "        .finally(() => {",
+            "            gdjs._playgamaBridgeExtension.nextIsLeaderboardsGetInfoCompleted = true;",
+            "            resolve();",
+            "        });",
+            "});"
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "parameters": [
+        {
+          "description": "Id",
+          "name": "Id",
+          "type": "string"
+        }
+      ],
+      "objectGroups": []
+    },
+    {
       "description": "Leaderboards Show Native Popup.",
       "fullName": "Leaderboards Show Native Popup",
       "functionType": "Action",
@@ -4883,6 +4937,37 @@
       "objectGroups": []
     },
     {
+      "description": "Compare the leaderboard period from the last Leaderboards Get Info.",
+      "fullName": "Leaderboard Is Period",
+      "functionType": "Condition",
+      "group": "Leaderboards",
+      "name": "LeaderboardIsPeriod",
+      "sentence": "Leaderboard Period is _PARAM1_",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "const period = eventsFunctionContext.getArgument('Period');",
+            "const info = gdjs._playgamaBridgeExtension.leaderboardInfo;",
+            "",
+            "eventsFunctionContext.returnValue = !!info && info.period === period;"
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "parameters": [
+        {
+          "description": "Period",
+          "name": "Period",
+          "supplementaryInformation": "[\"permanent\",\"daily\",\"weekly\",\"monthly\"]",
+          "type": "stringWithSelector"
+        }
+      ],
+      "objectGroups": []
+    },
+    {
       "description": "On Leaderboards Set Score Completed.",
       "fullName": "On Leaderboards Set Score Completed",
       "functionType": "Condition",
@@ -4917,6 +5002,27 @@
           "inlineCode": [
             "eventsFunctionContext.returnValue = gdjs._playgamaBridgeExtension.isLeaderboardsGetEntriesCompleted;",
             ""
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "parameters": [],
+      "objectGroups": []
+    },
+    {
+      "description": "On Leaderboards Get Info Completed.",
+      "fullName": "On Leaderboards Get Info Completed",
+      "functionType": "Condition",
+      "group": "Leaderboards",
+      "name": "OnLeaderboardsGetInfoCompleted",
+      "sentence": "On Leaderboards Get Info Completed",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "eventsFunctionContext.returnValue = gdjs._playgamaBridgeExtension.isLeaderboardsGetInfoCompleted;"
           ],
           "parameterObjects": "",
           "useStrict": true,
@@ -5161,6 +5267,57 @@
           "type": "expression"
         }
       ],
+      "objectGroups": []
+    },
+    {
+      "description": "Period of the leaderboard from the last Leaderboards Get Info: permanent, daily, weekly or monthly. Empty until Leaderboards Get Info succeeds.",
+      "fullName": "Leaderboard Period",
+      "functionType": "StringExpression",
+      "group": "Leaderboards",
+      "name": "LeaderboardPeriod",
+      "sentence": "",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "const info = gdjs._playgamaBridgeExtension.leaderboardInfo;",
+            "eventsFunctionContext.returnValue = info ? String(info.period) : '';"
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "expressionType": {
+        "supplementaryInformation": "[\"permanent\",\"daily\",\"weekly\",\"monthly\"]",
+        "type": "string"
+      },
+      "parameters": [],
+      "objectGroups": []
+    },
+    {
+      "description": "Seconds until the leaderboard period resets, from the last Leaderboards Get Info. -1 for a permanent leaderboard or until Leaderboards Get Info succeeds.",
+      "fullName": "Leaderboard Time Left",
+      "functionType": "Expression",
+      "group": "Leaderboards",
+      "name": "LeaderboardTimeLeft",
+      "sentence": "",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "const info = gdjs._playgamaBridgeExtension.leaderboardInfo;",
+            "eventsFunctionContext.returnValue = info && typeof info.timeLeft === 'number' ? info.timeLeft : -1;"
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "expressionType": {
+        "type": "expression"
+      },
+      "parameters": [],
       "objectGroups": []
     },
     {
