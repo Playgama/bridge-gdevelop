@@ -4749,7 +4749,7 @@
             "        })",
             "        .catch(error => console.log(error))",
             "        .finally(() => {",
-            "            gdjs._playgamaBridgeExtension.nextIsLeaderboardsGetEntriesCompleted = true;",
+            "            gdjs._playgamaBridgeExtension.nextIsLeaderboardsShowNativePopupCompleted = true;",
             "            resolve();",
             "        });",
             "});"
