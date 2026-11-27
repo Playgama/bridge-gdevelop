@@ -284,6 +284,25 @@
             "    return options;",
             "}",
             "",
+            "// shared by Leaderboards Get Entries and Leaderboards Get Entries For Period",
+            "gdjs._playgamaBridgeExtension.getLeaderboardEntries = function (id, options) {",
+            "    gdjs._playgamaBridgeExtension.isLastActionCompletedSuccessfully = false;",
+            "    gdjs._playgamaBridgeExtension.leaderboardEntries = [];",
+            "",
+            "    return new Promise(resolve => {",
+            "        bridge.leaderboards.getEntries(id, options)",
+            "            .then(entries => {",
+            "                gdjs._playgamaBridgeExtension.leaderboardEntries = entries || [];",
+            "                gdjs._playgamaBridgeExtension.isLastActionCompletedSuccessfully = true;",
+            "            })",
+            "            .catch(error => console.log(error))",
+            "            .finally(() => {",
+            "                gdjs._playgamaBridgeExtension.nextIsLeaderboardsGetEntriesCompleted = true;",
+            "                resolve();",
+            "            });",
+            "    });",
+            "}",
+            "",
             "",
             "let bridgeScript = null",
             "let bridgeTimeout = null",
@@ -4651,7 +4670,7 @@
       "objectGroups": []
     },
     {
-      "description": "Leaderboards Set Score.",
+      "description": "Leaderboards Set Score. A leaderboard with the sum score mode adds every submitted score, so send what the player earned (e.g. 120), not the total.",
       "fullName": "Leaderboards Set Score",
       "functionType": "Action",
       "group": "Leaderboards",
@@ -4698,7 +4717,7 @@
       "objectGroups": []
     },
     {
-      "description": "Leaderboards Get Entries.",
+      "description": "Get the entries of the permanent (all time) standings. Use Leaderboards Get Entries For Period for daily, weekly or monthly standings.",
       "fullName": "Leaderboards Get Entries",
       "functionType": "Action",
       "group": "Leaderboards",
@@ -4708,22 +4727,8 @@
         {
           "type": "BuiltinCommonInstructions::JsCode",
           "inlineCode": [
-            "gdjs._playgamaBridgeExtension.isLastActionCompletedSuccessfully = false;",
-            "gdjs._playgamaBridgeExtension.leaderboardEntries = [];",
-            "",
-            "return new Promise(resolve => {",
-            "    const id = eventsFunctionContext.getArgument('Id');",
-            "    bridge.leaderboards.getEntries(id)",
-            "        .then(entries => {",
-            "            gdjs._playgamaBridgeExtension.leaderboardEntries = entries || [];",
-            "            gdjs._playgamaBridgeExtension.isLastActionCompletedSuccessfully = true;",
-            "        })",
-            "        .catch(error => console.log(error))",
-            "        .finally(() => {",
-            "            gdjs._playgamaBridgeExtension.nextIsLeaderboardsGetEntriesCompleted = true;",
-            "            resolve();",
-            "        });",
-            "});"
+            "const id = eventsFunctionContext.getArgument('Id');",
+            "return gdjs._playgamaBridgeExtension.getLeaderboardEntries(id);"
           ],
           "parameterObjects": "",
           "useStrict": true,
@@ -4740,7 +4745,42 @@
       "objectGroups": []
     },
     {
-      "description": "Get the leaderboard period and the time left until it resets. Daily, weekly and monthly periods exist only for Playgama leaderboards and reset at 00:00 UTC (weekly on Monday, monthly on the 1st); native platform leaderboards are always permanent. Read the result with Leaderboard Period and Leaderboard Time Left.",
+      "description": "Get the entries of the permanent (all time), daily, weekly or monthly standings. Completes On Leaderboards Get Entries Completed and fills the Leaderboard Entry expressions. Only Playgama leaderboards have daily, weekly and monthly standings (check with Leaderboard Has Period); on native platform leaderboards they fail.",
+      "fullName": "Leaderboards Get Entries For Period",
+      "functionType": "Action",
+      "group": "Leaderboards",
+      "name": "LeaderboardsGetEntriesForPeriod",
+      "sentence": "Leaderboards Get Entries For Period - Id: _PARAM1_, Period: _PARAM2_",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "const id = eventsFunctionContext.getArgument('Id');",
+            "const period = eventsFunctionContext.getArgument('Period') || 'permanent';",
+            "return gdjs._playgamaBridgeExtension.getLeaderboardEntries(id, { period });"
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "parameters": [
+        {
+          "description": "Id",
+          "name": "Id",
+          "type": "string"
+        },
+        {
+          "description": "Period (daily, weekly and monthly reset at 00:00 UTC, weekly on Monday, monthly on the 1st)",
+          "name": "Period",
+          "supplementaryInformation": "[\"permanent\",\"daily\",\"weekly\",\"monthly\"]",
+          "type": "stringWithSelector"
+        }
+      ],
+      "objectGroups": []
+    },
+    {
+      "description": "Get the leaderboard score mode, the periods it has standings for and the time left until each period resets. Playgama leaderboards have permanent, daily, weekly and monthly standings (reset at 00:00 UTC, weekly on Monday, monthly on the 1st); native platform leaderboards have only permanent and the best score mode. Read the result with Leaderboard Score Mode, Leaderboard Has Period and Leaderboard Time Left.",
       "fullName": "Leaderboards Get Info",
       "functionType": "Action",
       "group": "Leaderboards",
@@ -4937,12 +4977,12 @@
       "objectGroups": []
     },
     {
-      "description": "Compare the leaderboard period from the last Leaderboards Get Info.",
-      "fullName": "Leaderboard Is Period",
+      "description": "Check that the leaderboard from the last Leaderboards Get Info has standings of the period. Playgama leaderboards have all of them, native platform leaderboards only permanent.",
+      "fullName": "Leaderboard Has Period",
       "functionType": "Condition",
       "group": "Leaderboards",
-      "name": "LeaderboardIsPeriod",
-      "sentence": "Leaderboard Period is _PARAM1_",
+      "name": "LeaderboardHasPeriod",
+      "sentence": "Leaderboard has period _PARAM1_",
       "events": [
         {
           "type": "BuiltinCommonInstructions::JsCode",
@@ -4950,7 +4990,7 @@
             "const period = eventsFunctionContext.getArgument('Period');",
             "const info = gdjs._playgamaBridgeExtension.leaderboardInfo;",
             "",
-            "eventsFunctionContext.returnValue = !!info && info.period === period;"
+            "eventsFunctionContext.returnValue = !!info && Array.isArray(info.periods) && info.periods.includes(period);"
           ],
           "parameterObjects": "",
           "useStrict": true,
@@ -4962,6 +5002,37 @@
           "description": "Period",
           "name": "Period",
           "supplementaryInformation": "[\"permanent\",\"daily\",\"weekly\",\"monthly\"]",
+          "type": "stringWithSelector"
+        }
+      ],
+      "objectGroups": []
+    },
+    {
+      "description": "Compare the leaderboard score mode from the last Leaderboards Get Info: best keeps the best score, sum adds every submitted score.",
+      "fullName": "Leaderboard Is Score Mode",
+      "functionType": "Condition",
+      "group": "Leaderboards",
+      "name": "LeaderboardIsScoreMode",
+      "sentence": "Leaderboard Score Mode is _PARAM1_",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "const scoreMode = eventsFunctionContext.getArgument('ScoreMode');",
+            "const info = gdjs._playgamaBridgeExtension.leaderboardInfo;",
+            "",
+            "eventsFunctionContext.returnValue = !!info && info.scoreMode === scoreMode;"
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "parameters": [
+        {
+          "description": "Score Mode",
+          "name": "ScoreMode",
+          "supplementaryInformation": "[\"best\",\"sum\"]",
           "type": "stringWithSelector"
         }
       ],
@@ -5270,18 +5341,18 @@
       "objectGroups": []
     },
     {
-      "description": "Period of the leaderboard from the last Leaderboards Get Info: permanent, daily, weekly or monthly. Empty until Leaderboards Get Info succeeds.",
-      "fullName": "Leaderboard Period",
+      "description": "Score mode of the leaderboard from the last Leaderboards Get Info: best (keeps the best score) or sum (adds every submitted score). Empty until Leaderboards Get Info succeeds.",
+      "fullName": "Leaderboard Score Mode",
       "functionType": "StringExpression",
       "group": "Leaderboards",
-      "name": "LeaderboardPeriod",
+      "name": "LeaderboardScoreMode",
       "sentence": "",
       "events": [
         {
           "type": "BuiltinCommonInstructions::JsCode",
           "inlineCode": [
             "const info = gdjs._playgamaBridgeExtension.leaderboardInfo;",
-            "eventsFunctionContext.returnValue = info ? String(info.period) : '';"
+            "eventsFunctionContext.returnValue = info ? String(info.scoreMode) : '';"
           ],
           "parameterObjects": "",
           "useStrict": true,
@@ -5289,14 +5360,14 @@
         }
       ],
       "expressionType": {
-        "supplementaryInformation": "[\"permanent\",\"daily\",\"weekly\",\"monthly\"]",
+        "supplementaryInformation": "[\"best\",\"sum\"]",
         "type": "string"
       },
       "parameters": [],
       "objectGroups": []
     },
     {
-      "description": "Seconds until the leaderboard period resets, from the last Leaderboards Get Info. -1 for a permanent leaderboard or until Leaderboards Get Info succeeds.",
+      "description": "Seconds until the period of the leaderboard resets, from the last Leaderboards Get Info. -1 for permanent, a period the leaderboard does not have, or until Leaderboards Get Info succeeds.",
       "fullName": "Leaderboard Time Left",
       "functionType": "Expression",
       "group": "Leaderboards",
@@ -5306,8 +5377,11 @@
         {
           "type": "BuiltinCommonInstructions::JsCode",
           "inlineCode": [
+            "const period = eventsFunctionContext.getArgument('Period');",
             "const info = gdjs._playgamaBridgeExtension.leaderboardInfo;",
-            "eventsFunctionContext.returnValue = info && typeof info.timeLeft === 'number' ? info.timeLeft : -1;"
+            "const timeLeft = info && info.timeLeft ? info.timeLeft[period] : undefined;",
+            "",
+            "eventsFunctionContext.returnValue = typeof timeLeft === 'number' ? timeLeft : -1;"
           ],
           "parameterObjects": "",
           "useStrict": true,
@@ -5317,7 +5391,14 @@
       "expressionType": {
         "type": "expression"
       },
-      "parameters": [],
+      "parameters": [
+        {
+          "description": "Period",
+          "name": "Period",
+          "supplementaryInformation": "[\"daily\",\"weekly\",\"monthly\"]",
+          "type": "stringWithSelector"
+        }
+      ],
       "objectGroups": []
     },
     {
